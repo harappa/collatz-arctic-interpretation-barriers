@@ -1,0 +1,3 @@
+# 2026-10-07T18:01:01+09:00 $ lake env lean verify/Closure.lean
+modules: 285, declared constants: 10037, reachable constants: 68753, axioms: [Classical.choice, Quot.sound, propext]
+# exit status 0, 2026-10-07T18:01:13+09:00

@@ -1,0 +1,22 @@
+Lean 4 formalization accompanying "Natural-number and arctic matrix interpretations alone make no progress, in any
+dimension, on the Collatz rewriting system"
+Copyright 2026 Hiroyuki Nashida
+
+Lean 4 formalization and computations accompanying the preprint "Natural-number and arctic matrix interpretations
+alone make no progress, in any dimension, on the Collatz rewriting system" by Hiroyuki Nashida (2026). Licensed under
+the Apache License, Version 2.0 (see LICENSE).
+
+Third-party components
+
+This repository does not include any third-party file, and no file in it is derived from
+third-party code. The following work is fetched at build time; it is not redistributed here,
+and its own LICENSE and NOTICE files apply.
+
+1. Mathlib, https://github.com/leanprover-community/mathlib4, tag v4.34.1, and the Lean
+   packages it requires (pinned in lake-manifest.json). Mathlib is licensed under the Apache
+   License 2.0; the other packages are under their own licenses. Fetched by Lake.
+
+The program computations/check_systems.py quotes, for comparison, the 22 rule lines of the files
+SRS_Standard/Yolcu_21/collatz-T.ari and SRS_Standard/Yolcu_21/collatz-T-5or7mod8.ari of the
+Termination Problem Database (TPDB-ARI, https://github.com/TermCOMP/TPDB-ARI, commit
+183f29db5ec7702215c6aabe12732bf3e836fced). The files themselves are not included.

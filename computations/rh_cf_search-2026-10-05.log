@@ -1,0 +1,72 @@
+# Runs of computations/rh_cf_search.c (Question 4.4 of the paper), 2026-10-05.
+# Compiled with gcc 13.3.0 (gcc -O2 -o rh_cf_search computations/rh_cf_search.c) and run on one core of an
+# Intel Xeon Gold 6254 (3.1 GHz), one process per run. Wall-clock times are given after each run.
+# In the output, -100000 stands for -inf. The modes are described at the top of rh_cf_search.c.
+
+$ ./rh_cf_search 1 cf
+K=1 mode=cf nall=54 nft=18 A-survivors=19445 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 0.3 s
+
+$ ./rh_cf_search 1 cfnou
+K=1 mode=cfnou nall=54 nft=18 A-survivors=19445 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 0.3 s
+
+$ ./rh_cf_search 1 col0
+K=1 mode=col0 nall=54 nft=18 A-survivors=19445 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 0.3 s
+
+$ ./rh_cf_search 2 cf
+K=2 mode=cf nall=192 nft=48 A-survivors=816401 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 92.3 s
+
+$ ./rh_cf_search 2 cfnou
+K=2 mode=cfnou nall=192 nft=48 A-survivors=816401 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 92.6 s
+
+$ ./rh_cf_search 2 col0
+K=2 mode=col0 nall=192 nft=48 A-survivors=816401 found=0 ILeft=0 (-100000 in the output is -inf)
+# time: 94.2 s
+
+$ ./rh_cf_search 1 none
+FOUND s0=1 sf=0
+ f: [[0,-100000],[-100000,1]]
+ t: [[0,-100000],[0,-100000]]
+ 0: [[0,-100000],[0,1]]
+ 1: [[0,-100000],[0,-100000]]
+ 2: [[0,-100000],[0,-100000]]
+ L: [[0,1],[-100000,-100000]]
+ .: [[0,-100000],[0,-100000]]
+FOUND s0=1 sf=0
+ f: [[0,-100000],[-100000,1]]
+ t: [[0,-100000],[0,-100000]]
+ 0: [[0,-100000],[0,1]]
+ 1: [[0,-100000],[0,-100000]]
+ 2: [[0,-100000],[0,-100000]]
+ L: [[0,1],[-100000,-100000]]
+ .: [[0,-100000],[0,0]]
+FOUND s0=1 sf=0
+ f: [[0,-100000],[-100000,1]]
+ t: [[0,-100000],[0,-100000]]
+ 0: [[0,-100000],[0,1]]
+ 1: [[0,-100000],[0,-100000]]
+ 2: [[0,-100000],[0,-100000]]
+ L: [[0,1],[-100000,-100000]]
+ .: [[0,-100000],[0,1]]
+FOUND s0=1 sf=0
+ f: [[0,-100000],[-100000,1]]
+ t: [[0,-100000],[0,-100000]]
+ 0: [[0,-100000],[0,1]]
+ 1: [[0,-100000],[0,-100000]]
+ 2: [[0,-100000],[0,-100000]]
+ L: [[0,1],[-100000,-100000]]
+ .: [[0,-100000],[1,-100000]]
+FOUND s0=1 sf=0
+ f: [[0,-100000],[-100000,1]]
+ t: [[0,-100000],[0,-100000]]
+ 0: [[0,-100000],[0,1]]
+ 1: [[0,-100000],[0,-100000]]
+ 2: [[0,-100000],[0,-100000]]
+ L: [[0,1],[-100000,-100000]]
+ .: [[0,-100000],[1,0]]
+K=1 mode=none nall=54 nft=54 A-survivors=619766 found=34820 ILeft=1 (-100000 in the output is -inf)
+# time: 5.2 s

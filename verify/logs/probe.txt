@@ -1,0 +1,2615 @@
+# 2026-10-07T18:00:53+09:00 $ lake env lean verify/Probe.lean
+def Collatz.Arctic.ArcticBarrierST : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+  Collatz.Arctic.Fin00 hd I →
+    (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.Weak I ρ) → ∀ ρ ∈ Collatz.Arctic.rulesST, ¬Collatz.Arctic.Strict I ρ
+def Collatz.Arctic.HTPDB.ArcticBarrierHT : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+  Collatz.Arctic.Fin00 hd I →
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT, Collatz.Arctic.Weak I ρ) →
+      ∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT, ¬Collatz.Arctic.Strict I ρ
+def Collatz.Arctic.RH.ArcticBarrierRH : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+  Collatz.Arctic.Fin00 hd I →
+    (∀ ρ ∈ Collatz.Arctic.RH.usedRH, Collatz.Arctic.Weak I ρ) →
+      ∀ ρ ∈ Collatz.Arctic.RH.usedRH, ¬Collatz.Arctic.Strict I ρ
+def Collatz.Arctic.RH.ArcticBarrierRHSub : Prop :=
+∀ (R' : List Collatz.Arctic.Rule),
+  (∀ ρ ∈ Collatz.Arctic.RH.usedRH, ρ ∈ R') →
+    (∀ ρ ∈ R', ρ ∈ Collatz.Arctic.RH.rulesRH) →
+      ∀ (d : ℕ) (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+        Collatz.Arctic.Fin00 hd I →
+          (∀ ρ ∈ R', Collatz.Arctic.Weak I ρ) →
+            ∀ ρ ∈ R', Collatz.Arctic.Strict I ρ → ρ = Collatz.Arctic.RH.l0Rule ∨ ρ = Collatz.Arctic.RH.lfRule
+def Collatz.Arctic.NonVacuity.BarrierFor : List Collatz.Arctic.Rule → Prop :=
+fun R =>
+  ∀ (d : ℕ) (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+    Collatz.Arctic.Fin00 hd I → (∀ ρ ∈ R, Collatz.Arctic.Weak I ρ) → ∀ ρ ∈ R, ¬Collatz.Arctic.Strict I ρ
+def Collatz.Arctic.ArcticBarrierDP : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPB →
+    (∀ ρ ∈ Collatz.Arctic.usableST,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPB,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPB,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.ArcticBarrierDPrev : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPDrev →
+    (∀ ρ ∈ Collatz.Arctic.usableSTrev,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPDrev,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPDrev,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.HTPDB.ArcticBarrierHDP : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPB →
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.usableHT,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPB,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPB,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.HTPDB.ArcticBarrierHDPrev : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPDrev →
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.usableHTrev,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.ArcticBarrierBZ : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPB →
+    (∀ ρ ∈ Collatz.Arctic.usableST,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPB,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPB,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.ArcticBarrierBZrev : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPDrev →
+    (∀ ρ ∈ Collatz.Arctic.usableSTrev,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPDrev,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPDrev,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.HTPDB.ArcticBarrierHBZ : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPB →
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.usableHT,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPB,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPB,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.HTPDB.ArcticBarrierHBZrev : Prop :=
+∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPDrev →
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.usableHTrev,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.ev : {d : ℕ} → Collatz.Arctic.Interp d → Collatz.Arctic.Word → Collatz.Arctic.AMat d :=
+fun {d} I w => (List.map I w).prod
+def Collatz.Arctic.Weak : {d : ℕ} → Collatz.Arctic.Interp d → Collatz.Arctic.Rule → Prop :=
+fun {d} I ρ => ∀ (i j : Fin d), Collatz.Arctic.ev I ρ.rhs i j ≤ Collatz.Arctic.ev I ρ.lhs i j
+def Collatz.Arctic.Strict : {d : ℕ} → Collatz.Arctic.Interp d → Collatz.Arctic.Rule → Prop :=
+fun {d} I ρ =>
+  ∀ (i j : Fin d),
+    Collatz.Arctic.ev I ρ.rhs i j < Collatz.Arctic.ev I ρ.lhs i j ∨
+      Collatz.Arctic.ev I ρ.lhs i j = 0 ∧ Collatz.Arctic.ev I ρ.rhs i j = 0
+def Collatz.Arctic.Fin00 : {d : ℕ} → 0 < d → Collatz.Arctic.Interp d → Prop :=
+fun {d} hd I => ∀ (s : Collatz.Arctic.Letter), I s ⟨0, hd⟩ ⟨0, hd⟩ ≠ 0
+def Collatz.Arctic.rulesST : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt], rhs := [Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.HTPDB.rulesHT : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.RH.rulesRH : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d0], rhs := [Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f], rhs := [Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] }]
+def Collatz.Arctic.RH.usedRH : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] }]
+def Collatz.Arctic.NonVacuity.revRule : Collatz.Arctic.Rule → Collatz.Arctic.Rule :=
+fun ρ => { lhs := List.reverse ρ.lhs, rhs := List.reverse ρ.rhs }
+def Collatz.Arctic.NonVacuity.rulesSTrev : List Collatz.Arctic.Rule :=
+List.map Collatz.Arctic.NonVacuity.revRule Collatz.Arctic.rulesST
+def Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev : List Collatz.Arctic.Rule :=
+List.map Collatz.Arctic.NonVacuity.revRule Collatz.Arctic.HTPDB.rulesHT
+def Collatz.Arctic.evA : {R : Type} →
+  [CommSemiring R] →
+    {d : ℕ} →
+      (Collatz.Arctic.DLetter → Collatz.Arctic.AffFun R d) → List Collatz.Arctic.DLetter → Collatz.Arctic.AffFun R d :=
+fun {R} [CommSemiring R] {d} J w => List.foldr (fun s acc => (J s).comp acc) Collatz.Arctic.AffFun.id w
+def Collatz.Arctic.WeakA : {R : Type} →
+  [LE R] → {d : ℕ} → Collatz.Arctic.AffFun R d → Collatz.Arctic.AffFun R d → Prop :=
+fun {R} [LE R] {d} f g => (∀ (i j : Fin d), g.M i j ≤ f.M i j) ∧ ∀ (i : Fin d), g.c i ≤ f.c i
+def Collatz.Arctic.WeakTop : {R : Type} →
+  [LE R] → {d : ℕ} → 0 < d → Collatz.Arctic.AffFun R d → Collatz.Arctic.AffFun R d → Prop :=
+fun {R} [LE R] {d} hd f g => (∀ (j : Fin d), g.M ⟨0, hd⟩ j ≤ f.M ⟨0, hd⟩ j) ∧ g.c ⟨0, hd⟩ ≤ f.c ⟨0, hd⟩
+def Collatz.Arctic.StrictTop : {R : Type} →
+  [LT R] → [Zero R] → {d : ℕ} → 0 < d → Collatz.Arctic.AffFun R d → Collatz.Arctic.AffFun R d → Prop :=
+fun {R} [LT R] [Zero R] {d} hd f g =>
+  (∀ (j : Fin d), Collatz.Arctic.GG (f.M ⟨0, hd⟩ j) (g.M ⟨0, hd⟩ j)) ∧ Collatz.Arctic.GG (f.c ⟨0, hd⟩) (g.c ⟨0, hd⟩)
+def Collatz.Arctic.SomewhereFinite : {d : ℕ} →
+  0 < d → (Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d) → List Collatz.Arctic.DLetter → Prop :=
+fun {d} hd J S => ∀ s ∈ S, (J s).c ⟨0, hd⟩ ≠ 0 ∨ (J s).M ⟨0, hd⟩ ⟨0, hd⟩ ≠ 0
+def Collatz.Arctic.AbsPositive : {d : ℕ} →
+  0 < d → (Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d) → List Collatz.Arctic.DLetter → Prop :=
+fun {d} hd J S => ∀ s ∈ S, Collatz.Arctic.ArcZ.fin 0 ≤ (J s).c ⟨0, hd⟩
+def Collatz.Arctic.pairsPB : List Collatz.Arctic.DRule :=
+[{
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d0],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t] },
+  {
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d1],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f,
+        Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f] },
+  {
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f,
+        Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.usableST : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt], rhs := [Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.lettersPB : List Collatz.Arctic.DLetter :=
+[Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d0,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d1, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.rgt]
+def Collatz.Arctic.pairsPDrev : List Collatz.Arctic.DRule :=
+[{ lhs := [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt] },
+  {
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2] }]
+def Collatz.Arctic.usableSTrev : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1] },
+  { lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2] },
+  { lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.lft] }]
+def Collatz.Arctic.lettersPDrev : List Collatz.Arctic.DLetter :=
+[Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d0,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d1, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2,
+  Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.lft]
+def Collatz.Arctic.HTPDB.usableHT : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.HTPDB.pairsPDrevH : List Collatz.Arctic.DRule :=
+[{
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f,
+        Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d0] },
+  {
+    lhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t,
+        Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.t],
+    rhs :=
+      [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2,
+        Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.d2] }]
+def Collatz.Arctic.HTPDB.usableHTrev : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1] },
+  { lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d1] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d2] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2] },
+  { lhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.lft] },
+  { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.lft],
+    rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.lft] }]
+structure Collatz.Arctic.AffFun (R : Type) (d : ℕ) : Type
+number of parameters: 2
+fields:
+  Collatz.Arctic.AffFun.M : Matrix (Fin d) (Fin d) R
+  Collatz.Arctic.AffFun.c : Fin d → R
+constructor:
+  Collatz.Arctic.AffFun.mk {R : Type} {d : ℕ} (M : Matrix (Fin d) (Fin d) R) (c : Fin d → R) : Collatz.Arctic.AffFun R d
+def Collatz.Arctic.Affine.evL : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d) →
+    List Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d :=
+fun {d} J w => Collatz.Arctic.evA (Collatz.Arctic.Affine.lift J) (List.map Collatz.Arctic.DLetter.plain w)
+def Collatz.Arctic.Affine.PWeak : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d) → Collatz.Arctic.Rule → Prop :=
+fun {d} J ρ =>
+  ∀ (x : Fin d → Collatz.Arctic.Arc) (i : Fin d),
+    (Collatz.Arctic.Affine.evL J ρ.rhs).apply x i ≤ (Collatz.Arctic.Affine.evL J ρ.lhs).apply x i
+def Collatz.Arctic.Affine.PStrict : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d) → Collatz.Arctic.Rule → Prop :=
+fun {d} J ρ =>
+  ∀ (x : Fin d → Collatz.Arctic.Arc) (i : Fin d),
+    Collatz.Arctic.GG ((Collatz.Arctic.Affine.evL J ρ.lhs).apply x i) ((Collatz.Arctic.Affine.evL J ρ.rhs).apply x i)
+def Collatz.Arctic.GG : {R : Type} → [LT R] → [Zero R] → R → R → Prop :=
+fun {R} [LT R] [Zero R] a b => b < a ∨ a = 0 ∧ b = 0
+def Collatz.Arctic.Affine.SomeFin : {d : ℕ} →
+  0 < d → (Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d) → Prop :=
+fun {d} hd J => ∀ (σ : Collatz.Arctic.Letter), (J σ).c ⟨0, hd⟩ ≠ 0 ∨ (J σ).M ⟨0, hd⟩ ⟨0, hd⟩ ≠ 0
+def Collatz.Arctic.Affine.AffBarrierFin : List Collatz.Arctic.Rule → Prop :=
+fun R =>
+  ∀ (d : ℕ) (hd : 0 < d) (J : Collatz.Arctic.Letter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+    (∀ (σ : Collatz.Arctic.Letter), (J σ).M ⟨0, hd⟩ ⟨0, hd⟩ ≠ 0) →
+      (∀ ρ ∈ R, Collatz.Arctic.Affine.PWeak J ρ) → ∀ ρ ∈ R, ¬Collatz.Arctic.Affine.PStrict J ρ
+def Collatz.Arctic.Affine.SomeFinOrientable : List Collatz.Arctic.Rule → Collatz.Arctic.Rule → Prop :=
+fun R ρ =>
+  ∃ d,
+    ∃ (hd : 0 < d),
+      ∃ J,
+        Collatz.Arctic.Affine.SomeFin hd J ∧
+          (∀ ρ' ∈ R, Collatz.Arctic.Affine.PWeak J ρ') ∧ Collatz.Arctic.Affine.PStrict J ρ
+def Collatz.Arctic.Affine.leftST : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.t] }]
+structure Collatz.Arctic.NatExample.NAff (d : ℕ) : Type
+number of parameters: 1
+fields:
+  Collatz.Arctic.NatExample.NAff.M : Matrix (Fin d) (Fin d) ℕ
+  Collatz.Arctic.NatExample.NAff.v : Fin d → ℕ
+constructor:
+  Collatz.Arctic.NatExample.NAff.mk {d : ℕ} (M : Matrix (Fin d) (Fin d) ℕ) (v : Fin d → ℕ) :
+    Collatz.Arctic.NatExample.NAff d
+def Collatz.Arctic.NatExample.NAff.app : {d : ℕ} → Collatz.Arctic.NatExample.NAff d → (Fin d → ℕ) → Fin d → ℕ :=
+fun {d} F y => F.M.mulVec y + F.v
+def Collatz.Arctic.NatExample.NAff.comp : {d : ℕ} →
+  Collatz.Arctic.NatExample.NAff d → Collatz.Arctic.NatExample.NAff d → Collatz.Arctic.NatExample.NAff d :=
+fun {d} F G => { M := F.M * G.M, v := F.M.mulVec G.v + F.v }
+def Collatz.Arctic.NatExample.NAff.id : (d : ℕ) → Collatz.Arctic.NatExample.NAff d :=
+fun d => { M := 1, v := 0 }
+def Collatz.Arctic.NatExample.evN : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff d) → Collatz.Arctic.Word → Collatz.Arctic.NatExample.NAff d :=
+fun {d} I x => List.brecOn x (Collatz.Arctic.NatExample.evN._f I)
+@Collatz.Arctic.NatExample.evN_app : ∀ {d : ℕ} (I : Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff d)
+  (y : Fin d → ℕ) (w : Collatz.Arctic.Word),
+  (Collatz.Arctic.NatExample.evN I w).app y = List.foldr (fun s z => (I s).app z) y w
+def Collatz.Arctic.NatExample.NWeak : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff d) → Collatz.Arctic.Rule → Prop :=
+fun {d} I ρ =>
+  (∀ (i j : Fin d), (Collatz.Arctic.NatExample.evN I ρ.rhs).M i j ≤ (Collatz.Arctic.NatExample.evN I ρ.lhs).M i j) ∧
+    ∀ (i : Fin d), (Collatz.Arctic.NatExample.evN I ρ.rhs).v i ≤ (Collatz.Arctic.NatExample.evN I ρ.lhs).v i
+def Collatz.Arctic.NatExample.NStrict : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff d) → Collatz.Arctic.Rule → Prop :=
+fun {d} [NeZero d] I ρ =>
+  Collatz.Arctic.NatExample.NWeak I ρ ∧
+    (Collatz.Arctic.NatExample.evN I ρ.rhs).v 0 < (Collatz.Arctic.NatExample.evN I ρ.lhs).v 0
+def Collatz.Arctic.NatExample.PhiN : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff d) → Collatz.Arctic.Word → ℕ :=
+fun {d} [NeZero d] I w => (Collatz.Arctic.NatExample.evN I w).app 0 0
+def Collatz.Arctic.NatExample.resIdx : ℕ → Fin 4 :=
+fun r => ⟨1 + r % 3, ⋯⟩
+def Collatz.Arctic.NatExample.matB : ℕ → Matrix (Fin 4) (Fin 4) ℕ :=
+fun b =>
+  Matrix.of fun i j =>
+    if i = 0 then if j = 0 then 1 else 0 else if j = Collatz.Arctic.NatExample.resIdx (2 * (↑i - 1) + b) then 2 else 0
+def Collatz.Arctic.NatExample.matD : ℕ → Matrix (Fin 4) (Fin 4) ℕ :=
+fun d =>
+  Matrix.of fun i j => if i = 0 then if j = 0 then 1 else 0 else if j = Collatz.Arctic.NatExample.resIdx d then 4 else 0
+def Collatz.Arctic.NatExample.matL : ℕ → Matrix (Fin 4) (Fin 4) ℕ :=
+fun rin => Matrix.of fun i j => if i = 0 ∧ (j = 0 ∨ j = Collatz.Arctic.NatExample.resIdx rin) then 1 else 0
+def Collatz.Arctic.NatExample.matR : Matrix (Fin 4) (Fin 4) ℕ :=
+Matrix.of fun i j => if i = 0 ∧ j = 0 then 1 else 0
+def Collatz.Arctic.NatExample.vecR : ℕ → Fin 4 → ℕ :=
+fun rout i => if i = 0 ∨ i = Collatz.Arctic.NatExample.resIdx rout then 1 else 0
+def Collatz.Arctic.NatExample.interp : ℕ → ℕ → Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4 :=
+fun rin rout x =>
+  match x with
+  | Collatz.Arctic.Letter.f => { M := Collatz.Arctic.NatExample.matB 0, v := 0 }
+  | Collatz.Arctic.Letter.t => { M := Collatz.Arctic.NatExample.matB 1, v := 0 }
+  | Collatz.Arctic.Letter.d0 => { M := Collatz.Arctic.NatExample.matD 0, v := 0 }
+  | Collatz.Arctic.Letter.d1 => { M := Collatz.Arctic.NatExample.matD 1, v := 0 }
+  | Collatz.Arctic.Letter.d2 => { M := Collatz.Arctic.NatExample.matD 2, v := 0 }
+  | Collatz.Arctic.Letter.lft => { M := Collatz.Arctic.NatExample.matL rin, v := 0 }
+  | Collatz.Arctic.Letter.rgt => { M := Collatz.Arctic.NatExample.matR, v := Collatz.Arctic.NatExample.vecR rout }
+def Collatz.Arctic.NatExample.IT : Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4 :=
+Collatz.Arctic.NatExample.interp 1 0
+def Collatz.Arctic.NatExample.IH : Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4 :=
+Collatz.Arctic.NatExample.interp 1 1
+def Collatz.Arctic.NatExample.IRH : Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4 :=
+Collatz.Arctic.NatExample.interp 0 1
+def Collatz.Arctic.NatExample.resPart : Matrix (Fin 4) (Fin 4) ℕ → Matrix (Fin 3) (Fin 3) ℕ :=
+fun A => Matrix.of fun i j => A i.succ j.succ
+def Collatz.Arctic.NatExample.digitL : Bool → Collatz.Arctic.Letter :=
+fun b => if b = true then Collatz.Arctic.Letter.t else Collatz.Arctic.Letter.f
+def Collatz.Arctic.NatExample.resProd : (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4) →
+  List Bool → Matrix (Fin 3) (Fin 3) ℕ :=
+fun I w => (List.map (fun b => Collatz.Arctic.NatExample.resPart (I (Collatz.Arctic.NatExample.digitL b)).M) w).prod
+def Collatz.Arctic.NatExample.ResidueComponent : (Collatz.Arctic.Letter → Collatz.Arctic.NatExample.NAff 4) → Prop :=
+fun I =>
+  Collatz.Arctic.NatExample.resPart (I Collatz.Arctic.Letter.f).M = 2 • Equiv.Perm.permMatrix ℕ (Equiv.swap 1 2) ∧
+    Collatz.Arctic.NatExample.resPart (I Collatz.Arctic.Letter.t).M = 2 • Equiv.Perm.permMatrix ℕ (Equiv.swap 0 1) ∧
+      (∀ (r : Fin 3), ↑((Equiv.swap 1 2) r) = 2 * ↑r % 3) ∧
+        (∀ (r : Fin 3), ↑((Equiv.swap 0 1) r) = (2 * ↑r + 1) % 3) ∧
+          (∀ (w : List Bool), ∃ σ, Collatz.Arctic.NatExample.resProd I w = 2 ^ w.length • Equiv.Perm.permMatrix ℕ σ) ∧
+            (∀ (σ : Equiv.Perm (Fin 3)),
+                ∃ w, w ≠ [] ∧ Collatz.Arctic.NatExample.resProd I w = 2 ^ w.length • Equiv.Perm.permMatrix ℕ σ) ∧
+              (∀ (w : List Bool) (i : Fin 3), ∃! j, 0 < Collatz.Arctic.NatExample.resProd I w i j) ∧
+                (∀ (w : List Bool) (j : Fin 3), ∃! i, 0 < Collatz.Arctic.NatExample.resProd I w i j) ∧
+                  (¬∃ w, ∀ (i j : Fin 3), 0 < Collatz.Arctic.NatExample.resProd I w i j) ∧
+                    (∀ (b : Bool) (i : Fin 3),
+                        (I (Collatz.Arctic.NatExample.digitL b)).M 0 i.succ = 0 ∧
+                          (I (Collatz.Arctic.NatExample.digitL b)).M i.succ 0 = 0) ∧
+                      ∀ (i j : Fin 3), ∃ w, w ≠ [] ∧ 0 < Collatz.Arctic.NatExample.resProd I w i j
+def Collatz.Arctic.NatExample.phiI : ℕ → ℕ :=
+fun n =>
+  Matrix.vecMul ![1, 1, 0, 0] (List.map Collatz.Arctic.NatExample.matB (Nat.digits 2 n).reverse).prod ⬝ᵥ ![1, 1, 0, 0]
+def Collatz.Arctic.binTail : ℕ → Collatz.Arctic.Word :=
+fun n =>
+  List.map (fun b => if b = 0 then Collatz.Arctic.Letter.f else Collatz.Arctic.Letter.t)
+    (List.drop 1 (Nat.digits 2 n).reverse)
+def Collatz.Arctic.can : ℕ → Collatz.Arctic.Word :=
+fun n => Collatz.Arctic.Letter.lft :: (Collatz.Arctic.binTail n ++ [Collatz.Arctic.Letter.rgt])
+def Collatz.Arctic.T : ℕ → ℕ :=
+fun n => if n % 2 = 0 then n / 2 else (3 * n + 1) / 2
+def Collatz.Arctic.RH.canRH : ℕ → Collatz.Arctic.Word :=
+fun n =>
+  Collatz.Arctic.Letter.lft :: Collatz.Arctic.Letter.t :: (Collatz.Arctic.binTail n ++ [Collatz.Arctic.Letter.rgt])
+def Collatz.Arctic.HModel.Hmap : ℕ → ℕ :=
+fun n => if n % 4 = 0 then 3 * (n / 4) else if n % 8 = 7 then (9 * n + 1) / 8 else n
+def Collatz.Arctic.HModel.HDom : ℕ → Prop :=
+fun n => 8 ≤ n ∧ (n % 4 = 0 ∨ n % 8 = 7)
+def Collatz.Arctic.NatQ5.NatBarrierST : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ ρ ∈ Collatz.Arctic.rulesST, ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.NatBarrierSTrev : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.NatBarrierSTB : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTB, ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.NatBarrierSTrevTop : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrevTop, ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.NatBarrierDP : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableST, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPB, Collatz.Arctic.NatQ5.NWeakTopD J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPB, ¬Collatz.Arctic.NatQ5.NStrictTopD J π
+def Collatz.Arctic.NatQ5.NatBarrierDPrev : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableSTrev, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPDrev, Collatz.Arctic.NatQ5.NWeakTopD J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPDrev, ¬Collatz.Arctic.NatQ5.NStrictTopD J π
+Collatz.Arctic.NatQ5.allBarriers_final : Collatz.Arctic.NatQ5.NatBarrierST ∧
+  Collatz.Arctic.NatQ5.NatBarrierSTB ∧
+    Collatz.Arctic.NatQ5.NatBarrierSTrev ∧
+      Collatz.Arctic.NatQ5.NatBarrierSTrevTop ∧ Collatz.Arctic.NatQ5.NatBarrierDP ∧ Collatz.Arctic.NatQ5.NatBarrierDPrev
+'Collatz.Arctic.NatQ5.allBarriers_final' depends on axioms: [propext, Classical.choice, Quot.sound]
+structure Collatz.Arctic.NatQ5.NAff (d : ℕ) : Type
+number of parameters: 1
+fields:
+  Collatz.Arctic.NatQ5.NAff.M : Matrix (Fin d) (Fin d) ℕ
+  Collatz.Arctic.NatQ5.NAff.v : Fin d → ℕ
+constructor:
+  Collatz.Arctic.NatQ5.NAff.mk {d : ℕ} (M : Matrix (Fin d) (Fin d) ℕ) (v : Fin d → ℕ) : Collatz.Arctic.NatQ5.NAff d
+def Collatz.Arctic.NatQ5.NAff.app : {d : ℕ} → Collatz.Arctic.NatQ5.NAff d → (Fin d → ℕ) → Fin d → ℕ :=
+fun {d} F y => F.M.mulVec y + F.v
+def Collatz.Arctic.NatQ5.NAff.comp : {d : ℕ} →
+  Collatz.Arctic.NatQ5.NAff d → Collatz.Arctic.NatQ5.NAff d → Collatz.Arctic.NatQ5.NAff d :=
+fun {d} F G => { M := F.M * G.M, v := F.M.mulVec G.v + F.v }
+def Collatz.Arctic.NatQ5.NAff.id : (d : ℕ) → Collatz.Arctic.NatQ5.NAff d :=
+fun d => { M := 1, v := 0 }
+def Collatz.Arctic.NatQ5.evN : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.Word → Collatz.Arctic.NatQ5.NAff d :=
+fun {d} I x => List.brecOn x (Collatz.Arctic.NatQ5.evN._f I)
+def Collatz.Arctic.NatQ5.NWeak : {d : ℕ} →
+  (Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.Rule → Prop :=
+fun {d} I ρ =>
+  (∀ (i j : Fin d), (Collatz.Arctic.NatQ5.evN I ρ.rhs).M i j ≤ (Collatz.Arctic.NatQ5.evN I ρ.lhs).M i j) ∧
+    ∀ (i : Fin d), (Collatz.Arctic.NatQ5.evN I ρ.rhs).v i ≤ (Collatz.Arctic.NatQ5.evN I ρ.lhs).v i
+def Collatz.Arctic.NatQ5.NStrict : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.Rule → Prop :=
+fun {d} [NeZero d] I ρ =>
+  Collatz.Arctic.NatQ5.NWeak I ρ ∧ (Collatz.Arctic.NatQ5.evN I ρ.rhs).v 0 < (Collatz.Arctic.NatQ5.evN I ρ.lhs).v 0
+def Collatz.Arctic.NatQ5.NMono : {d : ℕ} → [NeZero d] → (Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) → Prop :=
+fun {d} [NeZero d] I => ∀ (s : Collatz.Arctic.Letter), 1 ≤ (I s).M 0 0
+def Collatz.Arctic.NatQ5.PhiN : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.Word → ℕ :=
+fun {d} [NeZero d] I w => (Collatz.Arctic.NatQ5.evN I w).app 0 0
+def Collatz.Arctic.NatQ5.rulesSTB : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d0],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.t] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d1],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.f] },
+  { lhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.d2],
+    rhs := [Collatz.Arctic.Letter.lft, Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.t] }]
+def Collatz.Arctic.NatQ5.rulesSTrev : List Collatz.Arctic.Rule :=
+List.map (fun ρ => { lhs := List.reverse ρ.lhs, rhs := List.reverse ρ.rhs }) Collatz.Arctic.rulesST
+def Collatz.Arctic.NatQ5.rulesSTrevTop : List Collatz.Arctic.Rule :=
+[{ lhs := [Collatz.Arctic.Letter.rgt, Collatz.Arctic.Letter.f], rhs := [Collatz.Arctic.Letter.rgt] },
+  { lhs := [Collatz.Arctic.Letter.rgt, Collatz.Arctic.Letter.t],
+    rhs := [Collatz.Arctic.Letter.rgt, Collatz.Arctic.Letter.d2] }]
+def Collatz.Arctic.NatQ5.evND : {d : ℕ} →
+  (Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d) → List Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d :=
+fun {d} J x => List.brecOn x (Collatz.Arctic.NatQ5.evND._f J)
+def Collatz.Arctic.NatQ5.NWeakD : {d : ℕ} →
+  (Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.DRule → Prop :=
+fun {d} J π =>
+  (∀ (i j : Fin d), (Collatz.Arctic.NatQ5.evND J π.rhs).M i j ≤ (Collatz.Arctic.NatQ5.evND J π.lhs).M i j) ∧
+    ∀ (i : Fin d), (Collatz.Arctic.NatQ5.evND J π.rhs).v i ≤ (Collatz.Arctic.NatQ5.evND J π.lhs).v i
+def Collatz.Arctic.NatQ5.NWeakTopD : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.DRule → Prop :=
+fun {d} [NeZero d] J π =>
+  (∀ (j : Fin d), (Collatz.Arctic.NatQ5.evND J π.rhs).M 0 j ≤ (Collatz.Arctic.NatQ5.evND J π.lhs).M 0 j) ∧
+    (Collatz.Arctic.NatQ5.evND J π.rhs).v 0 ≤ (Collatz.Arctic.NatQ5.evND J π.lhs).v 0
+def Collatz.Arctic.NatQ5.NStrictTopD : {d : ℕ} →
+  [NeZero d] → (Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d) → Collatz.Arctic.DRule → Prop :=
+fun {d} [NeZero d] J π =>
+  (∀ (j : Fin d), (Collatz.Arctic.NatQ5.evND J π.rhs).M 0 j ≤ (Collatz.Arctic.NatQ5.evND J π.lhs).M 0 j) ∧
+    (Collatz.Arctic.NatQ5.evND J π.rhs).v 0 < (Collatz.Arctic.NatQ5.evND J π.lhs).v 0
+inductive Collatz.Arctic.DLetter : Type
+number of parameters: 0
+constructors:
+Collatz.Arctic.DLetter.mark : Collatz.Arctic.Letter → Collatz.Arctic.DLetter
+Collatz.Arctic.DLetter.plain : Collatz.Arctic.Letter → Collatz.Arctic.DLetter
+structure Collatz.Arctic.DRule : Type
+number of parameters: 0
+fields:
+  Collatz.Arctic.DRule.lhs : List Collatz.Arctic.DLetter
+  Collatz.Arctic.DRule.rhs : List Collatz.Arctic.DLetter
+constructor:
+  Collatz.Arctic.DRule.mk (lhs rhs : List Collatz.Arctic.DLetter) : Collatz.Arctic.DRule
+def Collatz.Arctic.Rule.plain : Collatz.Arctic.Rule → Collatz.Arctic.DRule :=
+fun ρ => { lhs := List.map Collatz.Arctic.DLetter.plain ρ.lhs, rhs := List.map Collatz.Arctic.DLetter.plain ρ.rhs }
+def Collatz.Arctic.NatQ5.UsedST : Collatz.Arctic.Rule → Prop :=
+fun ρ => ∃ n, 2 ≤ n ∧ ρ ∈ Collatz.Arctic.canDeriv n
+def Collatz.Arctic.NatQ5.NatBarrierSTUsed : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ (ρ : Collatz.Arctic.Rule), Collatz.Arctic.NatQ5.UsedST ρ → Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ (ρ : Collatz.Arctic.Rule), Collatz.Arctic.NatQ5.UsedST ρ → ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.canDerivRev : ℕ → List Collatz.Arctic.Rule :=
+fun n => List.map (fun ρ => { lhs := List.reverse ρ.lhs, rhs := List.reverse ρ.rhs }) (Collatz.Arctic.canDeriv n)
+def Collatz.Arctic.NatQ5.UsedSTrev : Collatz.Arctic.Rule → Prop :=
+fun ρ => ∃ n, 2 ≤ n ∧ ρ ∈ Collatz.Arctic.NatQ5.canDerivRev n
+def Collatz.Arctic.NatQ5.NatBarrierSTrevUsed : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ (ρ : Collatz.Arctic.Rule), Collatz.Arctic.NatQ5.UsedSTrev ρ → Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ (ρ : Collatz.Arctic.Rule), Collatz.Arctic.NatQ5.UsedSTrev ρ → ¬Collatz.Arctic.NatQ5.NStrict I ρ
+def Collatz.Arctic.NatQ5.NatValueCore : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ ρ ∈ Collatz.Arctic.rulesST,
+        ∀ (K : ℕ),
+          ∃ n,
+            K ≤ n ∧
+              ∃ m,
+                (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                  Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n) < Collatz.Arctic.usesOrbit ρ n m
+def Collatz.Arctic.NatQ5.NatValueCore' : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ ρ ∈ Collatz.Arctic.rulesST,
+      ∀ (K : ℕ),
+        ∃ n,
+          K ≤ n ∧
+            ∃ m,
+              (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n) < Collatz.Arctic.usesOrbit ρ n m
+def Collatz.Arctic.canDeriv : ℕ → List Collatz.Arctic.Rule :=
+fun n =>
+  if n % 2 = 0 then
+    [{ lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.rgt], rhs := [Collatz.Arctic.Letter.rgt] }]
+  else
+    { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.rgt],
+        rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.rgt] } ::
+      Collatz.Arctic.sweepRules (Collatz.Arctic.tailBitsLSB ((n - 1) / 2)) 2
+def Collatz.Arctic.uses : Collatz.Arctic.Rule → ℕ → ℕ :=
+fun ρ n => List.count ρ (Collatz.Arctic.canDeriv n)
+def Collatz.Arctic.usesOrbit : Collatz.Arctic.Rule → ℕ → ℕ → ℕ :=
+fun ρ n m => (List.map (fun i => Collatz.Arctic.uses ρ (Collatz.Arctic.T^[i] n)) (List.range m)).sum
+def Collatz.Arctic.NatQ5.W3c.DecompStmt : Prop :=
+∀ (Q : Type) [inst : Fintype Q] [inst_1 : DecidableEq Q] (A : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (C : Finset Q), Collatz.Arctic.NatQ5.IsComp A C → Collatz.Arctic.NatQ5.ZeroOne A C) →
+    ∀ (K : Set (Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A))) (u : List (Fin 2))
+      (e : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)),
+      Collatz.Arctic.NatQ5.W3c.Sharp A K u e →
+        ∀ (R : ℕ),
+          Fintype.card Q ≤ R →
+            ∀ (τ' y'' z : List (Fin 2)), Nonempty (Collatz.Arctic.NatQ5.W3c.DecompData A u τ' y'' z R)
+structure Collatz.Arctic.NatQ5.W3c.DecompData.{u_1} {Q : Type u_1} [Fintype Q] [DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) (u τ' y'' z : List (Fin 2)) (R : ℕ) : Type (max 1 u_1)
+number of parameters: 9
+fields:
+  Collatz.Arctic.NatQ5.W3c.DecompData.Γ : Type
+  Collatz.Arctic.NatQ5.W3c.DecompData.finΓ : Fintype self.Γ
+  Collatz.Arctic.NatQ5.W3c.DecompData.deg : self.Γ → ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.t0 : self.Γ → ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.t1 : self.Γ → ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.t0_le : ∀ (γ : self.Γ), self.t0 γ ≤ (Collatz.Arctic.NatQ5.W3c.topW u τ' R).length
+  Collatz.Arctic.NatQ5.W3c.DecompData.t1_le : ∀ (γ : self.Γ), self.t1 γ ≤ y''.length + R * u.length
+  Collatz.Arctic.NatQ5.W3c.DecompData.Lab : Type
+  Collatz.Arctic.NatQ5.W3c.DecompData.finLab : Fintype self.Lab
+  Collatz.Arctic.NatQ5.W3c.DecompData.labS : self.Lab → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)
+  Collatz.Arctic.NatQ5.W3c.DecompData.κ : (γ : self.Γ) →
+      Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A) → (Fin (self.deg γ) → self.Lab) → ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.g : (γ : self.Γ) → Fin (self.deg γ) → self.Lab → ℕ → List (Fin 2) → ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.g_len : ∀ (γ : self.Γ) (k : Fin (self.deg γ)) (l : self.Lab) (r : ℕ)
+      (v : List (Fin 2)), self.g γ k l r v ≠ 0 → v.length = r
+  Collatz.Arctic.NatQ5.W3c.DecompData.cP : ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.dP : ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.g_poly : ∀ (γ : self.Γ) (k : Fin (self.deg γ)) (l : self.Lab) (r : ℕ)
+      (v : List (Fin 2)), self.g γ k l r v ≤ self.cP * (r + 1) ^ self.dP
+  Collatz.Arctic.NatQ5.W3c.DecompData.cW : ℕ
+  Collatz.Arctic.NatQ5.W3c.DecompData.g_free : ∀ (γ : self.Γ) (k : Fin (self.deg γ)) (l : self.Lab) (r : ℕ)
+      (v : List (Fin 2)),
+      self.g γ k l r v ≠ 0 → ∃ a ℓ, a + ℓ ≤ r ∧ r ≤ self.cW * (ℓ + 1) ∧ ¬u <:+: List.take ℓ (List.drop a v)
+  Collatz.Arctic.NatQ5.W3c.DecompData.spec : ∀ (m : List (Fin 2)),
+      Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R) =
+        ∑ γ,
+          Collatz.Arctic.NatQ5.W3c.termOf A self.labS (self.deg γ) (self.κ γ) (self.g γ) (self.t0 γ)
+            ((Collatz.Arctic.NatQ5.W3c.topW u τ' R).length + m.length + self.t1 γ)
+            (Collatz.Arctic.NatQ5.W3c.muZ A
+              (List.take (Collatz.Arctic.NatQ5.W3c.posT u τ' y'' m R) (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R)))
+            (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R)
+constructor:
+  Collatz.Arctic.NatQ5.W3c.DecompData.mk.{u_1} {Q : Type u_1} [Fintype Q] [DecidableEq Q]
+    {A : Collatz.Arctic.NatQ5.ValAuto Q} {u τ' y'' z : List (Fin 2)} {R : ℕ} (Γ : Type) (finΓ : Fintype Γ)
+    (deg t0 t1 : Γ → ℕ) (t0_le : ∀ (γ : Γ), t0 γ ≤ (Collatz.Arctic.NatQ5.W3c.topW u τ' R).length)
+    (t1_le : ∀ (γ : Γ), t1 γ ≤ y''.length + R * u.length) (Lab : Type) (finLab : Fintype Lab)
+    (labS : Lab → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A))
+    (κ : (γ : Γ) → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A) → (Fin (deg γ) → Lab) → ℕ)
+    (g : (γ : Γ) → Fin (deg γ) → Lab → ℕ → List (Fin 2) → ℕ)
+    (g_len : ∀ (γ : Γ) (k : Fin (deg γ)) (l : Lab) (r : ℕ) (v : List (Fin 2)), g γ k l r v ≠ 0 → v.length = r)
+    (cP dP : ℕ)
+    (g_poly : ∀ (γ : Γ) (k : Fin (deg γ)) (l : Lab) (r : ℕ) (v : List (Fin 2)), g γ k l r v ≤ cP * (r + 1) ^ dP)
+    (cW : ℕ)
+    (g_free :
+      ∀ (γ : Γ) (k : Fin (deg γ)) (l : Lab) (r : ℕ) (v : List (Fin 2)),
+        g γ k l r v ≠ 0 → ∃ a ℓ, a + ℓ ≤ r ∧ r ≤ cW * (ℓ + 1) ∧ ¬u <:+: List.take ℓ (List.drop a v))
+    (spec :
+      ∀ (m : List (Fin 2)),
+        Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R) =
+          ∑ γ,
+            Collatz.Arctic.NatQ5.W3c.termOf A labS (deg γ) (κ γ) (g γ) (t0 γ)
+              ((Collatz.Arctic.NatQ5.W3c.topW u τ' R).length + m.length + t1 γ)
+              (Collatz.Arctic.NatQ5.W3c.muZ A
+                (List.take (Collatz.Arctic.NatQ5.W3c.posT u τ' y'' m R)
+                  (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R)))
+              (Collatz.Arctic.NatQ5.W3c.fullW u τ' y'' z m R)) :
+    Collatz.Arctic.NatQ5.W3c.DecompData A u τ' y'' z R
+def Collatz.Arctic.NatQ5.W3c.topW : List (Fin 2) → List (Fin 2) → ℕ → List (Fin 2) :=
+fun u τ' R => τ' ++ (List.replicate R u).flatten
+def Collatz.Arctic.NatQ5.W3c.tailW : List (Fin 2) → List (Fin 2) → List (Fin 2) → ℕ → List (Fin 2) :=
+fun u y'' z R => y'' ++ (List.replicate R u).flatten ++ z
+def Collatz.Arctic.NatQ5.W3c.fullW : List (Fin 2) →
+  List (Fin 2) → List (Fin 2) → List (Fin 2) → List (Fin 2) → ℕ → List (Fin 2) :=
+fun u τ' y'' z m R => Collatz.Arctic.NatQ5.W3c.topW u τ' R ++ m ++ Collatz.Arctic.NatQ5.W3c.tailW u y'' z R
+def Collatz.Arctic.NatQ5.W3c.posT : List (Fin 2) → List (Fin 2) → List (Fin 2) → List (Fin 2) → ℕ → ℕ :=
+fun u τ' y'' m R => (Collatz.Arctic.NatQ5.W3c.topW u τ' R).length + m.length + y''.length + R * u.length
+def Collatz.Arctic.NatQ5.W3c.Adm : (s : ℕ) → ℕ → ℕ → (Fin s → ℕ) → (Fin s → ℕ) → Prop :=
+fun s t0 t1 p r =>
+  (∀ (k : Fin s), 1 ≤ r k) ∧
+    (∀ (k : Fin s), ↑k = 0 → t0 ≤ p k) ∧
+      (∀ (k k' : Fin s), ↑k' = ↑k + 1 → p k + r k ≤ p k') ∧ ∀ (k : Fin s), ↑k + 1 = s → p k + r k ≤ t1
+def Collatz.Arctic.NatQ5.W3c.admSet : (s : ℕ) → ℕ → ℕ → ℕ → Finset ((Fin s → ℕ) × (Fin s → ℕ)) :=
+fun s t0 t1 N =>
+  {pr ∈ (Fintype.piFinset fun x => Finset.range (N + 1)) ×ˢ Fintype.piFinset fun x => Finset.range (N + 1) |
+    Collatz.Arctic.NatQ5.W3c.Adm s t0 t1 pr.1 pr.2}
+def Collatz.Arctic.NatQ5.W3c.ind : Prop → ℕ :=
+fun P => if P then 1 else 0
+def Collatz.Arctic.NatQ5.W3c.xiOf.{u_1} : {Q : Type u_1} →
+  [inst : Fintype Q] →
+    [inst_1 : DecidableEq Q] →
+      (A : Collatz.Arctic.NatQ5.ValAuto Q) →
+        {Lab : Type} →
+          (Lab → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)) →
+            (Lab → ℕ → List (Fin 2) → ℕ) → Lab → ℕ → List (Fin 2) → ℕ → ℕ :=
+fun {Q} [Fintype Q] [DecidableEq Q] A {Lab} labS g l r ω p =>
+  Collatz.Arctic.NatQ5.W3c.ind (Collatz.Arctic.NatQ5.W3c.muZ A (List.take p ω) = labS l) *
+    g l r (List.take r (List.drop p ω))
+def Collatz.Arctic.NatQ5.W3c.termOf.{u_1} : {Q : Type u_1} →
+  [inst : Fintype Q] →
+    [inst_1 : DecidableEq Q] →
+      (A : Collatz.Arctic.NatQ5.ValAuto Q) →
+        {Lab : Type} →
+          [Fintype Lab] →
+            (Lab → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)) →
+              (s : ℕ) →
+                (Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A) → (Fin s → Lab) → ℕ) →
+                  (Fin s → Lab → ℕ → List (Fin 2) → ℕ) →
+                    ℕ → ℕ → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A) → List (Fin 2) → ℕ :=
+fun {Q} [Fintype Q] [DecidableEq Q] A {Lab} [Fintype Lab] labS s κ g t0 t1 sT ω =>
+  ∑ l,
+    κ sT l *
+      ∑ pr ∈ Collatz.Arctic.NatQ5.W3c.admSet s t0 t1 ω.length,
+        ∏ k, Collatz.Arctic.NatQ5.W3c.xiOf A labS (g k) (l k) (pr.2 k) ω (pr.1 k)
+structure Collatz.Arctic.NatQ5.W3c.Sharp.{u_1} {Q : Type u_1} [Fintype Q] [DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) (K : Set (Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)))
+  (u : List (Fin 2)) (e : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)) : Prop
+number of parameters: 7
+fields:
+  Collatz.Arctic.NatQ5.W3c.Sharp.minIdeal : Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.NatQ5.W3c.muMon A) K
+  Collatz.Arctic.NatQ5.W3c.Sharp.mem : e ∈ K
+  Collatz.Arctic.NatQ5.W3c.Sharp.idem : e * e = e
+  Collatz.Arctic.NatQ5.W3c.Sharp.mu_eq : Collatz.Arctic.NatQ5.W3c.muZ A u = e
+  Collatz.Arctic.NatQ5.W3c.Sharp.ne_nil : u ≠ []
+  Collatz.Arctic.NatQ5.W3c.Sharp.ustar : ∃ v, Collatz.Arctic.NatQ5.IsUStar A v ∧ v <:+: u
+constructor:
+  Collatz.Arctic.NatQ5.W3c.Sharp.mk.{u_1} {Q : Type u_1} [Fintype Q] [DecidableEq Q]
+    {A : Collatz.Arctic.NatQ5.ValAuto Q} {K : Set (Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A))}
+    {u : List (Fin 2)} {e : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)}
+    (minIdeal : Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.NatQ5.W3c.muMon A) K) (mem : e ∈ K)
+    (idem : e * e = e) (mu_eq : Collatz.Arctic.NatQ5.W3c.muZ A u = e) (ne_nil : u ≠ [])
+    (ustar : ∃ v, Collatz.Arctic.NatQ5.IsUStar A v ∧ v <:+: u) : Collatz.Arctic.NatQ5.W3c.Sharp A K u e
+@[reducible] def Collatz.Arctic.NatQ5.W3c.ZIdx.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Type (max 0 u_1) :=
+fun {Q} [Fintype Q] [DecidableEq Q] A => { q // Collatz.Arctic.NatQ5.W3c.InZ A q }
+def Collatz.Arctic.NatQ5.W3c.muZ.{u_1} : {Q : Type u_1} →
+  [inst : Fintype Q] →
+    [inst_1 : DecidableEq Q] →
+      (A : Collatz.Arctic.NatQ5.ValAuto Q) →
+        List (Fin 2) → Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A) :=
+fun {Q} [Fintype Q] [DecidableEq Q] A w x y =>
+  ↑y ∈ Collatz.Arctic.NatQ5.sccOf A ↑x ∧ 1 ≤ Collatz.Arctic.NatQ5.Rigid.DxN A.B w ↑x ↑y
+def Collatz.Arctic.NatQ5.IsComp.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Finset Q → Prop :=
+fun {Q} [Fintype Q] [DecidableEq Q] A C =>
+  (∃ q, Collatz.Arctic.NatQ5.Rel A q ∧ C = Collatz.Arctic.NatQ5.sccOf A q) ∧ Collatz.Arctic.NatQ5.HasEdge A C
+def Collatz.Arctic.NatQ5.ZeroOne.{u_1} : {Q : Type u_1} →
+  [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Finset Q → Prop :=
+fun {Q} [DecidableEq Q] A C => ∀ (w : List (Fin 2)) (x y : ↥C), Collatz.Arctic.NatQ5.DC A C w x y ≤ 1
+structure Collatz.Arctic.NatQ5.ValAuto.{u_1} (Q : Type u_1) : Type u_1
+number of parameters: 1
+fields:
+  Collatz.Arctic.NatQ5.ValAuto.B : Fin 2 → Matrix Q Q ℕ
+  Collatz.Arctic.NatQ5.ValAuto.u : Q → ℕ
+  Collatz.Arctic.NatQ5.ValAuto.v : Q → ℕ
+constructor:
+  Collatz.Arctic.NatQ5.ValAuto.mk.{u_1} {Q : Type u_1} (B : Fin 2 → Matrix Q Q ℕ) (u v : Q → ℕ) :
+    Collatz.Arctic.NatQ5.ValAuto Q
+def Collatz.Arctic.NatQ5.aval.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → List (Fin 2) → ℕ :=
+fun {Q} [Fintype Q] [DecidableEq Q] A ω => A.u ⬝ᵥ (Collatz.Arctic.NatQ5.Rigid.DxN A.B ω).mulVec A.v
+def Collatz.Arctic.NatQ5.binWord : ℕ → List (Fin 2) :=
+fun n => List.map (fun b => if b = 0 then 0 else 1) (List.drop 1 (Nat.digits 2 n).reverse)
+def Collatz.Arctic.NatQ5.AutoMono.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Prop :=
+fun {Q} [Fintype Q] [DecidableEq Q] A =>
+  ∀ (n : ℕ),
+    2 ≤ n →
+      Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+        Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord n)
+def Collatz.Arctic.NatQ5.AutoMono3.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Prop :=
+fun {Q} [Fintype Q] [DecidableEq Q] A =>
+  ∀ (n : ℕ),
+    2 ≤ n →
+      ¬3 ∣ n →
+        Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+          Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord n)
+def Collatz.Arctic.NatQ5.H2Prod.{u_1} : {Q : Type u_1} →
+  [Fintype Q] → [DecidableEq Q] → Collatz.Arctic.NatQ5.ValAuto Q → Prop :=
+fun {Q} [Fintype Q] [DecidableEq Q] A =>
+  ∀ (C : Finset (Q × ZMod 3)),
+    Collatz.Arctic.NatQ5.IsComp (Collatz.Arctic.NatQ5.liftT A) C →
+      Collatz.Arctic.NatQ5.ZeroOne (Collatz.Arctic.NatQ5.liftT A) C
+def Collatz.Arctic.NatQ5.lift.{u_1} : {Q : Type u_1} →
+  Collatz.Arctic.NatQ5.ValAuto Q → (M : ℕ) → Finset (ZMod M) → Collatz.Arctic.NatQ5.ValAuto (Q × ZMod M) :=
+fun {Q} A M Pc =>
+  { B := Collatz.Arctic.NatQ5.liftB A M, u := fun p => A.u p.1 * if p.2 = 1 then 1 else 0,
+    v := fun p => A.v p.1 * if p.2 ∈ Pc then 1 else 0 }
+def Collatz.Arctic.NatQ5.PcT : Finset (ZMod 3) :=
+{1, 2}
+def Collatz.Arctic.NatQ5.liftT.{u_1} : {Q : Type u_1} →
+  Collatz.Arctic.NatQ5.ValAuto Q → Collatz.Arctic.NatQ5.ValAuto (Q × ZMod 3) :=
+fun {Q} A => Collatz.Arctic.NatQ5.lift A 3 Collatz.Arctic.NatQ5.PcT
+def Collatz.Arctic.NatQ5.W3CoreStmt : Prop :=
+∀ (Q : Type) [inst : Fintype Q] [inst_1 : DecidableEq Q] (A : Collatz.Arctic.NatQ5.ValAuto Q),
+  Collatz.Arctic.NatQ5.H2Prod A →
+    Collatz.Arctic.NatQ5.AutoMono3 (Collatz.Arctic.NatQ5.liftT A) →
+      ∀ ρ ∈ Collatz.Arctic.rulesST,
+        ∀ (K : ℕ),
+          ∃ n,
+            K ≤ n ∧
+              ∃ m,
+                (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                  Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord n) < Collatz.Arctic.usesOrbit ρ n m
+def Collatz.Arctic.NatQ5.AutoValueCoreNoG2 : Prop :=
+∀ (Q : Type) [inst : Fintype Q] [inst_1 : DecidableEq Q] (A : Collatz.Arctic.NatQ5.ValAuto Q),
+  Collatz.Arctic.NatQ5.AutoMono A →
+    ∀ ρ ∈ Collatz.Arctic.rulesST,
+      ∀ (K : ℕ),
+        ∃ n,
+          K ≤ n ∧
+            ∃ m,
+              (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord n) < Collatz.Arctic.usesOrbit ρ n m
+def Collatz.Arctic.NatQ5.NW.{u_1} : {ι : Type u_1} →
+  [Fintype ι] → [DecidableEq ι] → (Collatz.Arctic.Letter → Matrix ι ι ℕ) → Collatz.Arctic.Word → Matrix ι ι ℕ :=
+fun {ι} [Fintype ι] [DecidableEq ι] N w => (List.map N w).prod
+def Collatz.Arctic.NatQ5.GWeak.{u_1} : {ι : Type u_1} →
+  [Fintype ι] → [DecidableEq ι] → (Collatz.Arctic.Letter → Matrix ι ι ℕ) → Collatz.Arctic.Rule → Prop :=
+fun {ι} [Fintype ι] [DecidableEq ι] N ρ =>
+  ∀ (i j : ι), Collatz.Arctic.NatQ5.NW N ρ.rhs i j ≤ Collatz.Arctic.NatQ5.NW N ρ.lhs i j
+def Collatz.Arctic.NatQ5.GenValueCore : Prop :=
+∀ (ι : Type) [inst : Fintype ι] [inst_1 : DecidableEq ι] (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.GWeak N ρ) →
+    ∀ ρ ∈ Collatz.Arctic.rulesST,
+      ∀ (K : ℕ),
+        ∃ n,
+          K ≤ n ∧
+            ∃ m,
+              (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                Collatz.Arctic.NatQ5.NW N (Collatz.Arctic.can n) a z < Collatz.Arctic.usesOrbit ρ n m
+def Collatz.Arctic.NatQ5.HW.HWBarrierST : Prop :=
+∀ (ι : Type) [inst : Fintype ι] [inst_1 : DecidableEq ι] (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (J : Finset ι),
+  (∀ (s : Collatz.Arctic.Letter), ∀ i ∈ J, 1 ≤ N s i i) →
+    (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.GWeak N ρ) →
+      ∀ ρ ∈ Collatz.Arctic.rulesST,
+        ∀ i ∈ J, ∀ j ∈ J, ¬Collatz.Arctic.NatQ5.NW N ρ.rhs i j < Collatz.Arctic.NatQ5.NW N ρ.lhs i j
+def Collatz.Arctic.NatQ5.HW.HWBarrierSTrev : Prop :=
+∀ (ι : Type) [inst : Fintype ι] [inst_1 : DecidableEq ι] (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (J : Finset ι),
+  (∀ (s : Collatz.Arctic.Letter), ∀ i ∈ J, 1 ≤ N s i i) →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, Collatz.Arctic.NatQ5.GWeak N ρ) →
+      ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev,
+        ∀ i ∈ J, ∀ j ∈ J, ¬Collatz.Arctic.NatQ5.NW N ρ.rhs i j < Collatz.Arctic.NatQ5.NW N ρ.lhs i j
+def Collatz.Arctic.DPFilter.ArcticBarrierDPFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.rulesST Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierDPrevFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.NatQ5.rulesSTrev Collatz.Arctic.pairsPDrev F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPDrev,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPDrev,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierBZFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.rulesST Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierBZrevFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.NatQ5.rulesSTrev Collatz.Arctic.pairsPDrev F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPDrev,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPDrev,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHDPFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.rulesHT Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHDPrevFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+  Collatz.Arctic.SomewhereFinite hd J Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀
+          ρ ∈
+            Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev
+              Collatz.Arctic.HTPDB.pairsPDrevH F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHBZFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.rulesHT Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHBZrevFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.AbsPositive hd J Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀
+          ρ ∈
+            Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev
+              Collatz.Arctic.HTPDB.pairsPDrevH F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.FirstNonneg : {d : ℕ} →
+  0 < d → (Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d) → List Collatz.Arctic.DLetter → Prop :=
+fun {d} hd J S =>
+  ∀ s ∈ S, Collatz.Arctic.ArcZ.fin 0 ≤ (J s).M ⟨0, hd⟩ ⟨0, hd⟩ ∨ Collatz.Arctic.ArcZ.fin 0 ≤ (J s).c ⟨0, hd⟩
+def Collatz.Arctic.DPFilter.BZPos : {d : ℕ} →
+  0 < d →
+    (Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d) →
+      Collatz.Arctic.Letter → List Collatz.Arctic.DLetter → Prop :=
+fun {d} hd J h S =>
+  Collatz.Arctic.AbsPositive hd J [Collatz.Arctic.DLetter.mark h] ∨ Collatz.Arctic.DPFilter.FirstNonneg hd J S
+def Collatz.Arctic.DPFilter.ArcticBarrierBZFiltW : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.lft Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.rulesST Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierBZrevFiltW : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.rgt Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.NatQ5.rulesSTrev Collatz.Arctic.pairsPDrev F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPDrev,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPDrev,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHBZFiltW : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.lft Collatz.Arctic.lettersPB →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.rulesHT Collatz.Arctic.pairsPB F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.pairsPB,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.pairsPB,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.DPFilter.ArcticBarrierHBZrevFiltW : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.rgt Collatz.Arctic.lettersPDrev →
+    (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+      (∀
+          ρ ∈
+            Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev
+              Collatz.Arctic.HTPDB.pairsPDrevH F,
+          Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+        (∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+          ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+            ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+def Collatz.Arctic.NatQ5.W5.usableFilt : List Collatz.Arctic.Rule →
+  List Collatz.Arctic.DRule → List Collatz.Arctic.Letter → List Collatz.Arctic.Rule :=
+fun R P F => Collatz.Arctic.NatQ5.W5.usableWith R P (Collatz.Arctic.NatQ5.W5.regPrefix F)
+def Collatz.Arctic.NatQ5.W5.usableWith : List Collatz.Arctic.Rule →
+  List Collatz.Arctic.DRule → (Collatz.Arctic.Word → Collatz.Arctic.Word) → List Collatz.Arctic.Rule :=
+fun R P pre =>
+  List.filter
+    (fun ρ =>
+      match List.head? ρ.lhs with
+      | some h =>
+        decide
+          (h ∈
+            Collatz.Arctic.NatQ5.W5.filtIter R pre (List.flatMap (fun π => pre (Collatz.Arctic.NatQ5.W5.dpTail π)) P) 7)
+      | none => false)
+    R
+def Collatz.Arctic.NatQ5.W5.regPrefix : List Collatz.Arctic.Letter → Collatz.Arctic.Word → Collatz.Arctic.Word :=
+fun F x => List.brecOn x (Collatz.Arctic.NatQ5.W5.regPrefix._f F)
+def Collatz.Arctic.NatQ5.W5.dpTail : Collatz.Arctic.DRule → Collatz.Arctic.Word :=
+fun π =>
+  List.filterMap
+    (fun s =>
+      match s with
+      | Collatz.Arctic.DLetter.plain x => some x
+      | Collatz.Arctic.DLetter.mark s => none)
+    π.rhs.tail
+def Collatz.Arctic.NatQ5.W5.filtStep : List Collatz.Arctic.Rule →
+  (Collatz.Arctic.Word → Collatz.Arctic.Word) → List Collatz.Arctic.Letter → List Collatz.Arctic.Letter :=
+fun R pre S =>
+  List.foldl (fun acc x => List.insert x acc) S
+    (List.flatMap (fun ρ => pre ρ.rhs)
+      (List.filter
+        (fun ρ =>
+          match List.head? ρ.lhs with
+          | some h => decide (h ∈ S)
+          | none => false)
+        R))
+def Collatz.Arctic.NatQ5.W5.filtIter : List Collatz.Arctic.Rule →
+  (Collatz.Arctic.Word → Collatz.Arctic.Word) → List Collatz.Arctic.Letter → ℕ → List Collatz.Arctic.Letter :=
+fun R pre S x => Nat.brecOn x (Collatz.Arctic.NatQ5.W5.filtIter._f R pre S)
+def Collatz.Arctic.NatQ5.NatBarrierDPFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.rulesST Collatz.Arctic.pairsPB F,
+        Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+      (∀ π ∈ Collatz.Arctic.pairsPB, Collatz.Arctic.NatQ5.NWeakTopD J π) →
+        ∀ π ∈ Collatz.Arctic.pairsPB, ¬Collatz.Arctic.NatQ5.NStrictTopD J π
+def Collatz.Arctic.NatQ5.NatBarrierDPrevFilt : Prop :=
+∀ (F : List Collatz.Arctic.Letter) (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ s ∈ F, (J (Collatz.Arctic.DLetter.plain s)).M = 0) →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.W5.usableFilt Collatz.Arctic.NatQ5.rulesSTrev Collatz.Arctic.pairsPDrev F,
+        Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+      (∀ π ∈ Collatz.Arctic.pairsPDrev, Collatz.Arctic.NatQ5.NWeakTopD J π) →
+        ∀ π ∈ Collatz.Arctic.pairsPDrev, ¬Collatz.Arctic.NatQ5.NStrictTopD J π
+inductive Collatz.Arctic.NatQ5.W5.ZYah.ZL : Type
+number of parameters: 0
+constructors:
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.one : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.h : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.s : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.t : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+Collatz.Arctic.NatQ5.W5.ZYah.ZL.H : Collatz.Arctic.NatQ5.W5.ZYah.ZL
+def Collatz.Arctic.NatQ5.W5.ZYah.evZ : {d : ℕ} →
+  (Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff d) →
+    List Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff d :=
+fun {d} I x => List.brecOn x (Collatz.Arctic.NatQ5.W5.ZYah.evZ._f I)
+def Collatz.Arctic.NatQ5.W5.ZYah.ZW : {d : ℕ} →
+  (Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff d) →
+    List Collatz.Arctic.NatQ5.W5.ZYah.ZL → List Collatz.Arctic.NatQ5.W5.ZYah.ZL → Prop :=
+fun {d} I l r =>
+  (∀ (i j : Fin d), (Collatz.Arctic.NatQ5.W5.ZYah.evZ I r).M i j ≤ (Collatz.Arctic.NatQ5.W5.ZYah.evZ I l).M i j) ∧
+    ∀ (i : Fin d), (Collatz.Arctic.NatQ5.W5.ZYah.evZ I r).v i ≤ (Collatz.Arctic.NatQ5.W5.ZYah.evZ I l).v i
+def Collatz.Arctic.NatQ5.W5.ZYah.ZS : {d : ℕ} →
+  [NeZero d] →
+    (Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff d) →
+      List Collatz.Arctic.NatQ5.W5.ZYah.ZL → List Collatz.Arctic.NatQ5.W5.ZYah.ZL → Prop :=
+fun {d} [NeZero d] I l r =>
+  Collatz.Arctic.NatQ5.W5.ZYah.ZW I l r ∧
+    (Collatz.Arctic.NatQ5.W5.ZYah.evZ I r).v 0 < (Collatz.Arctic.NatQ5.W5.ZYah.evZ I l).v 0
+def Collatz.Arctic.NatQ5.W5.ZYah.rulesZ : List
+  (List Collatz.Arctic.NatQ5.W5.ZYah.ZL × List Collatz.Arctic.NatQ5.W5.ZYah.ZL) :=
+[([Collatz.Arctic.NatQ5.W5.ZYah.ZL.h, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h,
+      Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.s,
+      Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.h, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.t, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one,
+      Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.s],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.s, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.t],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.t, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one,
+      Collatz.Arctic.NatQ5.W5.ZYah.ZL.one]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia, Collatz.Arctic.NatQ5.W5.ZYah.ZL.s],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h]),
+  ([Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia, Collatz.Arctic.NatQ5.W5.ZYah.ZL.t],
+    [Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h])]
+def Collatz.Arctic.NatQ5.W5.ZYah.IZ : Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff 2 :=
+fun x =>
+  match x with
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.one => { M := !![3, 3; 3, 3], v := ![3, 3] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia => { M := !![0, 0; 0, 0], v := ![3, 3] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.h => { M := !![3, 0; 3, 2], v := ![2, 0] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.s => { M := !![3, 0; 0, 3], v := ![3, 3] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.t => { M := !![0, 0; 0, 0], v := ![0, 3] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.H => { M := !![1, 0; 3, 0], v := ![2, 3] }
+def Collatz.Arctic.NatQ5.W5.ZYah.rulesZrev : List
+  (List Collatz.Arctic.NatQ5.W5.ZYah.ZL × List Collatz.Arctic.NatQ5.W5.ZYah.ZL) :=
+List.map (fun p => (p.1.reverse, p.2.reverse)) Collatz.Arctic.NatQ5.W5.ZYah.rulesZ
+def Collatz.Arctic.NatQ5.W5.ZYah.IZr : Collatz.Arctic.NatQ5.W5.ZYah.ZL → Collatz.Arctic.NatQ5.NAff 2 :=
+fun x =>
+  match x with
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.one => { M := !![0, 2; 0, 1], v := ![2, 2] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.dia => { M := !![0, 0; 0, 0], v := ![0, 0] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.h => { M := !![0, 2; 0, 1], v := ![2, 0] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.s => { M := !![1, 0; 0, 1], v := ![2, 0] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.t => { M := !![3, 1; 0, 3], v := ![2, 0] }
+  | Collatz.Arctic.NatQ5.W5.ZYah.ZL.H => { M := !![2, 3; 0, 0], v := ![3, 0] }
+def Collatz.Arctic.NatQ5.W5.LiteralDP : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    ∀ π ∈ Collatz.Arctic.pairsPB, ¬Collatz.Arctic.NatQ5.NStrictD J π
+def Collatz.Arctic.NatQ5.W5.LiteralDPrev : Prop :=
+∀ (d : ℕ) [inst : NeZero d] (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    ∀ π ∈ Collatz.Arctic.pairsPDrev, ¬Collatz.Arctic.NatQ5.NStrictD J π
+Collatz.Arctic.Paper.paper_lem_2_3_T : ∀ (n : ℕ),
+  2 ≤ n →
+    Collatz.Arctic.Chain (Collatz.Arctic.canDeriv n) (Collatz.Arctic.can n) (Collatz.Arctic.can (Collatz.Arctic.T n))
+'Collatz.Arctic.Paper.paper_lem_2_3_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_2_3_H : ∀ (n : ℕ),
+  Collatz.Arctic.HModel.HDom n →
+    Collatz.Arctic.Chain (Collatz.Arctic.HTPDB.canDerivH n) (Collatz.Arctic.can n)
+      (Collatz.Arctic.can (Collatz.Arctic.HModel.Hmap n))
+'Collatz.Arctic.Paper.paper_lem_2_3_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_2_3_RH : ∀ (n : ℕ),
+  Collatz.Arctic.HModel.HDom n →
+    Collatz.Arctic.Chain (Collatz.Arctic.RH.canDerivRH n) (Collatz.Arctic.RH.canRH n)
+      (Collatz.Arctic.RH.canRH (Collatz.Arctic.HModel.Hmap n))
+'Collatz.Arctic.Paper.paper_lem_2_3_RH' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_T : Collatz.Arctic.ArcticBarrierST
+'Collatz.Arctic.Paper.paper_thm_3_1_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_H : Collatz.Arctic.HTPDB.ArcticBarrierHT
+'Collatz.Arctic.Paper.paper_thm_3_1_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_RH : Collatz.Arctic.RH.ArcticBarrierRH
+'Collatz.Arctic.Paper.paper_thm_3_1_RH' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_RHsub : Collatz.Arctic.RH.ArcticBarrierRHSub
+'Collatz.Arctic.Paper.paper_thm_3_1_RHsub' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_Trev : Collatz.Arctic.NonVacuity.BarrierFor Collatz.Arctic.NonVacuity.rulesSTrev
+'Collatz.Arctic.Paper.paper_thm_3_1_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_Hrev : Collatz.Arctic.NonVacuity.BarrierFor
+  Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev
+'Collatz.Arctic.Paper.paper_thm_3_1_Hrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_1_RHrev : Collatz.Arctic.NonVacuity.BarrierFor
+  (List.map Collatz.Arctic.NonVacuity.revRule Collatz.Arctic.RH.usedRH)
+'Collatz.Arctic.Paper.paper_thm_3_1_RHrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_3_T : Collatz.Arctic.ArcticBarrierDP
+'Collatz.Arctic.Paper.paper_thm_3_3_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_3_Trev : Collatz.Arctic.ArcticBarrierDPrev
+'Collatz.Arctic.Paper.paper_thm_3_3_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_3_H : Collatz.Arctic.HTPDB.ArcticBarrierHDP
+'Collatz.Arctic.Paper.paper_thm_3_3_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_3_Hrev : Collatz.Arctic.HTPDB.ArcticBarrierHDPrev
+'Collatz.Arctic.Paper.paper_thm_3_3_Hrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_4_T : Collatz.Arctic.ArcticBarrierBZ
+'Collatz.Arctic.Paper.paper_thm_3_4_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_4_Trev : Collatz.Arctic.ArcticBarrierBZrev
+'Collatz.Arctic.Paper.paper_thm_3_4_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_4_H : Collatz.Arctic.HTPDB.ArcticBarrierHBZ
+'Collatz.Arctic.Paper.paper_thm_3_4_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_4_Hrev : Collatz.Arctic.HTPDB.ArcticBarrierHBZrev
+'Collatz.Arctic.Paper.paper_thm_3_4_Hrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_T : ¬∃ D u A c,
+    (∀ (n : ℕ), 1 ≤ n → Collatz.Arctic.autoVal u A c n ≠ 0) ∧
+      ∀ (n : ℕ),
+        2 ≤ n →
+          ∀ (a b : ℕ),
+            Collatz.Arctic.autoVal u A c n = Collatz.Arctic.Arc.fin a →
+              Collatz.Arctic.autoVal u A c (Collatz.Arctic.T n) = Collatz.Arctic.Arc.fin b → b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_H : ¬∃ D u A c,
+    (∀ (n : ℕ), 1 ≤ n → Collatz.Arctic.autoVal u A c n ≠ 0) ∧
+      ∀ (n : ℕ),
+        Collatz.Arctic.HModel.HDom n →
+          ∀ (a b : ℕ),
+            Collatz.Arctic.autoVal u A c n = Collatz.Arctic.Arc.fin a →
+              Collatz.Arctic.autoVal u A c (Collatz.Arctic.HModel.Hmap n) = Collatz.Arctic.Arc.fin b → b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_T_Z : ¬∃ D u A c,
+    (∀ (n : ℕ), 1 ≤ n → ∃ z, Collatz.Arctic.autoValZ u A c n = Collatz.Arctic.ArcZ.fin ↑z) ∧
+      ∀ (n : ℕ),
+        2 ≤ n →
+          ∀ (a b : ℤ),
+            Collatz.Arctic.autoValZ u A c n = Collatz.Arctic.ArcZ.fin a →
+              Collatz.Arctic.autoValZ u A c (Collatz.Arctic.T n) = Collatz.Arctic.ArcZ.fin b → b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_T_Z' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_H_Z : ¬∃ D u A c,
+    (∀ (n : ℕ), 1 ≤ n → ∃ z, Collatz.Arctic.autoValZ u A c n = Collatz.Arctic.ArcZ.fin ↑z) ∧
+      ∀ (n : ℕ),
+        Collatz.Arctic.HModel.HDom n →
+          ∀ (a b : ℤ),
+            Collatz.Arctic.autoValZ u A c n = Collatz.Arctic.ArcZ.fin a →
+              Collatz.Arctic.autoValZ u A c (Collatz.Arctic.HModel.Hmap n) = Collatz.Arctic.ArcZ.fin b → b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_H_Z' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_T_Zlsb : ¬∃ D u A c,
+    (∀ (n : ℕ),
+        1 ≤ n →
+          ∃ z,
+            u ⬝ᵥ (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail n))).mulVec c =
+              Collatz.Arctic.ArcZ.fin ↑z) ∧
+      ∀ (n : ℕ),
+        2 ≤ n →
+          ∀ (a b : ℤ),
+            u ⬝ᵥ (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail n))).mulVec c = Collatz.Arctic.ArcZ.fin a →
+              u ⬝ᵥ (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail (Collatz.Arctic.T n)))).mulVec c =
+                  Collatz.Arctic.ArcZ.fin b →
+                b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_T_Zlsb' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_3_6_H_Zlsb : ¬∃ D u A c,
+    (∀ (n : ℕ),
+        1 ≤ n →
+          ∃ z,
+            u ⬝ᵥ (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail n))).mulVec c =
+              Collatz.Arctic.ArcZ.fin ↑z) ∧
+      ∀ (n : ℕ),
+        Collatz.Arctic.HModel.HDom n →
+          ∀ (a b : ℤ),
+            u ⬝ᵥ (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail n))).mulVec c = Collatz.Arctic.ArcZ.fin a →
+              u ⬝ᵥ
+                    (Collatz.Arctic.evR A (List.reverse (Collatz.Arctic.binTail (Collatz.Arctic.HModel.Hmap n)))).mulVec
+                      c =
+                  Collatz.Arctic.ArcZ.fin b →
+                b + 1 ≤ a
+'Collatz.Arctic.Paper.paper_thm_3_6_H_Zlsb' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_3_7_T : ∀ (D : ℕ) (u : Fin D → Collatz.Arctic.Arc) (A : Collatz.Arctic.Interp D)
+  (c : Fin D → Collatz.Arctic.Arc) (K b d : ℕ),
+  b < 2 →
+    d ≤ 2 →
+      ∀ (N : ℕ),
+        ∃ n,
+          N ≤ n ∧
+            ∃ m,
+              (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                Collatz.Arctic.autoVal u A c n <
+                  Collatz.Arctic.Arc.fin
+                    (K * Collatz.Arctic.lenT n + Collatz.Arctic.usesOrbit (Collatz.Arctic.aRule b d) n m)
+'Collatz.Arctic.Paper.paper_prop_3_7_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_3_7_H : Collatz.Arctic.HTPDB.SpecQuadH
+'Collatz.Arctic.Paper.paper_prop_3_7_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_3_8_T : Collatz.Arctic.Affine.AffBarrierFin Collatz.Arctic.rulesST
+'Collatz.Arctic.Paper.paper_cor_3_8_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_3_8_Trev : Collatz.Arctic.Affine.AffBarrierFin Collatz.Arctic.NonVacuity.rulesSTrev
+'Collatz.Arctic.Paper.paper_cor_3_8_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_3_8_H : Collatz.Arctic.Affine.AffBarrierFin Collatz.Arctic.HTPDB.rulesHT
+'Collatz.Arctic.Paper.paper_cor_3_8_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_3_8_Hrev : Collatz.Arctic.Affine.AffBarrierFin
+  Collatz.Arctic.HTPDB.NonVacuityH.rulesHTrev
+'Collatz.Arctic.Paper.paper_cor_3_8_Hrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_3_8_RH : Collatz.Arctic.Affine.AffBarrierFin Collatz.Arctic.RH.usedRH
+'Collatz.Arctic.Paper.paper_cor_3_8_RH' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_3_4_filt : Collatz.Arctic.DPFilter.ArcticBarrierDPFilt ∧
+  Collatz.Arctic.DPFilter.ArcticBarrierDPrevFilt ∧
+    Collatz.Arctic.DPFilter.ArcticBarrierBZFilt ∧
+      Collatz.Arctic.DPFilter.ArcticBarrierBZrevFilt ∧
+        Collatz.Arctic.DPFilter.ArcticBarrierHDPFilt ∧
+          Collatz.Arctic.DPFilter.ArcticBarrierHDPrevFilt ∧
+            Collatz.Arctic.DPFilter.ArcticBarrierHBZFilt ∧ Collatz.Arctic.DPFilter.ArcticBarrierHBZrevFilt
+'Collatz.Arctic.Paper.paper_rem_3_4_filt' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_3_4_filtW : Collatz.Arctic.DPFilter.ArcticBarrierBZFiltW ∧
+  Collatz.Arctic.DPFilter.ArcticBarrierBZrevFiltW ∧
+    Collatz.Arctic.DPFilter.ArcticBarrierHBZFiltW ∧ Collatz.Arctic.DPFilter.ArcticBarrierHBZrevFiltW
+'Collatz.Arctic.Paper.paper_rem_3_4_filtW' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_rem_3_4_bzpos_T : ∀ {d : ℕ} (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.lft Collatz.Arctic.lettersPB →
+    (∀ ρ ∈ Collatz.Arctic.usableST,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPB,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPB,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_rem_3_4_bzpos_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_rem_3_4_bzpos_Trev : ∀ {d : ℕ} (hd : 0 < d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+  Collatz.Arctic.DPFilter.BZPos hd J Collatz.Arctic.Letter.rgt Collatz.Arctic.lettersPDrev →
+    (∀ ρ ∈ Collatz.Arctic.usableSTrev,
+        Collatz.Arctic.WeakA (Collatz.Arctic.evA J ρ.plain.lhs) (Collatz.Arctic.evA J ρ.plain.rhs)) →
+      (∀ π ∈ Collatz.Arctic.pairsPDrev,
+          Collatz.Arctic.WeakTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)) →
+        ∀ π ∈ Collatz.Arctic.pairsPDrev,
+          ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_rem_3_4_bzpos_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_DPw : Collatz.Arctic.ArcticBarrierDPw
+'Collatz.Arctic.Paper.paper_prop_4_1_DPw' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_DPrevw : Collatz.Arctic.ArcticBarrierDPrevw
+'Collatz.Arctic.Paper.paper_prop_4_1_DPrevw' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_BZf : Collatz.Arctic.ArcticBarrierBZf
+'Collatz.Arctic.Paper.paper_prop_4_1_BZf' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_BZrevf : Collatz.Arctic.ArcticBarrierBZrevf
+'Collatz.Arctic.Paper.paper_prop_4_1_BZrevf' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_BZw : Collatz.Arctic.ArcticBarrierBZw
+'Collatz.Arctic.Paper.paper_prop_4_1_BZw' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_1_BZrevw : Collatz.Arctic.ArcticBarrierBZrevw
+'Collatz.Arctic.Paper.paper_prop_4_1_BZrevw' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_markOnly : ¬Collatz.Arctic.NonVacuity.BarrierDPFor
+    [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.lft] Collatz.Arctic.usableST Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_2_markOnly' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_markOnly_rev : ¬Collatz.Arctic.NonVacuity.BarrierDPFor
+    [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt] Collatz.Arctic.usableSTrev Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_4_2_markOnly_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_noMark : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPB.tail
+    Collatz.Arctic.usableST Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_2_noMark' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_noMark_rev : ¬Collatz.Arctic.NonVacuity.BarrierDPFor
+    Collatz.Arctic.lettersPDrev.tail Collatz.Arctic.usableSTrev Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_4_2_noMark_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_noMark_BZ : ¬Collatz.Arctic.NonVacuity.BarrierBZFor Collatz.Arctic.lettersPB.tail
+    Collatz.Arctic.usableST Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_2_noMark_BZ' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_2_noMark_BZrev : ¬Collatz.Arctic.NonVacuity.BarrierBZFor
+    Collatz.Arctic.lettersPDrev.tail Collatz.Arctic.usableSTrev Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_4_2_noMark_BZrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_3 : ¬Collatz.Arctic.NonVacuity.BarrierFor Collatz.Arctic.RH.rulesRH
+'Collatz.Arctic.Paper.paper_prop_4_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_3_l0 : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    (Collatz.Arctic.RH.usedRH ++ [Collatz.Arctic.RH.l0Rule])
+'Collatz.Arctic.Paper.paper_prop_4_3_l0' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_3_lf : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    (Collatz.Arctic.RH.usedRH ++ [Collatz.Arctic.RH.lfRule])
+'Collatz.Arctic.Paper.paper_prop_4_3_lf' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_AB : ¬Collatz.Arctic.NonVacuity.BarrierFor Collatz.Arctic.NonVacuity.rulesAB
+'Collatz.Arctic.Paper.paper_prop_4_5_AB' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_DA : ¬Collatz.Arctic.NonVacuity.BarrierFor Collatz.Arctic.NonVacuity.rulesDA
+'Collatz.Arctic.Paper.paper_prop_4_5_DA' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_DP_A : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPB
+    Collatz.Arctic.NonVacuity.usableA Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_5_DP_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_DPrev_A : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPDrev
+    Collatz.Arctic.NonVacuity.usableArev Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_4_5_DPrev_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_BZ_A : ¬Collatz.Arctic.NonVacuity.BarrierBZFor Collatz.Arctic.lettersPB
+    Collatz.Arctic.NonVacuity.usableA Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_5_BZ_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_BZrev_A : ¬Collatz.Arctic.NonVacuity.BarrierBZFor Collatz.Arctic.lettersPDrev
+    Collatz.Arctic.NonVacuity.usableArev Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_4_5_BZrev_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_DPrev_one : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPDrev
+    Collatz.Arctic.usableSTrev
+    [{
+        lhs :=
+          [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt, Collatz.Arctic.DLetter.plain Collatz.Arctic.Letter.f],
+        rhs := [Collatz.Arctic.DLetter.mark Collatz.Arctic.Letter.rgt] }]
+'Collatz.Arctic.Paper.paper_prop_4_5_DPrev_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_4_5_swap : ∀ {d : ℕ} (hd : 0 < d) (I : Collatz.Arctic.Interp d),
+  Collatz.Arctic.Fin00 hd I → ∀ (a b : Collatz.Arctic.Letter), ¬Collatz.Arctic.Strict I { lhs := [a, b], rhs := [b, a] }
+'Collatz.Arctic.Paper.paper_prop_4_5_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_strict_ST : ∀ ρ ∈ Collatz.Arctic.rulesST,
+  ρ ≠
+      { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+        rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] } →
+    ρ ≠
+        { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+          rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] } →
+      ∃ I, Collatz.Arctic.Fin00 Nat.one_pos I ∧ Collatz.Arctic.Strict I ρ
+'Collatz.Arctic.Paper.paper_prop_4_5_strict_ST' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_strict_DP : ∀ π ∈ Collatz.Arctic.pairsPB,
+  ∃ J,
+    Collatz.Arctic.SomewhereFinite Nat.one_pos J Collatz.Arctic.lettersPB ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_strict_DP' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_strict_DPrev : ∀ π ∈ Collatz.Arctic.pairsPDrev,
+  ∃ J,
+    Collatz.Arctic.SomewhereFinite Nat.one_pos J Collatz.Arctic.lettersPDrev ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_strict_DPrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_strict_BZ : ∀ π ∈ Collatz.Arctic.pairsPB,
+  ∃ J,
+    Collatz.Arctic.AbsPositive Nat.one_pos J Collatz.Arctic.lettersPB ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_strict_BZ' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_strict_BZrev : ∀ π ∈ Collatz.Arctic.pairsPDrev,
+  ∃ J,
+    Collatz.Arctic.AbsPositive Nat.one_pos J Collatz.Arctic.lettersPDrev ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_strict_BZrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_AB : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    (List.drop 2 Collatz.Arctic.HTPDB.rulesHT)
+'Collatz.Arctic.Paper.paper_prop_4_5_H_AB' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_DA : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    Collatz.Arctic.HTPDB.NonVacuityH.rulesDAH
+'Collatz.Arctic.Paper.paper_prop_4_5_H_DA' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_DP_A : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPB
+    (List.drop 2 Collatz.Arctic.HTPDB.usableHT) Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_5_H_DP_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_BZ_A : ¬Collatz.Arctic.NonVacuity.BarrierBZFor Collatz.Arctic.lettersPB
+    (List.drop 2 Collatz.Arctic.HTPDB.usableHT) Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_4_5_H_BZ_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_DPrev_A : ¬Collatz.Arctic.NonVacuity.BarrierDPFor Collatz.Arctic.lettersPDrev
+    Collatz.Arctic.NonVacuity.usableArev Collatz.Arctic.HTPDB.pairsPDrevH
+'Collatz.Arctic.Paper.paper_prop_4_5_H_DPrev_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_BZrev_A : ¬Collatz.Arctic.NonVacuity.BarrierBZFor Collatz.Arctic.lettersPDrev
+    Collatz.Arctic.NonVacuity.usableArev Collatz.Arctic.HTPDB.pairsPDrevH
+'Collatz.Arctic.Paper.paper_prop_4_5_H_BZrev_A' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_strict : ∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT,
+  (∃ d, ∃ (hd : 0 < d), ∃ I, Collatz.Arctic.Fin00 hd I ∧ Collatz.Arctic.Strict I ρ) ↔
+    ρ ≠
+        { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+          rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] } ∧
+      ρ ≠
+        { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+          rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] }
+'Collatz.Arctic.Paper.paper_prop_4_5_H_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_strict_DP : ∀ π ∈ Collatz.Arctic.pairsPB,
+  ∃ J,
+    Collatz.Arctic.SomewhereFinite Nat.one_pos J Collatz.Arctic.lettersPB ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_H_strict_DP' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_strict_DPrev : ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+  ∃ J,
+    Collatz.Arctic.SomewhereFinite Nat.one_pos J Collatz.Arctic.lettersPDrev ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_H_strict_DPrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_strict_BZ : ∀ π ∈ Collatz.Arctic.pairsPB,
+  ∃ J,
+    Collatz.Arctic.AbsPositive Nat.one_pos J Collatz.Arctic.lettersPB ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_H_strict_BZ' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_H_strict_BZrev : ∀ π ∈ Collatz.Arctic.HTPDB.pairsPDrevH,
+  ∃ J,
+    Collatz.Arctic.AbsPositive Nat.one_pos J Collatz.Arctic.lettersPDrev ∧
+      Collatz.Arctic.StrictTop Nat.one_pos (Collatz.Arctic.evA J π.lhs) (Collatz.Arctic.evA J π.rhs)
+'Collatz.Arctic.Paper.paper_prop_4_5_H_strict_BZrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_RH_noDyn : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    (List.take 8 Collatz.Arctic.RH.usedRH)
+'Collatz.Arctic.Paper.paper_prop_4_5_RH_noDyn' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_RH_X : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    (List.take 10 Collatz.Arctic.RH.rulesRH)
+'Collatz.Arctic.Paper.paper_prop_4_5_RH_X' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_RH_noLeft : ¬Collatz.Arctic.NonVacuity.BarrierFor
+    Collatz.Arctic.RH.NonVacuityRH.usedDA
+'Collatz.Arctic.Paper.paper_prop_4_5_RH_noLeft' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_5_RH_strict : ∀ ρ ∈ Collatz.Arctic.RH.rulesRH,
+  (∃ d, ∃ (hd : 0 < d), ∃ I, Collatz.Arctic.Fin00 hd I ∧ Collatz.Arctic.Strict I ρ) ↔
+    ρ ≠
+        { lhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d0],
+          rhs := [Collatz.Arctic.Letter.d0, Collatz.Arctic.Letter.f] } ∧
+      ρ ≠
+        { lhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d2],
+          rhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.t] }
+'Collatz.Arctic.Paper.paper_prop_4_5_RH_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_6 : Collatz.Arctic.CollatzReachT → Collatz.Arctic.ArcticBarrierDPmin
+'Collatz.Arctic.Paper.paper_prop_4_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_6_rev : Collatz.Arctic.CollatzReachT → Collatz.Arctic.ArcticBarrierDPrevmin
+'Collatz.Arctic.Paper.paper_prop_4_6_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_6_contra : ¬Collatz.Arctic.ArcticBarrierDPmin → ¬Collatz.Arctic.CollatzReachT
+'Collatz.Arctic.Paper.paper_prop_4_6_contra' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_6_rev_contra : ¬Collatz.Arctic.ArcticBarrierDPrevmin → ¬Collatz.Arctic.CollatzReachT
+'Collatz.Arctic.Paper.paper_prop_4_6_rev_contra' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_8_T : ∀ ρ ∈ Collatz.Arctic.rulesST,
+  Collatz.Arctic.Affine.SomeFinOrientable Collatz.Arctic.rulesST ρ ↔ ρ ∉ Collatz.Arctic.Affine.leftST
+'Collatz.Arctic.Paper.paper_prop_4_8_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_4_8_H : ∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT,
+  Collatz.Arctic.Affine.SomeFinOrientable Collatz.Arctic.HTPDB.rulesHT ρ ↔ ρ ∉ Collatz.Arctic.Affine.leftST
+'Collatz.Arctic.Paper.paper_prop_4_8_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_1_weak : ∀ {d : ℕ} (hd : 0 < d) (I : Collatz.Arctic.Interp d)
+  {ρ : Collatz.Arctic.Rule},
+  Collatz.Arctic.Weak I ρ →
+    ∀ (p q : Collatz.Arctic.Word), Collatz.Arctic.Phi hd I (p ++ ρ.rhs ++ q) ≤ Collatz.Arctic.Phi hd I (p ++ ρ.lhs ++ q)
+'Collatz.Arctic.Paper.paper_lem_5_1_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_1_strict : ∀ {d : ℕ} (hd : 0 < d) (I : Collatz.Arctic.Interp d)
+  {ρ : Collatz.Arctic.Rule},
+  Collatz.Arctic.Strict I ρ →
+    ∀ (p q : Collatz.Arctic.Word) {a : ℕ},
+      Collatz.Arctic.Phi hd I (p ++ ρ.rhs ++ q) = Collatz.Arctic.Arc.fin a →
+        Collatz.Arctic.Arc.fin (a + 1) ≤ Collatz.Arctic.Phi hd I (p ++ ρ.lhs ++ q)
+'Collatz.Arctic.Paper.paper_lem_5_1_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_5_5_T : Collatz.Arctic.AutoCore
+'Collatz.Arctic.Paper.paper_thm_5_5_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_5_5_H : Collatz.Arctic.HTPDB.AutoCoreH
+'Collatz.Arctic.Paper.paper_thm_5_5_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_6 : ∀ {α : Type} [inst : DecidableEq α] {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+  (E : ℕ → List (Collatz.Arctic.DPGen.GLetter α)) (U P : List (Collatz.Arctic.DPGen.GDRule α))
+  (π : Collatz.Arctic.DPGen.GDRule α),
+  (∀ (n : ℕ),
+      dom n →
+        ∃ es,
+          Collatz.Arctic.DPGen.GDChain U P es (E n) (E (f n)) ∧
+            cnt n ≤ List.count (Collatz.Arctic.DPGen.GLabel.root π) es) →
+    Collatz.Arctic.DPGen.AutoUseG f dom cnt →
+      ∀ {d : ℕ} (hd : 0 < d) (J : Collatz.Arctic.DPGen.GLetter α → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+        (∃ D u A c, ∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) = Collatz.Arctic.autoVal u A c n) →
+          (∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) ≠ 0) →
+            (∀ ρ ∈ U, Collatz.Arctic.WeakA (Collatz.Arctic.DPGen.gevA J ρ.lhs) (Collatz.Arctic.DPGen.gevA J ρ.rhs)) →
+              (∀ π' ∈ P,
+                  Collatz.Arctic.WeakTop hd (Collatz.Arctic.DPGen.gevA J π'.lhs) (Collatz.Arctic.DPGen.gevA J π'.rhs)) →
+                ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.DPGen.gevA J π.lhs) (Collatz.Arctic.DPGen.gevA J π.rhs)
+'Collatz.Arctic.Paper.paper_lem_5_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_6_Z : ∀ {α : Type} [inst : DecidableEq α] {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+  (E : ℕ → List (Collatz.Arctic.DPGen.GLetter α)) (U P : List (Collatz.Arctic.DPGen.GDRule α))
+  (π : Collatz.Arctic.DPGen.GDRule α),
+  (∀ (n : ℕ),
+      dom n →
+        ∃ es,
+          Collatz.Arctic.DPGen.GDChain U P es (E n) (E (f n)) ∧
+            cnt n ≤ List.count (Collatz.Arctic.DPGen.GLabel.root π) es) →
+    Collatz.Arctic.DPGen.AutoUseG f dom cnt →
+      ∀ {d : ℕ} (hd : 0 < d) (J : Collatz.Arctic.DPGen.GLetter α → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+        (∃ D u A c, ∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) = Collatz.Arctic.autoValZ u A c n) →
+          (∃ B, ∀ (n : ℕ), Collatz.Arctic.ArcZ.fin B ≤ Collatz.Arctic.DPGen.gV hd J (E n)) →
+            (∀ ρ ∈ U, Collatz.Arctic.WeakA (Collatz.Arctic.DPGen.gevA J ρ.lhs) (Collatz.Arctic.DPGen.gevA J ρ.rhs)) →
+              (∀ π' ∈ P,
+                  Collatz.Arctic.WeakTop hd (Collatz.Arctic.DPGen.gevA J π'.lhs) (Collatz.Arctic.DPGen.gevA J π'.rhs)) →
+                ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.DPGen.gevA J π.lhs) (Collatz.Arctic.DPGen.gevA J π.rhs)
+'Collatz.Arctic.Paper.paper_lem_5_6_Z' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_6_family : ∀ {α : Type} [inst : DecidableEq α] (M : Collatz.Arctic.Gen.BlockModel),
+  Collatz.Arctic.Gen.HTerrasWinR M.R →
+    ∀ {cnt : ℕ → ℕ},
+      Collatz.Arctic.DPGen.HUseC M.f M.R M.steps cnt →
+        ∀ (E : ℕ → List (Collatz.Arctic.DPGen.GLetter α)) (U P : List (Collatz.Arctic.DPGen.GDRule α))
+          (π : Collatz.Arctic.DPGen.GDRule α),
+          (∀ (n : ℕ),
+              Collatz.Arctic.DPGen.famDom M n →
+                ∃ es,
+                  Collatz.Arctic.DPGen.GDChain U P es (E n) (E (M.f n)) ∧
+                    cnt n ≤ List.count (Collatz.Arctic.DPGen.GLabel.root π) es) →
+            ∀ {d : ℕ} (hd : 0 < d) (J : Collatz.Arctic.DPGen.GLetter α → Collatz.Arctic.AffFun Collatz.Arctic.Arc d),
+              (∃ D u A c, ∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) = Collatz.Arctic.autoVal u A c n) →
+                (∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) ≠ 0) →
+                  (∀ ρ ∈ U,
+                      Collatz.Arctic.WeakA (Collatz.Arctic.DPGen.gevA J ρ.lhs) (Collatz.Arctic.DPGen.gevA J ρ.rhs)) →
+                    (∀ π' ∈ P,
+                        Collatz.Arctic.WeakTop hd (Collatz.Arctic.DPGen.gevA J π'.lhs)
+                          (Collatz.Arctic.DPGen.gevA J π'.rhs)) →
+                      ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.DPGen.gevA J π.lhs)
+                          (Collatz.Arctic.DPGen.gevA J π.rhs)
+'Collatz.Arctic.Paper.paper_lem_5_6_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_5_6_familyZ : ∀ {α : Type} [inst : DecidableEq α] (M : Collatz.Arctic.Gen.BlockModel),
+  Collatz.Arctic.Gen.HTerrasWinR M.R →
+    ∀ {cnt : ℕ → ℕ},
+      Collatz.Arctic.DPGen.HUseC M.f M.R M.steps cnt →
+        ∀ (E : ℕ → List (Collatz.Arctic.DPGen.GLetter α)) (U P : List (Collatz.Arctic.DPGen.GDRule α))
+          (π : Collatz.Arctic.DPGen.GDRule α),
+          (∀ (n : ℕ),
+              Collatz.Arctic.DPGen.famDom M n →
+                ∃ es,
+                  Collatz.Arctic.DPGen.GDChain U P es (E n) (E (M.f n)) ∧
+                    cnt n ≤ List.count (Collatz.Arctic.DPGen.GLabel.root π) es) →
+            ∀ {d : ℕ} (hd : 0 < d) (J : Collatz.Arctic.DPGen.GLetter α → Collatz.Arctic.AffFun Collatz.Arctic.ArcZ d),
+              (∃ D u A c, ∀ (n : ℕ), Collatz.Arctic.DPGen.gV hd J (E n) = Collatz.Arctic.autoValZ u A c n) →
+                (∃ B, ∀ (n : ℕ), Collatz.Arctic.ArcZ.fin B ≤ Collatz.Arctic.DPGen.gV hd J (E n)) →
+                  (∀ ρ ∈ U,
+                      Collatz.Arctic.WeakA (Collatz.Arctic.DPGen.gevA J ρ.lhs) (Collatz.Arctic.DPGen.gevA J ρ.rhs)) →
+                    (∀ π' ∈ P,
+                        Collatz.Arctic.WeakTop hd (Collatz.Arctic.DPGen.gevA J π'.lhs)
+                          (Collatz.Arctic.DPGen.gevA J π'.rhs)) →
+                      ¬Collatz.Arctic.StrictTop hd (Collatz.Arctic.DPGen.gevA J π.lhs)
+                          (Collatz.Arctic.DPGen.gevA J π.rhs)
+'Collatz.Arctic.Paper.paper_lem_5_6_familyZ' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_6_2 : ∀ {Q : Type u_1} [Finite Q] (B₀ B₁ : Collatz.Arctic.MinIdeal.BRel Q)
+  {K : Set (Collatz.Arctic.MinIdeal.BRel Q)},
+  Collatz.Arctic.MinIdeal.IsMinIdeal (Submonoid.closure {B₀, B₁}) K →
+    ∀ {E : Collatz.Arctic.MinIdeal.BRel Q},
+      E ∈ K →
+        ∀ (hE : E * E = E),
+          (∀ X ∈ Submonoid.closure {B₀, B₁}, Collatz.Arctic.MinIdeal.InH E (E * X * E)) ∧
+            (∀ (a b : Q), E a b → ∃ c, E c c ∧ E a c ∧ E c b) ∧
+              (∀ (k k' : Q) (hk : E k k) (hk' : E k' k'),
+                  Collatz.Arctic.MinIdeal.cls hE k hk = Collatz.Arctic.MinIdeal.cls hE k' hk' → E k = E k') ∧
+                (∀ (s b : Q), E s b ↔ ∃ i, Collatz.Arctic.MinIdeal.Hits hE s i ∧ Collatz.Arctic.MinIdeal.beta hE i b) ∧
+                  (∀ (i : Collatz.Arctic.MinIdeal.Cls E hE) (k : Q) (hk : E k k),
+                      Collatz.Arctic.MinIdeal.beta hE i k ↔ i ≤ Collatz.Arctic.MinIdeal.cls hE k hk) ∧
+                    (∀ X ∈ Submonoid.closure {B₀, B₁},
+                        ∃ π,
+                          ∀ (q : Q) (hq : E q q),
+                            (E * X * E) q = Collatz.Arctic.MinIdeal.beta hE (π (Collatz.Arctic.MinIdeal.cls hE q hq))) ∧
+                      ((∀ (x y : Q), Relation.ReflTransGen (fun a b => B₀ a b ∨ B₁ a b) x y) →
+                        (∀ (i j : Collatz.Arctic.MinIdeal.Cls E hE), i ≤ j → i = j) ∧
+                          ∀ (i : Collatz.Arctic.MinIdeal.Cls E hE) (k : Q) (hk : E k k),
+                            Collatz.Arctic.MinIdeal.beta hE i k ↔ Collatz.Arctic.MinIdeal.cls hE k hk = i)
+'Collatz.Arctic.Paper.paper_lem_6_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_6_2_exists : ∀ {Q : Type u_1} [Finite Q] (B₀ B₁ : Collatz.Arctic.MinIdeal.BRel Q),
+  ∃ K, Collatz.Arctic.MinIdeal.IsMinIdeal (Submonoid.closure {B₀, B₁}) K ∧ ∃ E ∈ K, E * E = E
+'Collatz.Arctic.Paper.paper_lem_6_2_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_6_3 : ∀ {Q : Type u_1} [Finite Q] (B₀ B₁ : Collatz.Arctic.MinIdeal.BRel Q)
+  {K : Set (Collatz.Arctic.MinIdeal.BRel Q)},
+  Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.MinIdeal.Mon B₀ B₁) K →
+    ∀ {E : Collatz.Arctic.MinIdeal.BRel Q},
+      E ∈ K →
+        ∀ (hE : E * E = E) {X : Collatz.Arctic.MinIdeal.BRel Q},
+          X ∈ Collatz.Arctic.MinIdeal.Mon B₀ B₁ →
+            (∀ (q : Q) (hq : E q q),
+                (E * X * E) q =
+                  Collatz.Arctic.MinIdeal.beta hE
+                    ((Collatz.Arctic.MinIdeal.piX hE X) (Collatz.Arctic.MinIdeal.cls hE q hq))) ∧
+              (∀ (I : Set (Collatz.Arctic.MinIdeal.Cls E hE)),
+                  Collatz.Arctic.MinIdeal.act (Collatz.Arctic.MinIdeal.act (Collatz.Arctic.MinIdeal.betaUnion hE I) X)
+                      E =
+                    Collatz.Arctic.MinIdeal.betaUnion hE (⇑(Collatz.Arctic.MinIdeal.piX hE X) '' I)) ∧
+                (∀ (I : Set (Collatz.Arctic.MinIdeal.Cls E hE)),
+                    IsUpperSet I → IsUpperSet (⇑(Collatz.Arctic.MinIdeal.piX hE X) '' I)) ∧
+                  (∀ (j : Collatz.Arctic.MinIdeal.Cls E hE),
+                      Collatz.Arctic.MinIdeal.comp B₀ B₁ hE ((Collatz.Arctic.MinIdeal.piX hE X) j) =
+                        Collatz.Arctic.MinIdeal.comp B₀ B₁ hE j) ∧
+                    ∀ (j : Collatz.Arctic.MinIdeal.Cls E hE) (k b : Q),
+                      Collatz.Arctic.MinIdeal.beta hE j k →
+                        (X * E) k b → Collatz.Arctic.MinIdeal.beta hE ((Collatz.Arctic.MinIdeal.piX hE X) j) b
+'Collatz.Arctic.Paper.paper_lem_6_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_6_3_stay : ∀ {Q : Type u_1} [Finite Q] (B₀ B₁ : Collatz.Arctic.MinIdeal.BRel Q)
+  {K : Set (Collatz.Arctic.MinIdeal.BRel Q)},
+  Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.MinIdeal.Mon B₀ B₁) K →
+    ∀ {E : Collatz.Arctic.MinIdeal.BRel Q},
+      E ∈ K →
+        ∀ (hE : E * E = E) {a b : Q},
+          Collatz.Arctic.MinIdeal.Reach B₀ B₁ a b ∧ Collatz.Arctic.MinIdeal.Reach B₀ B₁ b a →
+            E a b →
+              ∀ {S : Set Q},
+                a ∈ S →
+                  ∃ c,
+                    ∃ (hc : E c c),
+                      E a c ∧
+                        E c b ∧
+                          a ∈ Collatz.Arctic.MinIdeal.comp B₀ B₁ hE (Collatz.Arctic.MinIdeal.cls hE c hc) ∧
+                            b ∈ Collatz.Arctic.MinIdeal.comp B₀ B₁ hE (Collatz.Arctic.MinIdeal.cls hE c hc) ∧
+                              Collatz.Arctic.MinIdeal.cls hE c hc ∈ Collatz.Arctic.MinIdeal.hitSet hE S ∧
+                                Collatz.Arctic.MinIdeal.beta hE (Collatz.Arctic.MinIdeal.cls hE c hc) b
+'Collatz.Arctic.Paper.paper_lem_6_3_stay' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_6_5 : ∀ {D : ℕ} (A : Collatz.Arctic.Interp D) (u : Fin D → Collatz.Arctic.Arc)
+  {K : Set (Collatz.Arctic.MinIdeal.BRel (Fin D))},
+  Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.MinIdeal.Mon (Collatz.Arctic.B0 A) (Collatz.Arctic.B1 A)) K →
+    ∀ {E : Collatz.Arctic.MinIdeal.BRel (Fin D)},
+      E ∈ K →
+        ∀ (hE : E * E = E) (us : Collatz.Arctic.Word),
+          Collatz.Arctic.IsDigits us →
+            Collatz.Arctic.suppRel (Collatz.Arctic.ev A us) = E →
+              ∃ C₁,
+                0 ≤ C₁ ∧
+                  ∀ (ε : ℝ),
+                    0 < ε →
+                      ∃ J δ,
+                        0 < δ ∧
+                          ∃ Cu,
+                            ∀ (w : Collatz.Arctic.Word) (P : List Collatz.Arctic.Upper.Seg) (T : ℕ),
+                              Collatz.Arctic.IsDigits w →
+                                Collatz.Arctic.Upper.GoodPartition w P ε J δ →
+                                  List.length w ≤ 2 * T →
+                                    T ≤ List.length w →
+                                      List.length us ≤ T →
+                                        Collatz.Arctic.window w (T - List.length us) (List.length us) = us →
+                                          ∀ (b : Fin D) (v : ℕ),
+                                            Collatz.Arctic.vecAfter u A (List.take T w) b = Collatz.Arctic.Arc.fin v →
+                                              ↑v ≤
+                                                (Collatz.Arctic.Upper.rhoB hE A
+                                                        (Collatz.Arctic.MinIdeal.hitSet hE
+                                                          (Collatz.Arctic.suppV
+                                                            (Collatz.Arctic.vecAfter u A
+                                                              (List.take (T - List.length us) w))))
+                                                        b +
+                                                      C₁ * ε) *
+                                                    ↑T +
+                                                  Cu
+'Collatz.Arctic.Paper.paper_lem_6_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_6_6 : Collatz.Arctic.HSP →
+  ∀ {D : ℕ} (A : Collatz.Arctic.Interp D) (u : Fin D → Collatz.Arctic.Arc)
+    {K : Set (Collatz.Arctic.MinIdeal.BRel (Fin D))},
+    Collatz.Arctic.MinIdeal.IsMinIdeal (Collatz.Arctic.MinIdeal.Mon (Collatz.Arctic.B0 A) (Collatz.Arctic.B1 A)) K →
+      ∀ {E : Collatz.Arctic.MinIdeal.BRel (Fin D)},
+        E ∈ K →
+          ∀ (hE : E * E = E) (ustar : Collatz.Arctic.Word),
+            Collatz.Arctic.IsDigits ustar →
+              Collatz.Arctic.suppRel (Collatz.Arctic.ev A ustar) = E →
+                ∀ (y z : Collatz.Arctic.Word),
+                  Collatz.Arctic.IsDigits y →
+                    ustar <:+ y →
+                      ∀ (G : ℕ),
+                        ∃ Cst,
+                          ∀ (ε : ℝ),
+                            0 < ε →
+                              ∃ L₀,
+                                ∀ (L₁ L₂ : ℕ),
+                                  L₀ ≤ L₁ →
+                                    L₀ ≤ L₂ →
+                                      ∀ {ι : Type u_1} (X : Finset ι) (g₀ g₁ B₁ B₂ : ι → Collatz.Arctic.Word)
+                                        (δ₁ δ₂ : ℝ),
+                                        (∀ x ∈ X, List.length (g₀ x) ≤ G) →
+                                          (∀ x ∈ X, Collatz.Arctic.IsDigits (g₁ x) ∧ List.length (g₁ x) ≤ G) →
+                                            (∀ x ∈ X, B₁ x ∈ Collatz.Arctic.wordsOfLen L₁) →
+                                              (∀ x ∈ X, B₂ x ∈ Collatz.Arctic.wordsOfLen L₂) →
+                                                Collatz.Arctic.Lower.TVClose X B₁ L₁ δ₁ →
+                                                  Collatz.Arctic.Lower.TVClose X B₂ L₂ δ₂ →
+                                                    (1 - δ₁ - δ₂ - ε) * ↑X.card ≤
+                                                      ↑{x ∈ X |
+                                                            Collatz.Arctic.Lower.LowerAt u A hE ustar z ε Cst
+                                                              (g₀ x ++ B₁ x ++ g₁ x ++ B₂ x ++ y ++ z)}.card
+'Collatz.Arctic.Paper.paper_lem_6_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_6_7_left : Collatz.Arctic.HLeftUse
+'Collatz.Arctic.Paper.paper_prop_6_7_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_6_8 : Collatz.Arctic.HSP →
+  Collatz.Arctic.HTerrasWin → Collatz.Arctic.HLeftUse → Collatz.Arctic.AutoCore
+'Collatz.Arctic.Paper.paper_thm_6_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_7_4 : ∀ (n : ℕ),
+  Collatz.Arctic.RH.canDerivRH n = List.flatMap Collatz.Arctic.RH.liftRH (Collatz.Arctic.HTPDB.canDerivH n)
+'Collatz.Arctic.Paper.paper_lem_7_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_7_4_count : Collatz.Arctic.RH.SpecCountRH
+'Collatz.Arctic.Paper.paper_lem_7_4_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_7_5 : Collatz.Arctic.RH.SpecCountRH →
+  Collatz.Arctic.HTPDB.AutoCoreH → Collatz.Arctic.RH.AutoCoreRH
+'Collatz.Arctic.Paper.paper_prop_7_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_8_1 : ∀ (M : Collatz.Arctic.Gen.BlockModel) (cd : ℕ → List Collatz.Arctic.Rule)
+  (ρ : Collatz.Arctic.Rule),
+  Collatz.Arctic.HSP →
+    Collatz.Arctic.Gen.HTerrasWinR M.R →
+      Collatz.Arctic.Gen.HUseR M.f M.R M.steps cd ρ →
+        Collatz.Arctic.Gen.AutoRuleG M.f (Collatz.Arctic.DPGen.famDom M) cd ρ
+'Collatz.Arctic.Paper.paper_cor_8_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_T : Collatz.Arctic.NatQ5.NatBarrierST
+'Collatz.Arctic.Paper.paper_thm_9_2_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_Trev : Collatz.Arctic.NatQ5.NatBarrierSTrev
+'Collatz.Arctic.Paper.paper_thm_9_2_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_B : Collatz.Arctic.NatQ5.NatBarrierSTB
+'Collatz.Arctic.Paper.paper_thm_9_2_B' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_revTop : Collatz.Arctic.NatQ5.NatBarrierSTrevTop
+'Collatz.Arctic.Paper.paper_thm_9_2_revTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_DP : Collatz.Arctic.NatQ5.NatBarrierDP
+'Collatz.Arctic.Paper.paper_thm_9_2_DP' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2_DPrev : Collatz.Arctic.NatQ5.NatBarrierDPrev
+'Collatz.Arctic.Paper.paper_thm_9_2_DPrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_9_2 : Collatz.Arctic.NatQ5.NatBarrierST ∧
+  Collatz.Arctic.NatQ5.NatBarrierSTB ∧
+    Collatz.Arctic.NatQ5.NatBarrierSTrev ∧
+      Collatz.Arctic.NatQ5.NatBarrierSTrevTop ∧ Collatz.Arctic.NatQ5.NatBarrierDP ∧ Collatz.Arctic.NatQ5.NatBarrierDPrev
+'Collatz.Arctic.Paper.paper_thm_9_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_drop : ∀ ρ ∈ Collatz.Arctic.rulesST,
+  ∃ σ ∈ Collatz.Arctic.rulesST,
+    σ ≠ ρ ∧
+      ∃ I,
+        Collatz.Arctic.NatQ5.NMono I ∧
+          (∀ τ ∈ Collatz.Arctic.rulesST.erase σ, Collatz.Arctic.NatQ5.NWeak I τ) ∧
+            ¬Collatz.Arctic.NatQ5.NWeak I σ ∧ Collatz.Arctic.NatQ5.NStrict I ρ
+'Collatz.Arctic.Paper.paper_prop_9_4_drop' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_drop_rev : ¬Collatz.Arctic.NatQ5.NatBarrierFor
+      (Collatz.Arctic.NatQ5.rulesSTrev.erase
+        { lhs := [Collatz.Arctic.Letter.rgt, Collatz.Arctic.Letter.t],
+          rhs := [Collatz.Arctic.Letter.rgt, Collatz.Arctic.Letter.d2] }) ∧
+  ¬Collatz.Arctic.NatQ5.NatBarrierFor
+        (Collatz.Arctic.NatQ5.rulesSTrev.erase
+          { lhs := [Collatz.Arctic.Letter.d1, Collatz.Arctic.Letter.f],
+            rhs := [Collatz.Arctic.Letter.t, Collatz.Arctic.Letter.d0] }) ∧
+    ¬Collatz.Arctic.NatQ5.NatBarrierFor
+        (Collatz.Arctic.NatQ5.rulesSTrev.erase
+          { lhs := [Collatz.Arctic.Letter.d2, Collatz.Arctic.Letter.f],
+            rhs := [Collatz.Arctic.Letter.f, Collatz.Arctic.Letter.d1] })
+'Collatz.Arctic.Paper.paper_prop_9_4_drop_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_noMono : ¬Collatz.Arctic.NatQ5.NatBarrierForNoMono Collatz.Arctic.rulesST
+'Collatz.Arctic.Paper.paper_prop_9_4_noMono' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_noMono_nonB : ∀ ρ ∈ Collatz.Arctic.rulesST,
+  ρ ∉ Collatz.Arctic.NatQ5.rulesSTB → Collatz.Arctic.NatQ5.NStrict Collatz.Arctic.NatQ5.INoMono ρ
+'Collatz.Arctic.Paper.paper_prop_9_4_noMono_nonB' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_noMono_rev : ¬Collatz.Arctic.NatQ5.NatBarrierForNoMono
+    Collatz.Arctic.NatQ5.rulesSTrev
+'Collatz.Arctic.Paper.paper_prop_9_4_noMono_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_noMono_nonTop : ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev,
+  ρ ∉ Collatz.Arctic.NatQ5.rulesSTrevTop → Collatz.Arctic.NatQ5.NStrict Collatz.Arctic.NatQ5.W5.INoMonoRev ρ
+'Collatz.Arctic.Paper.paper_prop_9_4_noMono_nonTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_pair : (∀ π ∈ Collatz.Arctic.pairsPDrev,
+    ∃ J, Collatz.Arctic.NatQ5.NStrictTopD J π) ∧
+  ∀ π ∈ Collatz.Arctic.pairsPB, ∃ J, Collatz.Arctic.NatQ5.NStrictTopD J π
+'Collatz.Arctic.Paper.paper_prop_9_4_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_literal : ¬Collatz.Arctic.NatQ5.W5.LiteralDP
+'Collatz.Arctic.Paper.paper_prop_9_4_literal' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_literal_rev : ¬Collatz.Arctic.NatQ5.W5.LiteralDPrev
+'Collatz.Arctic.Paper.paper_prop_9_4_literal_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_dropU : ¬Collatz.Arctic.NatQ5.W5.NatBarrierDPFor
+    (Collatz.Arctic.usableST.erase Collatz.Arctic.NatQ5.rTdot) Collatz.Arctic.pairsPB
+'Collatz.Arctic.Paper.paper_prop_9_4_dropU' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_4_dropU_rev : ¬Collatz.Arctic.NatQ5.W5.NatBarrierDPFor
+    (List.take 6 Collatz.Arctic.usableSTrev) Collatz.Arctic.pairsPDrev
+'Collatz.Arctic.Paper.paper_prop_9_4_dropU_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_5_T : (∀ ρ ∈ Collatz.Arctic.rulesST,
+    Collatz.Arctic.NatExample.NWeak Collatz.Arctic.NatExample.IT ρ) ∧
+  (∀ ρ ∈ Collatz.Arctic.rulesST,
+      (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IT ρ.lhs).v 0 =
+        (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IT ρ.rhs).v 0) ∧
+    (∀ ρ ∈ Collatz.Arctic.rulesST, ¬Collatz.Arctic.NatExample.NStrict Collatz.Arctic.NatExample.IT ρ) ∧
+      (∀ (s : Collatz.Arctic.Letter), (Collatz.Arctic.NatExample.IT s).M 0 0 = 1) ∧
+        (∀ (n : ℕ),
+            1 ≤ n →
+              Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IT (Collatz.Arctic.can n) =
+                1 + if n % 3 = 0 then 2 ^ ((Nat.digits 2 n).length - 1) else 0) ∧
+          (∀ (n : ℕ),
+              2 ≤ n →
+                Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IT (Collatz.Arctic.can (Collatz.Arctic.T n)) ≤
+                  Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IT (Collatz.Arctic.can n)) ∧
+            Collatz.Arctic.NatExample.ResidueComponent Collatz.Arctic.NatExample.IT ∧
+              (Collatz.Arctic.NatExample.IT Collatz.Arctic.Letter.lft).M 0 (Collatz.Arctic.NatExample.resIdx 1) = 1 ∧
+                (Collatz.Arctic.NatExample.IT Collatz.Arctic.Letter.rgt).v (Collatz.Arctic.NatExample.resIdx 0) = 1
+'Collatz.Arctic.Paper.paper_prop_9_5_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_5_H : (∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT,
+    Collatz.Arctic.NatExample.NWeak Collatz.Arctic.NatExample.IH ρ) ∧
+  (∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT,
+      (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IH ρ.lhs).v 0 =
+        (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IH ρ.rhs).v 0) ∧
+    (∀ ρ ∈ Collatz.Arctic.HTPDB.rulesHT, ¬Collatz.Arctic.NatExample.NStrict Collatz.Arctic.NatExample.IH ρ) ∧
+      (∀ (s : Collatz.Arctic.Letter), (Collatz.Arctic.NatExample.IH s).M 0 0 = 1) ∧
+        (∀ (n : ℕ),
+            1 ≤ n →
+              Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IH (Collatz.Arctic.can n) =
+                1 + if n % 3 = 1 then 2 ^ ((Nat.digits 2 n).length - 1) else 0) ∧
+          (∀ (n : ℕ),
+              Collatz.Arctic.HModel.HDom n →
+                Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IH
+                    (Collatz.Arctic.can (Collatz.Arctic.HModel.Hmap n)) ≤
+                  Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IH (Collatz.Arctic.can n)) ∧
+            Collatz.Arctic.NatExample.ResidueComponent Collatz.Arctic.NatExample.IH ∧
+              (Collatz.Arctic.NatExample.IH Collatz.Arctic.Letter.lft).M 0 (Collatz.Arctic.NatExample.resIdx 1) = 1 ∧
+                (Collatz.Arctic.NatExample.IH Collatz.Arctic.Letter.rgt).v (Collatz.Arctic.NatExample.resIdx 1) = 1
+'Collatz.Arctic.Paper.paper_prop_9_5_H' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_5_RH : (∀ ρ ∈ Collatz.Arctic.RH.rulesRH,
+    Collatz.Arctic.NatExample.NWeak Collatz.Arctic.NatExample.IRH ρ) ∧
+  (∀ ρ ∈ Collatz.Arctic.RH.rulesRH,
+      (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IRH ρ.lhs).v 0 =
+        (Collatz.Arctic.NatExample.evN Collatz.Arctic.NatExample.IRH ρ.rhs).v 0) ∧
+    (∀ ρ ∈ Collatz.Arctic.RH.rulesRH, ¬Collatz.Arctic.NatExample.NStrict Collatz.Arctic.NatExample.IRH ρ) ∧
+      (∀ (s : Collatz.Arctic.Letter), (Collatz.Arctic.NatExample.IRH s).M 0 0 = 1) ∧
+        (∀ (n : ℕ),
+            1 ≤ n →
+              Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IRH (Collatz.Arctic.RH.canRH n) =
+                1 + if n % 3 = 1 then 2 ^ (Nat.digits 2 n).length else 0) ∧
+          (∀ (n : ℕ),
+              Collatz.Arctic.HModel.HDom n →
+                Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IRH
+                    (Collatz.Arctic.RH.canRH (Collatz.Arctic.HModel.Hmap n)) ≤
+                  Collatz.Arctic.NatExample.PhiN Collatz.Arctic.NatExample.IRH (Collatz.Arctic.RH.canRH n)) ∧
+            Collatz.Arctic.NatExample.ResidueComponent Collatz.Arctic.NatExample.IRH ∧
+              (Collatz.Arctic.NatExample.IRH Collatz.Arctic.Letter.lft).M 0 (Collatz.Arctic.NatExample.resIdx 0) = 1 ∧
+                (Collatz.Arctic.NatExample.IRH Collatz.Arctic.Letter.rgt).v (Collatz.Arctic.NatExample.resIdx 1) = 1
+'Collatz.Arctic.Paper.paper_prop_9_5_RH' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_9_5_remark : (∀ (n : ℕ),
+    1 ≤ n → Collatz.Arctic.NatExample.phiI n = 1 + if n % 3 = 0 then 2 ^ (Nat.digits 2 n).length else 0) ∧
+  ∀ (n : ℕ), 2 ≤ n → Collatz.Arctic.NatExample.phiI (Collatz.Arctic.T n) ≤ Collatz.Arctic.NatExample.phiI n
+'Collatz.Arctic.Paper.paper_prop_9_5_remark' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_2_step : ∀ {d : ℕ} [inst : NeZero d]
+  (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (p q : Collatz.Arctic.Word) (ρ : Collatz.Arctic.Rule),
+  ↑(Collatz.Arctic.NatQ5.PhiN I (p ++ ρ.lhs ++ q)) - ↑(Collatz.Arctic.NatQ5.PhiN I (p ++ ρ.rhs ++ q)) =
+    Collatz.Arctic.NatQ5.stepTerm I p ρ q
+'Collatz.Arctic.Paper.paper_lem_10_2_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_2_T : ∀ {d : ℕ} [inst : NeZero d]
+  {I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d},
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ (n : ℕ),
+      2 ≤ n →
+        Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can (Collatz.Arctic.T n)) ≤
+          Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n)
+'Collatz.Arctic.Paper.paper_lem_10_2_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_2_orbit : ∀ {d : ℕ} [inst : NeZero d]
+  {I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d},
+  Collatz.Arctic.NatQ5.NMono I →
+    (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+      ∀ {ρ : Collatz.Arctic.Rule},
+        Collatz.Arctic.NatQ5.NStrict I ρ →
+          ∀ (m n : ℕ),
+            (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) →
+              Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can (Collatz.Arctic.T^[m] n)) +
+                  Collatz.Arctic.usesOrbit ρ n m ≤
+                Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n)
+'Collatz.Arctic.Paper.paper_lem_10_2_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_3 : ∀ {d : ℕ} [inst : NeZero d]
+  (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (n : ℕ),
+  Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n) =
+    Collatz.Arctic.NatQ5.aval (Collatz.Arctic.NatQ5.natAuto I) (Collatz.Arctic.NatQ5.binWord n)
+'Collatz.Arctic.Paper.paper_lem_10_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_4 : ∀ {d : ℕ} [inst : NeZero d]
+  (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (n : ℕ),
+  Collatz.Arctic.NatQ5.PhiN I (List.reverse (Collatz.Arctic.can n)) =
+    Collatz.Arctic.NatQ5.NW (fun s => (Collatz.Arctic.NatQ5.homFam I s).transpose) (Collatz.Arctic.can n) none (some 0)
+'Collatz.Arctic.Paper.paper_lem_10_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_4_weak : ∀ {d : ℕ} (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d)
+  (ρ : Collatz.Arctic.Rule),
+  Collatz.Arctic.NatQ5.NWeak I (Collatz.Arctic.NatQ5.ruleRev ρ) ↔
+    Collatz.Arctic.NatQ5.GWeak (Collatz.Arctic.NatQ5.W5.transFam I) ρ
+'Collatz.Arctic.Paper.paper_lem_10_4_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_4_strict : ∀ {d : ℕ} [inst : NeZero d]
+  (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (ρ : Collatz.Arctic.Rule),
+  Collatz.Arctic.NatQ5.NStrict I (Collatz.Arctic.NatQ5.ruleRev ρ) ↔
+    Collatz.Arctic.NatQ5.GWeak (Collatz.Arctic.NatQ5.W5.transFam I) ρ ∧
+      Collatz.Arctic.NatQ5.NW (Collatz.Arctic.NatQ5.W5.transFam I) ρ.rhs none (some 0) <
+        Collatz.Arctic.NatQ5.NW (Collatz.Arctic.NatQ5.W5.transFam I) ρ.lhs none (some 0)
+'Collatz.Arctic.Paper.paper_lem_10_4_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_5_mono : ∀ {ι : Type u_1} [inst : Fintype ι] [inst_1 : DecidableEq ι]
+  (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι),
+  Collatz.Arctic.NatQ5.NMono (Collatz.Arctic.NatQ5.embInterp N a z)
+'Collatz.Arctic.Paper.paper_lem_10_5_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_5_weak : ∀ {ι : Type u_1} [inst : Fintype ι] [inst_1 : DecidableEq ι]
+  (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.GWeak N ρ) →
+    ∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak (Collatz.Arctic.NatQ5.embInterp N a z) ρ
+'Collatz.Arctic.Paper.paper_lem_10_5_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_5_phi : ∀ {ι : Type u_1} [inst : Fintype ι] [inst_1 : DecidableEq ι]
+  (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι) (n : ℕ),
+  Collatz.Arctic.NatQ5.PhiN (Collatz.Arctic.NatQ5.embInterp N a z) (Collatz.Arctic.can n) =
+    Collatz.Arctic.NatQ5.NW N (Collatz.Arctic.can n) a z
+'Collatz.Arctic.Paper.paper_lem_10_5_phi' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_5_not_strict : ∀ {ι : Type u_1} [inst : Fintype ι] [inst_1 : DecidableEq ι]
+  (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι),
+  ∀ ρ ∈ Collatz.Arctic.rulesST, ¬Collatz.Arctic.NatQ5.NStrict (Collatz.Arctic.NatQ5.embInterp N a z) ρ
+'Collatz.Arctic.Paper.paper_lem_10_5_not_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_6 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) (n : ℕ),
+  1 ≤ n →
+    Collatz.Arctic.NatQ5.aval (Collatz.Arctic.NatQ5.liftT A) (Collatz.Arctic.NatQ5.binWord n) =
+      Collatz.Arctic.NatQ5.aval A (Collatz.Arctic.NatQ5.binWord n) * if 3 ∣ n then 0 else 1
+'Collatz.Arctic.Paper.paper_lem_10_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_6_mono3 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  {A : Collatz.Arctic.NatQ5.ValAuto Q},
+  Collatz.Arctic.NatQ5.AutoMono A → Collatz.Arctic.NatQ5.AutoMono3 (Collatz.Arctic.NatQ5.liftT A)
+'Collatz.Arctic.Paper.paper_lem_10_6_mono3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_10_7 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) {u : List (Fin 2)},
+  Collatz.Arctic.NatQ5.IsUStar A u →
+    ∀ (q : Q) {z : List (Fin 2)},
+      Collatz.Arctic.NatQ5.Kills A (Collatz.Arctic.NatQ5.sccOf A q) z →
+        Collatz.Arctic.NatQ5.DC A (Collatz.Arctic.NatQ5.sccOf A q) u = 0
+'Collatz.Arctic.Paper.paper_lem_10_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_10_8 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (L : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (n : ℕ),
+      2 ≤ n →
+        ¬3 ∣ n →
+          Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+            Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n)) →
+    (∀ (n : ℕ), 1 ≤ n → 3 ∣ n → Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n) = 0) →
+      ∀ (C : Finset Q), Collatz.Arctic.NatQ5.IsComp L C → Collatz.Arctic.NatQ5.ZeroOne L C
+'Collatz.Arctic.Paper.paper_thm_10_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_10_8_gdiag : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (L : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (n : ℕ),
+      2 ≤ n →
+        ¬3 ∣ n →
+          Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+            Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n)) →
+    (∀ (n : ℕ), 1 ≤ n → 3 ∣ n → Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n) = 0) →
+      Collatz.Arctic.NatQ5.Rigid.gDiag (Collatz.Arctic.NatQ5.restrictRel L).B ≤ 1
+'Collatz.Arctic.Paper.paper_thm_10_8_gdiag' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_10_9 : Collatz.Arctic.NatQ5.H2Core
+'Collatz.Arctic.Paper.paper_cor_10_9' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_cor_10_9_gen : ∀ {ι : Type u_1} [inst : Fintype ι] [inst_1 : DecidableEq ι]
+  (N : Collatz.Arctic.Letter → Matrix ι ι ℕ) (a z : ι),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.GWeak N ρ) →
+    ∀ (C : Finset (ι × ZMod 3)),
+      Collatz.Arctic.NatQ5.IsComp (Collatz.Arctic.NatQ5.liftT (Collatz.Arctic.NatQ5.genAuto N a z)) C →
+        Collatz.Arctic.NatQ5.ZeroOne (Collatz.Arctic.NatQ5.liftT (Collatz.Arctic.NatQ5.genAuto N a z)) C
+'Collatz.Arctic.Paper.paper_cor_10_9_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_cor_10_9_nat : ∀ {d : ℕ} [inst : NeZero d]
+  (I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ (C : Finset (Option (Fin d) × ZMod 3)),
+      Collatz.Arctic.NatQ5.IsComp (Collatz.Arctic.NatQ5.liftNat I) C →
+        Collatz.Arctic.NatQ5.ZeroOne (Collatz.Arctic.NatQ5.liftNat I) C
+'Collatz.Arctic.Paper.paper_cor_10_9_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_10_10 : Collatz.Arctic.NatQ5.W3CoreStmt
+'Collatz.Arctic.Paper.paper_thm_10_10' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_10_11 : Collatz.Arctic.NatQ5.AutoValueCoreNoG2
+'Collatz.Arctic.Paper.paper_thm_10_11' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_10_11_nat : Collatz.Arctic.NatQ5.NatValueCore'
+'Collatz.Arctic.Paper.paper_thm_10_11_nat' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_10_11_gen : Collatz.Arctic.NatQ5.GenValueCore
+'Collatz.Arctic.Paper.paper_thm_10_11_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_10_12 : Collatz.Arctic.NatQ5.HW.HWBarrierST
+'Collatz.Arctic.Paper.paper_cor_10_12' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_10_12_rev : Collatz.Arctic.NatQ5.HW.HWBarrierSTrev
+'Collatz.Arctic.Paper.paper_cor_10_12_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_11_1 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) {G θ C : ℝ} {κ : ℕ} {z : List (Fin 2)},
+  1 ≤ G →
+    0 < θ →
+      θ ≤ 1 →
+        (∀ (q : Q) (bs : List (List (Fin 2))),
+            (∀ b ∈ bs, b.length = κ) →
+              ∀ (x y : ↥(Collatz.Arctic.NatQ5.sccOf A q)),
+                ↑(Collatz.Arctic.NatQ5.DC A (Collatz.Arctic.NatQ5.sccOf A q) bs.flatten x y) ≤
+                  C * G ^ bs.flatten.length * θ ^ List.count z bs) →
+          ∃ C',
+            0 ≤ C' ∧
+              ∀ (bs : List (List (Fin 2))),
+                (∀ b ∈ bs, b.length = κ) →
+                  ∀ (i j : Q),
+                    θ ^ Fintype.card Q * ↑(Collatz.Arctic.NatQ5.Rigid.DxN A.B bs.flatten i j) ≤
+                      C' * (↑bs.length + 1) ^ Fintype.card Q * G ^ bs.flatten.length * θ ^ List.count z bs
+'Collatz.Arctic.Paper.paper_lem_11_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_cor_11_2 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) {G : ℝ},
+  1 ≤ G →
+    (∀ (w : List (Fin 2)) (i : Q), Collatz.Arctic.NatQ5.Rigid.Dx A.B w i i ≤ G ^ w.length) →
+      ∃ C,
+        0 ≤ C ∧
+          ∀ (w : List (Fin 2)), ↑(Collatz.Arctic.NatQ5.aval A w) ≤ C * (↑w.length + 1) ^ Fintype.card Q * G ^ w.length
+'Collatz.Arctic.Paper.paper_cor_11_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_11_3 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) {G : ℝ},
+  1 < G →
+    (∀ (w : List (Fin 2)) (i : Q), Collatz.Arctic.NatQ5.Rigid.Dx A.B w i i ≤ G ^ w.length) →
+      (∀ (κ : ℕ), 1 ≤ κ → ↑κ * Real.log G ≤ Collatz.Arctic.NatQ5.Rigid.bAvg A.B κ) →
+        ∃ q,
+          Collatz.Arctic.NatQ5.Rigid.SC (Collatz.Arctic.NatQ5.compMat A (Collatz.Arctic.NatQ5.sccOf A q)) ∧
+            Collatz.Arctic.NatQ5.Rigid.RigidAt (Collatz.Arctic.NatQ5.compMat A (Collatz.Arctic.NatQ5.sccOf A q)) G ∧
+              (∃ c,
+                  0 < c ∧
+                    ∀ (x : List (Fin 2)),
+                      c * G ^ x.length ≤
+                        Collatz.Arctic.NatQ5.Rigid.nrm
+                          (Collatz.Arctic.NatQ5.Rigid.Dx
+                            (Collatz.Arctic.NatQ5.compMat A (Collatz.Arctic.NatQ5.sccOf A q)) x)) ∧
+                Collatz.Arctic.NatQ5.HasEdge A (Collatz.Arctic.NatQ5.sccOf A q)
+'Collatz.Arctic.Paper.paper_lem_11_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_cor_11_4 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q) {G : ℝ},
+  1 < G →
+    (∀ (w : List (Fin 2)) (i : Q), Collatz.Arctic.NatQ5.Rigid.Dx A.B w i i ≤ G ^ w.length) →
+      (∀ (κ : ℕ), 1 ≤ κ → ↑κ * Real.log G ≤ Collatz.Arctic.NatQ5.Rigid.bAvg A.B κ) →
+        ∃ a Ψ h c,
+          1 ≤ h ∧
+            0 < c ∧
+              ∀ (ε : List (Fin 2)),
+                c * G ^ (Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε).length ≤
+                  Collatz.Arctic.NatQ5.Rigid.Dx A.B (Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε) a a
+'Collatz.Arctic.Paper.paper_cor_11_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_11_8 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (L : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (q : Q), Collatz.Arctic.NatQ5.Rel L q) →
+    (∀ (n : ℕ),
+        2 ≤ n →
+          ¬3 ∣ n →
+            Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+              Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n)) →
+      (∀ (n : ℕ), 1 ≤ n → 3 ∣ n → Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n) = 0) →
+        ∀ (κ : ℕ), 1 ≤ κ → ↑κ * Real.log (Collatz.Arctic.NatQ5.Rigid.gDiag L.B) ≤ Collatz.Arctic.NatQ5.Rigid.bAvg L.B κ
+'Collatz.Arctic.Paper.paper_thm_11_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_11_12 : ∀ (V : ℕ → ℝ) (Ψ p₀ s : List (Fin 2)) {h : ℕ},
+  1 ≤ h →
+    ∀ {G c C : ℝ} {p : ℕ},
+      1 < G →
+        0 < c →
+          (∀ (n : ℕ), 2 ≤ n → ¬3 ∣ n → V (Collatz.Arctic.T n) ≤ V n) →
+            (∀ (n : ℕ), 1 ≤ n → 3 ∣ n → V n ≤ 0) →
+              (∀ (n : ℕ),
+                  1 ≤ n →
+                    ¬3 ∣ n →
+                      V n ≤
+                        C * (↑(Collatz.Arctic.NatQ5.binWord n).length + 1) ^ p *
+                          G ^ (Collatz.Arctic.NatQ5.binWord n).length) →
+                (∀ (ε : List (Fin 2)),
+                    c * G ^ (Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε).length ≤
+                      V (Collatz.Arctic.NatQ5.valW 1 (p₀ ++ Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε ++ s))) →
+                  False
+'Collatz.Arctic.Paper.paper_prop_11_12' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_11_13 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (L : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (q : Q), Collatz.Arctic.NatQ5.Rel L q) →
+    (∀ (n : ℕ),
+        2 ≤ n →
+          ¬3 ∣ n →
+            Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.T n)) ≤
+              Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n)) →
+      (∀ (n : ℕ), 1 ≤ n → 3 ∣ n → Collatz.Arctic.NatQ5.aval L (Collatz.Arctic.NatQ5.binWord n) = 0) →
+        Collatz.Arctic.NatQ5.Rigid.gDiag L.B ≤ 1
+'Collatz.Arctic.Paper.paper_prop_11_13' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_12_3 : ∀ {Q : Type u_1} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  (A : Collatz.Arctic.NatQ5.ValAuto Q),
+  (∀ (C : Finset Q), Collatz.Arctic.NatQ5.IsComp A C → Collatz.Arctic.NatQ5.ZeroOne A C) →
+    ∀ {K : Set (Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A))} {u : List (Fin 2)}
+      {e : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx A)},
+      Collatz.Arctic.NatQ5.W3c.Sharp A K u e →
+        ∀ {q : Q},
+          Collatz.Arctic.NatQ5.Rel A q →
+            ¬Collatz.Arctic.NatQ5.W3c.InZ A q → Collatz.Arctic.NatQ5.DC A (Collatz.Arctic.NatQ5.sccOf A q) u = 0
+'Collatz.Arctic.Paper.paper_lem_12_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_12_11 : Collatz.Arctic.NatQ5.W3c.DecompStmt
+'Collatz.Arctic.Paper.paper_prop_12_11' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_12_11_T0 : Collatz.Arctic.NatQ5.DecompStmtT0
+'Collatz.Arctic.Paper.paper_prop_12_11_T0' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_12_13_mean : ∀ {S : Type u_1} [Fintype S] [DecidableEq S] {δ : S → Bool → S} (J : ℕ)
+  {φ : S → List Bool → ℝ} {q₀ : S},
+  Collatz.Arctic.Dfa.Recurrent δ q₀ →
+    ∀ {C : ℝ},
+      (∀ (x : S) (v : List Bool), |φ x v| ≤ C) →
+        ∀ ε > 0,
+          ∃ L₀,
+            ∀ L ≥ L₀,
+              ∀ (x : S),
+                Collatz.Arctic.Dfa.Reach δ q₀ x →
+                  (Collatz.Arctic.NatQ5.W3d.avg (L + J) fun w =>
+                      |Collatz.Arctic.NatQ5.W3d.wsum δ J φ x w L - Collatz.Arctic.NatQ5.W3d.statMean δ J φ q₀ * ↑L|) ≤
+                    ε * ↑L
+'Collatz.Arctic.Paper.paper_thm_12_13_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_12_13_win : ∀ {S : Type u_1} [Fintype S] [DecidableEq S] {δ : S → Bool → S} (J : ℕ)
+  {φ : S → List Bool → ℝ} {q₀ : S},
+  Collatz.Arctic.Dfa.Recurrent δ q₀ →
+    ∀ {C : ℝ},
+      (∀ (x : S) (v : List Bool), |φ x v| ≤ C) →
+        ∀ (ε : ℝ),
+          0 < ε →
+            ∃ J₀ δ',
+              0 < δ' ∧
+                ∀ (J' : ℕ),
+                  J₀ ≤ J' →
+                    ∃ N₀,
+                      ∀ (ω : List Bool) (a b : ℕ),
+                        Collatz.Arctic.WinClose (List.map Collatz.Arctic.NatQ5.W3d.ofB ω) a b J' δ' →
+                          N₀ ≤ b - a →
+                            ∀ (x : S),
+                              Collatz.Arctic.Dfa.Reach δ q₀ x →
+                                ∀ (k : ℕ),
+                                  a ≤ k →
+                                    k ≤ b →
+                                      |Collatz.Arctic.NatQ5.W3d.wsum δ J φ x (List.drop a ω) (k - a) -
+                                            Collatz.Arctic.NatQ5.W3d.statMean δ J φ q₀ * ↑(k - a)| ≤
+                                        ε * ↑(b - a)
+'Collatz.Arctic.Paper.paper_thm_12_13_win' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_12_18 : ∀ (β₀ : List Bool),
+  ∃ c,
+    0 < c ∧
+      ∀ (ε : ℚ),
+        0 < ε →
+          ∀ (L : ℕ),
+            ∃ k₀,
+              ∀ k ≥ k₀,
+                1 - ε ≤ Collatz.Arctic.Prσ β₀ k (Collatz.Arctic.NatQ5.W3a.EvLeft c k) ∧
+                  ∀ (β : List Bool),
+                    Collatz.Arctic.NatQ5.W3a.EvLeft c k β →
+                      k ≤ β.length →
+                        ∀ (n K τ : ℕ),
+                          1 ≤ K →
+                            K + (Collatz.Arctic.parityOf β₀).length ≤ n →
+                              2 ^ (K - 1) ≤ τ →
+                                (Collatz.Arctic.parityOf β).length < n →
+                                  k ≤ n - K - (Collatz.Arctic.parityOf β₀).length →
+                                    ∀ (P : ℕ → Prop) (s : Finset ℕ),
+                                      (∀ u ∈ s, u < 2 ^ (n - K - (Collatz.Arctic.parityOf β₀).length) ∧ P u) →
+                                        2 ^ (n - K - (Collatz.Arctic.parityOf β₀).length - L) ≤ s.card →
+                                          ∃ u < 2 ^ (n - K - (Collatz.Arctic.parityOf β₀).length),
+                                            P u ∧
+                                              Collatz.Arctic.NatQ5.W3a.UsesGood c k (Collatz.Arctic.famX0 β₀ β n K τ u)
+                                                (Collatz.Arctic.parityOf β).length
+'Collatz.Arctic.Paper.paper_cor_12_18' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_12_19 : ∀ (E : ℕ),
+  ∃ c,
+    0 < c ∧
+      ∃ B,
+        ∀ (β₀ : List Bool) (k : ℕ),
+          B ≤ k →
+            c ≤
+              Collatz.Arctic.Prσ β₀ k fun β =>
+                ∀ (τ : List (Fin 2)),
+                  τ.length = E →
+                    ∀ (n u : ℕ),
+                      E + 9 + (Collatz.Arctic.parityOf β₀).length ≤ n →
+                        u < 2 ^ (n - (E + 9) - (Collatz.Arctic.parityOf β₀).length) →
+                          List.take E
+                              (Collatz.Arctic.NatQ5.binWord
+                                (Collatz.Arctic.famX1 β₀ β n (E + 9) (Collatz.Arctic.NatQ5.W3b.topT0 τ) u)) =
+                            τ
+'Collatz.Arctic.Paper.paper_prop_12_19' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_12_24 : ∀ (P : Collatz.Arctic.Word → Prop) (a : ℕ) (η : ℚ),
+  0 ≤ η →
+    η < 1 →
+      Collatz.Arctic.NatQ5.W3b.MissFrac P a η →
+        ∃ n₀ c,
+          0 < c ∧
+            c ≤ 1 ∧
+              ∀ n₁ ≥ n₀,
+                ∀ (C : ℚ) (d : ℕ) (α α' : ℚ) (κ κ' : ℕ) (A K : ℕ → ℕ),
+                  0 ≤ C →
+                    0 ≤ α →
+                      0 ≤ α' →
+                        1 ≤ κ →
+                          (∀ (R : ℕ), ↑(A R) ≤ α * ↑R + α') →
+                            (∀ (R : ℕ), R ≤ κ * K R + κ') →
+                              ∀ (ε : ℚ),
+                                0 < ε →
+                                  ∀ (η' : ℚ),
+                                    0 < η' →
+                                      ∃ J,
+                                        ∀ (β₀ : List Bool) (k : ℕ) (I S : Finset ℕ),
+                                          (∀ i ∈ I, (i + 1) * (n₁ + a) ≤ k) →
+                                            (∀ R ∈ S, J < R) →
+                                              (Collatz.Arctic.Prσ β₀ k fun β =>
+                                                  ε * ↑I.card <
+                                                    ∑ i ∈ I,
+                                                      ∑ R ∈ S,
+                                                        C * (↑R + 1) ^ d *
+                                                          if
+                                                              Collatz.Arctic.NatQ5.W3b.RunMiss P β₀.length n₁ a i (A R)
+                                                                (K R) β then
+                                                            1
+                                                          else 0) ≤
+                                                η'
+'Collatz.Arctic.Paper.paper_prop_12_24' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_12_26 : ∀ {Q : Type} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  {B : Collatz.Arctic.NatQ5.ValAuto Q} (S : Collatz.Arctic.NatQ5.W3h.Setup B) (β' : List Bool) {n u J Nmax n₁ a : ℕ}
+  (KT : ℕ → ℕ),
+  S.Kc + S.s' ≤ n →
+    u < 2 ^ S.Flen n →
+      1 ≤ n₁ + a →
+        (∀ (r : ℕ), J < r → 1 ≤ KT r ∧ 11 * (n₁ + a) * (KT r + 2) ≤ S.Lr S.C0 r) →
+          (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length ≤ Nmax →
+            ∀ (i : S.Item),
+              ∑
+                  p ∈
+                    Finset.range
+                      (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length,
+                  ∑
+                    r ∈
+                      Finset.Ioc J
+                        (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length,
+                    ↑(S.xiI i r (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u))
+                        p) ≤
+                ∑ r ∈ Finset.Ioc J Nmax,
+                    S.wt r *
+                      ↑(S.cntRun (S.Lr S.C0 r)
+                          (List.map Collatz.Arctic.NatQ5.W3a.l2f (Collatz.Arctic.bitsMSB (S.Flen n) u))) +
+                  22 * (↑n₁ + ↑a) *
+                    ∑ j ∈ Finset.range (β'.length / (n₁ + a)),
+                      ∑ r ∈ Finset.Ioc J Nmax,
+                        S.wt r *
+                          if
+                              Collatz.Arctic.NatQ5.W3b.RunMiss (Collatz.Arctic.NatQ5.W3h.PU S.us) S.β₀.length n₁ a j
+                                (KT r) (KT r) (S.β₀ ++ β') then
+                            1
+                          else 0
+'Collatz.Arctic.Paper.paper_prop_12_26' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_12_27 : ∀ {Q : Type} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  {B : Collatz.Arctic.NatQ5.ValAuto Q} (S : Collatz.Arctic.NatQ5.W3h.Setup B) (β' : List Bool) (n u J : ℕ),
+  S.Kc + S.s' ≤ n →
+    u < 2 ^ S.Flen n →
+      ∀ {clo : Collatz.Arctic.NatQ5.W3h.PSt B} {dlo : ℕ} {Clo ε η₀ θF εT : ℝ},
+        S.conf (S.mid0 (S.β₀ ++ β') n u) = clo →
+          (∀ (d : ℕ), dlo < d → S.coef d clo.1 = 0) →
+            S.coef dlo clo.1 = Clo →
+              1 ≤ dlo →
+                0 < ε →
+                  0 < η₀ →
+                    η₀ ≤ 1 →
+                      (∀ (i : S.Item) (x : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx B)),
+                          Collatz.Arctic.Dfa.Reach (Collatz.Arctic.NatQ5.W3c.muStepB B) S.e x →
+                            ∀ (p : ℕ),
+                              S.Kc - 1 ≤ p →
+                                p ≤ S.Kc - 1 + S.Flen n →
+                                  |Collatz.Arctic.NatQ5.W3d.wsum (Collatz.Arctic.NatQ5.W3c.muStepB B) J (S.phi i J) x
+                                          (List.drop (S.Kc - 1)
+                                            (List.map Collatz.Arctic.NatQ5.W3d.f2b
+                                              (Collatz.Arctic.NatQ5.binWord
+                                                (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u))))
+                                          (p - (S.Kc - 1)) -
+                                        S.QJ i J * ↑(p - (S.Kc - 1))| ≤
+                                    η₀ / 4 * ↑(S.Flen n)) →
+                        (∀ (i : S.Item) (x : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx B)),
+                            Collatz.Arctic.Dfa.Reach (Collatz.Arctic.NatQ5.W3c.muStepB B) S.e x →
+                              ∀ (p : ℕ),
+                                n - 1 ≤ p →
+                                  p ≤ n - 1 + ((Collatz.Arctic.parityOf (S.β₀ ++ β')).length - S.s') →
+                                    |Collatz.Arctic.NatQ5.W3d.wsum (Collatz.Arctic.NatQ5.W3c.muStepB B) J (S.phi i J) x
+                                            (List.drop (n - 1)
+                                              (List.map Collatz.Arctic.NatQ5.W3d.f2b
+                                                (Collatz.Arctic.NatQ5.binWord
+                                                  (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u))))
+                                            (p - (n - 1)) -
+                                          S.QJ i J * ↑(p - (n - 1))| ≤
+                                      η₀ / 4 * ↑((Collatz.Arctic.parityOf (S.β₀ ++ β')).length - S.s')) →
+                          (∀ (i : S.Item),
+                              ∑
+                                  p ∈
+                                    Finset.range
+                                      (Collatz.Arctic.NatQ5.binWord
+                                          (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length,
+                                  ∑
+                                    r ∈
+                                      Finset.Ioc J
+                                        (Collatz.Arctic.NatQ5.binWord
+                                            (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length,
+                                    ↑(S.xiI i r
+                                        (Collatz.Arctic.NatQ5.binWord
+                                          (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u))
+                                        p) ≤
+                                θF * (↑(S.Flen n) + 1) + εT * ↑β'.length) →
+                            θF ≤ η₀ / 8 →
+                              εT ≤ η₀ / 8 →
+                                (∀ (i : S.Item), S.Qc i - S.QJ i J ≤ η₀ / 4) →
+                                  1 ≤ β'.length →
+                                    (↑(S.BJ J) + S.Hb) * ↑S.C0 ≤ η₀ / 4 * ↑β'.length →
+                                      ∑ d ∈ Finset.range dlo, S.coef d clo.1 ≤ ε / 2 * ↑β'.length →
+                                        S.Ktot clo.1 * (S.Cst * (η₀ + 1 / ↑β'.length)) ≤ ε / 2 →
+                                          ↑(Collatz.Arctic.NatQ5.aval B
+                                                (Collatz.Arctic.NatQ5.binWord
+                                                  (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u))) ≤
+                                            (Clo + ε) *
+                                              ↑(Collatz.Arctic.NatQ5.binWord
+                                                      (Collatz.Arctic.famX0 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length ^
+                                                dlo
+'Collatz.Arctic.Paper.paper_prop_12_27' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_12_28 : ∀ {Q : Type} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  {B : Collatz.Arctic.NatQ5.ValAuto Q} (S : Collatz.Arctic.NatQ5.W3h.Setup B) (β' : List Bool) (n u b M Δ k : ℕ),
+  S.Kc + S.s' ≤ n →
+    u < 2 ^ S.Flen n →
+      ¬3 ∣ Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u →
+        1 ≤ Collatz.Arctic.terrasA (Collatz.Arctic.parityOf (S.β₀ ++ β')) →
+          2 ^ (b + Δ + S.Kc) ≤ 3 ^ Collatz.Arctic.terrasA (Collatz.Arctic.parityOf (S.β₀ ++ β')) →
+            3 ^ Collatz.Arctic.terrasA (Collatz.Arctic.parityOf (S.β₀ ++ β')) < 2 ^ (b + (S.Kc + Δ + 1)) →
+              List.take S.E (Collatz.Arctic.NatQ5.binWord (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)) =
+                  S.τ →
+                ∀ {J' : ℕ} {δ' : ℚ} {N₀' : ℕ} {η₁ ε Kmax : ℝ},
+                  (∀ (ω : List Bool) (a b : ℕ),
+                      Collatz.Arctic.WinClose (List.map Collatz.Arctic.NatQ5.W3d.ofB ω) a b J' δ' →
+                        N₀' ≤ b - a →
+                          ∀ (i : S.Item) (x : Collatz.Arctic.MinIdeal.BRel (Collatz.Arctic.NatQ5.W3c.ZIdx B)),
+                            Collatz.Arctic.Dfa.Reach (Collatz.Arctic.NatQ5.W3c.muStepB B) S.e x →
+                              ∀ (k : ℕ),
+                                a ≤ k →
+                                  k ≤ b →
+                                    |Collatz.Arctic.NatQ5.W3d.wsum (Collatz.Arctic.NatQ5.W3c.muStepB B) M (S.phi i M) x
+                                            (List.drop a ω) (k - a) -
+                                          S.QJ i M * ↑(k - a)| ≤
+                                      η₁ / 4 * ↑(b - a)) →
+                    N₀' ≤ b →
+                      N₀' ≤ S.Flen n →
+                        Collatz.Arctic.WinClose
+                            (Collatz.Arctic.bitsMSB b
+                              (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u / 2 ^ n % 2 ^ b))
+                            0 b J' δ' →
+                          Collatz.Arctic.WinClose
+                              (Collatz.Arctic.bitsMSB (n - S.Kc - (Collatz.Arctic.parityOf S.β₀).length)
+                                (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u % 2 ^ n % 2 ^ (n - S.Kc) /
+                                  2 ^ (Collatz.Arctic.parityOf S.β₀).length))
+                              0 (n - S.Kc - (Collatz.Arctic.parityOf S.β₀).length) J' δ' →
+                            0 < η₁ →
+                              η₁ ≤ 1 →
+                                1 ≤ M →
+                                  M ≤ S.Flen n →
+                                    (∀ c ∈ S.Kset, S.Ktot c.1 ≤ Kmax) →
+                                      (∀ c ∈ S.Kset, ∀ d ≤ S.Dm, S.coef d c.1 - ε / 3 ≤ S.coefM M d c.1) →
+                                        1 ≤ k →
+                                          k ≤
+                                              (Collatz.Arctic.NatQ5.binWord
+                                                  (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)).length →
+                                            Kmax * (S.Cst * (η₁ + 1 / ↑k)) ≤ ε / 3 →
+                                              Kmax * (↑S.Dm * ↑(M - 1) * max (↑(S.BJ M)) 1 ^ S.Dm) ≤ ε / 3 * ↑k →
+                                                (↑(S.BJ M) + S.Hb) * ↑(2 * S.Kc + Δ + M + S.s') ≤ η₁ / 2 * ↑k →
+                                                  ∃ c₁ ∈ S.Kset,
+                                                    (S.coef (S.degF c₁.1) c₁.1 - ε) *
+                                                        ↑(Collatz.Arctic.NatQ5.binWord
+                                                                (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0
+                                                                  u)).length ^
+                                                          S.degF c₁.1 ≤
+                                                      ↑(Collatz.Arctic.NatQ5.aval B
+                                                          (Collatz.Arctic.NatQ5.binWord
+                                                            (Collatz.Arctic.famX1 S.β₀ (S.β₀ ++ β') n S.Kc S.T0 u)))
+'Collatz.Arctic.Paper.paper_prop_12_28' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_12_30 : ∀ {Q : Type} [inst : Fintype Q] [inst_1 : DecidableEq Q]
+  {B : Collatz.Arctic.NatQ5.ValAuto Q} (S : Collatz.Arctic.NatQ5.W3h.Setup B) {c : Collatz.Arctic.NatQ5.W3h.PSt B},
+  c ∈ S.Kset →
+    (∀ (d : ℕ), 1 ≤ d → S.coef d c.1 = 0) →
+      ∀ ρ ∈ Collatz.Arctic.rulesST,
+        ∀ (K₀ : ℕ),
+          ∃ n,
+            K₀ ≤ n ∧
+              ¬3 ∣ n ∧
+                ∃ m,
+                  (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) ∧
+                    Collatz.Arctic.NatQ5.aval B (Collatz.Arctic.NatQ5.binWord n) < Collatz.Arctic.usesOrbit ρ n m
+'Collatz.Arctic.Paper.paper_lem_12_30' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_12_31 : Collatz.Arctic.NatQ5.CaseBStmt
+'Collatz.Arctic.Paper.paper_prop_12_31' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_13_1_rev : ∀ (n : ℕ),
+  2 ≤ n →
+    Collatz.Arctic.Chain (Collatz.Arctic.NatQ5.canDerivRev n) (List.reverse (Collatz.Arctic.can n))
+      (List.reverse (Collatz.Arctic.can (Collatz.Arctic.T n)))
+'Collatz.Arctic.Paper.paper_lem_13_1_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_13_1_top : ∀ {d : ℕ} [inst : NeZero d]
+  {I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d},
+  (∀ ρ ∈ Collatz.Arctic.rulesST, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ {ρ : Collatz.Arctic.Rule},
+      ρ ∈ Collatz.Arctic.NatQ5.rulesSTB →
+        Collatz.Arctic.NatQ5.NStrict I ρ →
+          ∀ (m n : ℕ),
+            (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) →
+              Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can (Collatz.Arctic.T^[m] n)) +
+                  Collatz.Arctic.usesOrbit ρ n m ≤
+                Collatz.Arctic.NatQ5.PhiN I (Collatz.Arctic.can n)
+'Collatz.Arctic.Paper.paper_lem_13_1_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_13_1_revTop : ∀ {d : ℕ} [inst : NeZero d]
+  {I : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d},
+  (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrev, Collatz.Arctic.NatQ5.NWeak I ρ) →
+    ∀ {ρ : Collatz.Arctic.Rule},
+      Collatz.Arctic.NatQ5.ruleRev ρ ∈ Collatz.Arctic.NatQ5.rulesSTrevTop →
+        Collatz.Arctic.NatQ5.NStrict I (Collatz.Arctic.NatQ5.ruleRev ρ) →
+          ∀ (m n : ℕ),
+            (∀ i < m, 2 ≤ Collatz.Arctic.T^[i] n) →
+              Collatz.Arctic.NatQ5.PhiN I (List.reverse (Collatz.Arctic.can (Collatz.Arctic.T^[m] n))) +
+                  Collatz.Arctic.usesOrbit ρ n m ≤
+                Collatz.Arctic.NatQ5.PhiN I (List.reverse (Collatz.Arctic.can n))
+'Collatz.Arctic.Paper.paper_lem_13_1_revTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_13_2 : Collatz.Arctic.NatQ5.NatBarrierDP ↔ Collatz.Arctic.NatQ5.NatBarrierSTB
+'Collatz.Arctic.Paper.paper_lem_13_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_lem_13_2_rev : Collatz.Arctic.NatQ5.NatBarrierDPrev ↔ Collatz.Arctic.NatQ5.NatBarrierSTrevTop
+'Collatz.Arctic.Paper.paper_lem_13_2_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_full : ∀ (d : ℕ) [inst : NeZero d]
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableST, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPB, Collatz.Arctic.NatQ5.NWeakD J π ∨ Collatz.Arctic.NatQ5.NStrictD J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPB, ¬Collatz.Arctic.NatQ5.NStrictD J π
+'Collatz.Arctic.Paper.paper_prop_13_3_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_full_rev : ∀ (d : ℕ) [inst : NeZero d]
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableSTrev, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPDrev, Collatz.Arctic.NatQ5.NWeakD J π ∨ Collatz.Arctic.NatQ5.NStrictD J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPDrev, ¬Collatz.Arctic.NatQ5.NStrictD J π
+'Collatz.Arctic.Paper.paper_prop_13_3_full_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_scalar : ∀ (d : ℕ) [NeZero d]
+  (Jp : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (H : Collatz.Arctic.NatQ5.W5.SAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableST, Collatz.Arctic.NatQ5.NWeak Jp ρ) →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTB, Collatz.Arctic.NatQ5.W5.SWeak H Jp ρ) →
+      ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTB, ¬Collatz.Arctic.NatQ5.W5.SStrict H Jp ρ
+'Collatz.Arctic.Paper.paper_prop_13_3_scalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_scalar_rev : ∀ (d : ℕ) [NeZero d]
+  (Jp : Collatz.Arctic.Letter → Collatz.Arctic.NatQ5.NAff d) (H : Collatz.Arctic.NatQ5.W5.SAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableSTrev, Collatz.Arctic.NatQ5.NWeak Jp ρ) →
+    (∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrevTop, Collatz.Arctic.NatQ5.W5.SWeak H Jp ρ) →
+      ∀ ρ ∈ Collatz.Arctic.NatQ5.rulesSTrevTop, ¬Collatz.Arctic.NatQ5.W5.SStrict H Jp ρ
+'Collatz.Arctic.Paper.paper_prop_13_3_scalar_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_row : ∀ (d : ℕ) [NeZero d] (k : Fin d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableST, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPB, Collatz.Arctic.NatQ5.W5.RowWeakD k J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPB, ¬Collatz.Arctic.NatQ5.W5.RowStrictD k J π
+'Collatz.Arctic.Paper.paper_prop_13_3_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_3_row_rev : ∀ (d : ℕ) [NeZero d] (k : Fin d)
+  (J : Collatz.Arctic.DLetter → Collatz.Arctic.NatQ5.NAff d),
+  (∀ ρ ∈ Collatz.Arctic.usableSTrev, Collatz.Arctic.NatQ5.NWeakD J ρ.plain) →
+    (∀ π ∈ Collatz.Arctic.pairsPDrev, Collatz.Arctic.NatQ5.W5.RowWeakD k J π) →
+      ∀ π ∈ Collatz.Arctic.pairsPDrev, ¬Collatz.Arctic.NatQ5.W5.RowStrictD k J π
+'Collatz.Arctic.Paper.paper_prop_13_3_row_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_4 : Collatz.Arctic.NatQ5.NatBarrierDPFilt
+'Collatz.Arctic.Paper.paper_prop_13_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_13_4_rev : Collatz.Arctic.NatQ5.NatBarrierDPrevFilt
+'Collatz.Arctic.Paper.paper_prop_13_4_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_yah310_Z : (∀ p ∈ Collatz.Arctic.NatQ5.W5.ZYah.rulesZ,
+    Collatz.Arctic.NatQ5.W5.ZYah.ZW Collatz.Arctic.NatQ5.W5.ZYah.IZ p.1 p.2) ∧
+  Collatz.Arctic.NatQ5.W5.ZYah.ZS Collatz.Arctic.NatQ5.W5.ZYah.IZ
+      [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.s]
+      [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h] ∧
+    ¬Collatz.Arctic.NatQ5.W5.ZYah.ZW Collatz.Arctic.NatQ5.W5.ZYah.IZ
+        [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.t]
+        [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h]
+'Collatz.Arctic.Paper.paper_rem_yah310_Z' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_yah310_Zrev : (∀ p ∈ Collatz.Arctic.NatQ5.W5.ZYah.rulesZrev,
+    Collatz.Arctic.NatQ5.W5.ZYah.ZW Collatz.Arctic.NatQ5.W5.ZYah.IZr p.1 p.2) ∧
+  Collatz.Arctic.NatQ5.W5.ZYah.ZS Collatz.Arctic.NatQ5.W5.ZYah.IZr
+      [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one,
+        Collatz.Arctic.NatQ5.W5.ZYah.ZL.one]
+      [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.s, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one,
+        Collatz.Arctic.NatQ5.W5.ZYah.ZL.one] ∧
+    ¬Collatz.Arctic.NatQ5.W5.ZYah.ZW Collatz.Arctic.NatQ5.W5.ZYah.IZr
+        [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.h]
+        [Collatz.Arctic.NatQ5.W5.ZYah.ZL.H, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one, Collatz.Arctic.NatQ5.W5.ZYah.ZL.one,
+          Collatz.Arctic.NatQ5.W5.ZYah.ZL.t]
+'Collatz.Arctic.Paper.paper_rem_yah310_Zrev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_yah310_T : ¬Collatz.Arctic.NatQ5.W5.LiteralDP
+'Collatz.Arctic.Paper.paper_rem_yah310_T' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_rem_yah310_Trev : ¬Collatz.Arctic.NatQ5.W5.LiteralDPrev
+'Collatz.Arctic.Paper.paper_rem_yah310_Trev' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_B_1 : Collatz.Arctic.MinRate → Collatz.Arctic.HSP
+'Collatz.Arctic.Paper.paper_thm_B_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_B_1_at : ∀ {D : ℕ} (A : Collatz.Arctic.Interp D) (C S : Finset (Fin D)),
+  Collatz.Arctic.MinRateAt A C → Collatz.Arctic.HSPAt A C S
+'Collatz.Arctic.Paper.paper_thm_B_1_at' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_B_2 : ∀ {D : ℕ} {A : Collatz.Arctic.Interp D} {C : Finset (Fin D)},
+  Collatz.Arctic.NeverDies A C C → ∀ {K : ℕ}, 1 ≤ K → ↑(Collatz.Arctic.avgMinCap A C K) / ↑K ≤ Collatz.Arctic.rate A C
+'Collatz.Arctic.Paper.paper_prop_B_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_B_3 : Collatz.Arctic.MinRate
+'Collatz.Arctic.Paper.paper_thm_B_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_thm_B_3_spr : ∀ {D : ℕ} {A : Collatz.Arctic.Interp D} {C : Finset (Fin D)},
+  Collatz.Arctic.StrongConnIn A C → Collatz.Arctic.NeverDies A C C → Collatz.Arctic.sprRate A C = 0
+'Collatz.Arctic.Paper.paper_thm_B_3_spr' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_cor_B_4 : Collatz.Arctic.HSP
+'Collatz.Arctic.Paper.paper_cor_B_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_B_7 : Collatz.Arctic.HKeyTop
+'Collatz.Arctic.Paper.paper_thm_B_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_B_8 : Collatz.Arctic.HTerrasWin
+'Collatz.Arctic.Paper.paper_thm_B_8' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_thm_B_8_of_key : Collatz.Arctic.HKeyTop → Collatz.Arctic.HTerrasWin
+'Collatz.Arctic.Paper.paper_thm_B_8_of_key' depends on axioms: [propext, Classical.choice, Quot.sound]
+Collatz.Arctic.Paper.paper_prop_B_9 : ∀ (lo hi : ℝ),
+  0 ≤ lo →
+    lo < hi →
+      hi ≤ 1 →
+        ∃ c,
+          0 < c ∧
+            ∀ (β₀ : List Bool) (ε : ℚ),
+              0 < ε →
+                ∃ k₀,
+                  ∀ k ≥ k₀,
+                    1 - ε ≤
+                      Collatz.Arctic.Prσ β₀ k fun β =>
+                        ∀ (φ : ℝ),
+                          ↑c * ↑k ≤
+                            ↑{i ∈ Finset.range β.length |
+                                  lo ≤ Int.fract (↑(Collatz.Arctic.oddPrefix β i) * Real.logb 2 3 + φ) ∧
+                                    Int.fract (↑(Collatz.Arctic.oddPrefix β i) * Real.logb 2 3 + φ) < hi}.card
+'Collatz.Arctic.Paper.paper_prop_B_9' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_D_2 : ∀ {K : Type u_1} [inst : Fintype K] [inst_1 : DecidableEq K]
+  (D : Fin 2 → Matrix K K ℕ),
+  Collatz.Arctic.NatQ5.Rigid.SC D →
+    ∀ {g : ℝ},
+      1 ≤ g →
+        (∀ (w : List (Fin 2)) (i : K), Collatz.Arctic.NatQ5.Rigid.Dx D w i i ≤ g ^ w.length) →
+          ∃ L, ∀ (x : List (Fin 2)) (i j : K), Collatz.Arctic.NatQ5.Rigid.Dx D x i j ≤ g ^ (x.length + L)
+'Collatz.Arctic.Paper.paper_lem_D_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_D_3 : ∀ {K : Type u_1} [inst : Fintype K] [inst_1 : DecidableEq K]
+  (D : Fin 2 → Matrix K K ℕ),
+  Collatz.Arctic.NatQ5.Rigid.SC D →
+    ∀ {g : ℝ},
+      1 < g →
+        (∀ (w : List (Fin 2)) (i : K), Collatz.Arctic.NatQ5.Rigid.Dx D w i i ≤ g ^ w.length) →
+          (Collatz.Arctic.NatQ5.Rigid.RigidAt D g ↔
+            ∃ c,
+              0 < c ∧
+                ∀ (x : List (Fin 2)),
+                  c * g ^ x.length ≤ Collatz.Arctic.NatQ5.Rigid.nrm (Collatz.Arctic.NatQ5.Rigid.Dx D x))
+'Collatz.Arctic.Paper.paper_lem_D_3' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_D_4 : ∀ {K : Type u_1} [inst : Fintype K] [inst_1 : DecidableEq K]
+  (D : Fin 2 → Matrix K K ℕ),
+  Collatz.Arctic.NatQ5.Rigid.SC D →
+    ∀ {g : ℝ},
+      Collatz.Arctic.NatQ5.Rigid.RigidAt D g →
+        ∃ P ∈ Collatz.Arctic.NatQ5.Rigid.Sbar D g,
+          P * P = P ∧ (∀ Y ∈ Collatz.Arctic.NatQ5.Rigid.Sbar D g, P.rank ≤ Y.rank) ∧ P ≠ 0
+'Collatz.Arctic.Paper.paper_lem_D_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_D_4_finite : ∀ {K : Type u_1} [inst : Fintype K] [DecidableEq K]
+  {S : Set (Matrix K K ℝ)} {P : Matrix K K ℝ},
+  IsCompact S →
+    (∀ Y ∈ S, ∀ Z ∈ S, Y * Z ∈ S) →
+      (∀ Y ∈ S, ∀ (i j : K), 0 ≤ Y i j) →
+        P ∈ S → P * P = P → (∀ Y ∈ S, P.rank ≤ Y.rank) → (Collatz.Arctic.NatQ5.Rigid.HP P S).Finite
+'Collatz.Arctic.Paper.paper_lem_D_4_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_prop_D_5 : ∀ {K : Type u_1} [inst : Fintype K] [inst_1 : DecidableEq K]
+  (D : Fin 2 → Matrix K K ℕ),
+  Collatz.Arctic.NatQ5.Rigid.SC D →
+    ∀ {g : ℝ},
+      Collatz.Arctic.NatQ5.Rigid.RigidAt D g →
+        ∃ Ψ h a c,
+          1 ≤ h ∧
+            0 < c ∧
+              ∀ (ε : List (Fin 2)),
+                c * g ^ (Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε).length ≤
+                  Collatz.Arctic.NatQ5.Rigid.Dx D (Collatz.Arctic.NatQ5.Rigid.heavyWord Ψ h ε) a a
+'Collatz.Arctic.Paper.paper_prop_D_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+@Collatz.Arctic.Paper.paper_lem_D_6 : ∀ {μ M : ℕ},
+  2 ≤ μ →
+    μ.Coprime 3 →
+      1 ≤ M → ∀ {r : ℕ}, 8 * μ ^ 2 * M ^ 2 ≤ r → ∀ (t : ZMod (3 ^ M)), ∃ J ⊆ Finset.range r, ∑ m ∈ J, ↑μ ^ m = t
+'Collatz.Arctic.Paper.paper_lem_D_6' depends on axioms: [propext, Classical.choice, Quot.sound]
+# exit status 0, 2026-10-07T18:01:01+09:00

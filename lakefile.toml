@@ -1,0 +1,18 @@
+name = "CollatzProof"
+defaultTargets = ["CollatzProof"]
+
+# Lean 4 formalization accompanying "Natural-number and arctic matrix interpretations alone make no progress, in any
+# dimension, on the Collatz rewriting system" (Hiroyuki Nashida).
+# The only dependency is Mathlib, pinned to the tag v4.34.1.
+# The package name matches lake-manifest.json (the name of the source project).
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.34.1"
+
+# All modules of CollatzProof/Arctic. The root module CollatzProof.Arctic.Paper (files Paper.lean, Paper2.lean,
+# Paper3.lean, Paper4.lean, Paper5.lean) imports all other files and restates the results of the paper under their
+# numbers (theorems paper_*).
+[[lean_lib]]
+name = "CollatzProof"
+globs = ["CollatzProof.Arctic.+"]

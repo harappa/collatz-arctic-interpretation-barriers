@@ -1,0 +1,436 @@
+# 2026-10-07T17:52:50+09:00 $ lake exe cache get && lake build
+info: mathlib: cloning https://github.com/leanprover-community/mathlib4
+info: mathlib: checking out revision 'd13f23b723b8a846827a245b89c10fc7d3f11612'
+info: plausible: cloning https://github.com/leanprover-community/plausible
+info: plausible: checking out revision '118aa17ee84656b8bd727fef7c458ee8c833385c'
+info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+info: LeanSearchClient: checking out revision 'ddf04cf3949fa556442341e87d47f9f6e6074707'
+info: importGraph: cloning https://github.com/leanprover-community/import-graph
+info: importGraph: checking out revision 'e928b72544873815af278d38681b31c0293588e3'
+info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+info: proofwidgets: checking out revision '106ff4fafc74ef4ac99d81dbf3ab399118f497a5'
+info: aesop: cloning https://github.com/leanprover-community/aesop
+info: aesop: checking out revision '355695d523e41d0554926416cba2a2b3544fbbc9'
+info: Qq: cloning https://github.com/leanprover-community/quote4
+info: Qq: checking out revision '6a489d9af5d0c47e5b259e2e8bcdfc1811b5a259'
+info: batteries: cloning https://github.com/leanprover-community/batteries
+info: batteries: checking out revision 'f2effa3d803fda822b1f97b806c47cf2adfbcbc2'
+info: Cli: cloning https://github.com/leanprover/lean4-cli
+info: Cli: checking out revision 'e92c9f15fdfacc8536f31cfb3b7ad26c3c8cd204'
+✔ [1/5] Built Cache.Cli (441ms)
+✔ [2/5] Built Cache.Lean (541ms)
+✔ [6/42] Built Cache.Cli:c.o (149ms)
+✔ [7/42] Built Cache.Lean:c.o (177ms)
+✔ [8/42] Built Cache.Env (456ms)
+✔ [9/42] Built Cache.Env:c.o (167ms)
+✔ [10/42] Built Cache.Infra (540ms)
+✔ [11/42] Built Batteries.Tactic.OpenPrivate (1.0s)
+✔ [12/42] Built Cache.Infra:c.o (228ms)
+✔ [13/42] Built Batteries.Tactic.OpenPrivate:c.o (1.1s)
+✔ [14/42] Built Cache.IO (1.6s)
+✔ [15/42] Built Cache.Hashing (998ms)
+✔ [16/42] Built Cache.Hashing:c.o (409ms)
+✔ [17/42] Built Cache.IO:c.o (1.5s)
+✔ [18/42] Built Cache.Requests (2.2s)
+✔ [19/42] Built Cache.Marker (762ms)
+✔ [20/42] Built Cache.Marker:c.o (132ms)
+✔ [21/42] Built Cache.Upload.Dest (823ms)
+✔ [22/42] Built Cache.Query (898ms)
+✔ [23/42] Built Cache.Upload.Dest:c.o (141ms)
+✔ [24/42] Built Cache.Query:c.o (298ms)
+✔ [25/42] Built Cache.Upload.Curl (823ms)
+✔ [26/42] Built Cache.Upload.Rclone (854ms)
+✔ [27/42] Built Cache.Warning (896ms)
+✔ [28/42] Built Cache.Requests:c.o (2.5s)
+✔ [29/42] Built Cache.Upload.Curl:c.o (204ms)
+✔ [30/42] Built Cache.Upload.Rclone:c.o (191ms)
+✔ [31/42] Built Cache.Warning:c.o (263ms)
+✔ [32/42] Built Cache.Upload.Azure (796ms)
+✔ [33/42] Built Cache.Upload.Azure:c.o (152ms)
+✔ [34/42] Built Cache.Upload.S3 (990ms)
+✔ [35/42] Built Cache.Upload.S3:c.o (319ms)
+✔ [36/42] Built Cache.Upload.Defs (817ms)
+✔ [37/42] Built Cache.Upload.Defs:c.o (157ms)
+✔ [38/42] Built Cache.Upload (720ms)
+✔ [39/42] Built Cache.Upload:c.o (129ms)
+✔ [40/42] Built Cache.Main (1.3s)
+✔ [41/42] Built Cache.Main:c.o (934ms)
+✔ [42/42] Built cache:exe (862ms)
+Current branch: HEAD
+Using cache from origin: (some leanprover-community/mathlib4)
+Decompressing 8907 already-cached file(s) (1 already decompressed)
+No files to download
+Decompressed 8907 already-cached file(s)
+Completed successfully in 19333 ms!
+✔ [8924/9209] Built CollatzProof.Arctic.KeyDefs (5.7s)
+✔ [8925/9209] Built CollatzProof.Arctic.Semiring (6.6s)
+✔ [8926/9209] Built CollatzProof.Arctic.Dfa (6.7s)
+✔ [8927/9209] Built CollatzProof.Arctic.MinIdealBase (6.8s)
+✔ [8928/9209] Built CollatzProof.Arctic.HSPVarAlg (7.0s)
+✔ [8929/9209] Built CollatzProof.Arctic.Nat.RigidDefs (7.2s)
+✔ [8930/9209] Built CollatzProof.Arctic.Nat.RigidCone (7.9s)
+⚠ [8931/9209] Built CollatzProof.Arctic.CoreArith (9.6s)
+warning: CollatzProof/Arctic/CoreArith.lean:35:104: Unused tactic linter: `push_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [8932/9209] Built CollatzProof.Arctic.EndDigitsCount (10s)
+✔ [8933/9209] Built CollatzProof.Arctic.Nat.W3Iter (10s)
+✔ [8934/9209] Built CollatzProof.Arctic.Nat.RigidCover (11s)
+✔ [8935/9209] Built CollatzProof.Arctic.Defs (5.8s)
+✔ [8936/9209] Built CollatzProof.Arctic.Dfa2 (6.0s)
+ℹ [8937/9209] Built CollatzProof.Arctic.MinIdeal (6.1s)
+info: CollatzProof/Arctic/MinIdeal.lean:430:0: 'Collatz.Arctic.MinIdeal.lemma_56_5_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/MinIdeal.lean:431:0: 'Collatz.Arctic.MinIdeal.exists_minIdeal_idem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/MinIdeal.lean:432:0: 'Collatz.Arctic.MinIdeal.leRel_not_antichain' depends on axioms: [propext, Quot.sound]
+✔ [8938/9209] Built CollatzProof.Arctic.SemiringZ (6.2s)
+✔ [8939/9209] Built CollatzProof.Arctic.Nat.RigidBound (5.7s)
+✔ [8940/9209] Built CollatzProof.Arctic.Statement (5.2s)
+✔ [8941/9209] Built CollatzProof.Arctic.CoreStart (5.6s)
+✔ [8942/9209] Built CollatzProof.Arctic.Transport (5.7s)
+✔ [8943/9209] Built CollatzProof.Arctic.EndDigits (8.8s)
+✔ [8944/9209] Built CollatzProof.Arctic.Window (5.4s)
+✔ [8945/9209] Built CollatzProof.Arctic.AutoStatement (5.4s)
+✔ [8946/9209] Built CollatzProof.Arctic.Nat.Statement (5.7s)
+✔ [8947/9209] Built CollatzProof.Arctic.HTPDB.Defs (5.8s)
+✔ [8948/9209] Built CollatzProof.Arctic.Nat.RigidLower (10s)
+✔ [8949/9209] Built CollatzProof.Arctic.DPStatement (6.1s)
+✔ [8950/9209] Built CollatzProof.Arctic.Bridge (6.3s)
+ℹ [8951/9209] Built CollatzProof.Arctic.TransportStay (6.2s)
+info: CollatzProof/Arctic/TransportStay.lean:244:0: 'Collatz.Arctic.MinIdeal.lemma_56_10_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/TransportStay.lean:245:0: 'Collatz.Arctic.MinIdeal.lemma_56_10_1_list' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/TransportStay.lean:246:0: 'Collatz.Arctic.MinIdeal.corollary_56_10_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/TransportStay.lean:247:0: 'Collatz.Arctic.MinIdeal.stay_supp' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/TransportStay.lean:248:0: 'Collatz.Arctic.MinIdeal.act_word' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/TransportStay.lean:249:0: 'Collatz.Arctic.MinIdeal.leRel_comp_ne' depends on axioms: [propext, Quot.sound]
+✔ [8952/9209] Built CollatzProof.Arctic.RateDefs (5.1s)
+✔ [8953/9209] Built CollatzProof.Arctic.Nat.StatementRev (5.2s)
+✔ [8954/9209] Built CollatzProof.Arctic.Nat.StatementDP (5.3s)
+✔ [8955/9209] Built CollatzProof.Arctic.DPAlg (6.1s)
+✔ [8956/9209] Built CollatzProof.Arctic.Nat.RigidNorm (6.7s)
+✔ [8957/9209] Built CollatzProof.Arctic.RH.Defs (6.7s)
+✔ [8958/9209] Built CollatzProof.Arctic.Canon (6.3s)
+✔ [8959/9209] Built CollatzProof.Arctic.Nat.RigidIdem (7.8s)
+✔ [8960/9209] Built CollatzProof.Arctic.Config (5.3s)
+✔ [8961/9209] Built CollatzProof.Arctic.RateUpperBase (6.5s)
+✔ [8962/9209] Built CollatzProof.Arctic.Nat.RigidOrder (5.8s)
+✔ [8963/9209] Built CollatzProof.Arctic.TModel (6.8s)
+✔ [8964/9209] Built CollatzProof.Arctic.Nat.RigidSpec (7.1s)
+✔ [8965/9209] Built CollatzProof.Arctic.ConfigLemmas (5.6s)
+✔ [8966/9209] Built CollatzProof.Arctic.Main (9.0s)
+✔ [8967/9209] Built CollatzProof.Arctic.CoreWindow (5.7s)
+✔ [8968/9209] Built CollatzProof.Arctic.Nat.RigidSep (9.9s)
+✔ [8969/9209] Built CollatzProof.Arctic.WindowLLN (6.4s)
+✔ [8970/9209] Built CollatzProof.Arctic.CoreHyp (5.3s)
+ℹ [8971/9209] Built CollatzProof.Arctic.RateUpper (9.5s)
+info: CollatzProof/Arctic/RateUpper.lean:161:0: 'Collatz.Arctic.fmax_append_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/RateUpper.lean:162:0: 'Collatz.Arctic.rate_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/RateUpper.lean:163:0: 'Collatz.Arctic.exists_len_near_rate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/RateUpper.lean:164:0: 'Collatz.Arctic.block_upper_of' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/RateUpper.lean:165:0: 'Collatz.Arctic.block_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [8972/9209] Built CollatzProof.Arctic.SupportDfa (6.1s)
+✔ [8973/9209] Built CollatzProof.Arctic.AutoBridge (5.8s)
+✔ [8974/9209] Built CollatzProof.Arctic.ARuleCarry (6.1s)
+✔ [8975/9209] Built CollatzProof.Arctic.DPBridge (6.2s)
+✔ [8976/9209] Built CollatzProof.Arctic.Nat.Bridge (6.5s)
+✔ [8977/9209] Built CollatzProof.Arctic.HTWKey (5.6s)
+✔ [8978/9209] Built CollatzProof.Arctic.KeySpec (5.6s)
+✔ [8979/9209] Built CollatzProof.Arctic.Nat.RigidExample (6.9s)
+✔ [8980/9209] Built CollatzProof.Arctic.WindowLLN2 (7.4s)
+✔ [8981/9209] Built CollatzProof.Arctic.LowerPath (6.6s)
+✔ [8982/9209] Built CollatzProof.Arctic.Family (7.3s)
+✔ [8983/9209] Built CollatzProof.Arctic.UpperPath (6.5s)
+✔ [8984/9209] Built CollatzProof.Arctic.CoreConfig (6.1s)
+✔ [8985/9209] Built CollatzProof.Arctic.HTPDB.DPStatement (6.2s)
+✔ [8986/9209] Built CollatzProof.Arctic.Nat.BridgeTop (6.0s)
+✔ [8987/9209] Built CollatzProof.Arctic.Nat.Coord (6.2s)
+✔ [8988/9209] Built CollatzProof.Arctic.DPCanon (7.0s)
+✔ [8989/9209] Built CollatzProof.Arctic.ARuleFamily (7.5s)
+✔ [8990/9209] Built CollatzProof.Arctic.CoreProb (10s)
+✔ [8991/9209] Built CollatzProof.Arctic.Nat.NonVacuity (9.0s)
+✔ [8992/9209] Built CollatzProof.Arctic.Nat.DfaLlnAvg (6.7s)
+✔ [8993/9209] Built CollatzProof.Arctic.LowerLineage (6.9s)
+✔ [8994/9209] Built CollatzProof.Arctic.HSPRedBase (7.5s)
+✔ [8995/9209] Built CollatzProof.Arctic.Gen.Model (6.6s)
+✔ [8996/9209] Built CollatzProof.Arctic.FamilyDigits (6.7s)
+✔ [8997/9209] Built CollatzProof.Arctic.KeyAnal (8.4s)
+✔ [8998/9209] Built CollatzProof.Arctic.FamilyUses (6.0s)
+✔ [8999/9209] Built CollatzProof.Arctic.UpperCarry (6.6s)
+✔ [9000/9209] Built CollatzProof.Arctic.KeyTerras (7.6s)
+✔ [9001/9209] Built CollatzProof.Arctic.HLUDet (7.7s)
+✔ [9002/9209] Built CollatzProof.Arctic.LowerCount (8.5s)
+✔ [9003/9209] Built CollatzProof.Arctic.FamilyExp (8.0s)
+✔ [9004/9209] Built CollatzProof.Arctic.WindowLLN3 (9.4s)
+✔ [9005/9209] Built CollatzProof.Arctic.DPMain (6.1s)
+✔ [9006/9209] Built CollatzProof.Arctic.Nat.ValueAuto (6.7s)
+✔ [9007/9209] Built CollatzProof.Arctic.BZShift (6.9s)
+✔ [9008/9209] Built CollatzProof.Arctic.Nat.NonVacuity2 (6.0s)
+✔ [9009/9209] Built CollatzProof.Arctic.Gen.Spec (5.8s)
+✔ [9010/9209] Built CollatzProof.Arctic.HModel.Defs (6.1s)
+✔ [9011/9209] Built CollatzProof.Arctic.DPGen.Defs (6.5s)
+✔ [9012/9209] Built CollatzProof.Arctic.KeyAnal4 (6.6s)
+✔ [9013/9209] Built CollatzProof.Arctic.Gen.Family (7.4s)
+✔ [9014/9209] Built CollatzProof.Arctic.ARuleFive (10s)
+✔ [9015/9209] Built CollatzProof.Arctic.KeyTerras2 (6.6s)
+✔ [9016/9209] Built CollatzProof.Arctic.Nat.DfaLlnMean (8.7s)
+✔ [9017/9209] Built CollatzProof.Arctic.KeyAnal2 (8.0s)
+✔ [9018/9209] Built CollatzProof.Arctic.Gen.KeySwap (7.2s)
+✔ [9019/9209] Built CollatzProof.Arctic.CoreSigma (7.4s)
+✔ [9020/9209] Built CollatzProof.Arctic.HLUWalk (7.4s)
+✔ [9021/9209] Built CollatzProof.Arctic.BZMain (6.2s)
+✔ [9022/9209] Built CollatzProof.Arctic.HSPRed (9.7s)
+✔ [9023/9209] Built CollatzProof.Arctic.Nat.Embed (7.5s)
+ℹ [9024/9209] Built CollatzProof.Arctic.Lower (9.5s)
+info: CollatzProof/Arctic/Lower.lean:207:0: 'Collatz.Arctic.Lower.lemma_56_11_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [9025/9209] Built CollatzProof.Arctic.Nat.Compartment (8.5s)
+✔ [9026/9209] Built CollatzProof.Arctic.HTPDB.Statement (5.9s)
+✔ [9027/9209] Built CollatzProof.Arctic.RH.Statement (5.9s)
+✔ [9028/9209] Built CollatzProof.Arctic.DPGen.Value (6.2s)
+✔ [9029/9209] Built CollatzProof.Arctic.HModel.Terras (7.3s)
+✔ [9030/9209] Built CollatzProof.Arctic.Gen.FamilyDigits (6.5s)
+✔ [9031/9209] Built CollatzProof.Arctic.Gen.ModelT (6.3s)
+✔ [9032/9209] Built CollatzProof.Arctic.ARuleMain (6.7s)
+✔ [9033/9209] Built CollatzProof.Arctic.HLUDetReal (13s)
+✔ [9034/9209] Built CollatzProof.Arctic.KeyMain (7.1s)
+✔ [9035/9209] Built CollatzProof.Arctic.Gen.KeyTerras2 (6.7s)
+✔ [9036/9209] Built CollatzProof.Arctic.NatExample (9.2s)
+✔ [9037/9209] Built CollatzProof.Arctic.Nat.BridgeRev (6.5s)
+✔ [9038/9209] Built CollatzProof.Arctic.Nat.Lift (6.8s)
+✔ [9039/9209] Built CollatzProof.Arctic.CoreLowerApp (6.0s)
+✔ [9040/9209] Built CollatzProof.Arctic.HTPDB.Spec (5.9s)
+✔ [9041/9209] Built CollatzProof.Arctic.Nat.CompartmentPi (7.1s)
+✔ [9042/9209] Built CollatzProof.Arctic.Gen.Sigma (9.2s)
+✔ [9043/9209] Built CollatzProof.Arctic.Gen.SysBridge (8.7s)
+✔ [9044/9209] Built CollatzProof.Arctic.KeyAnal3 (10s)
+✔ [9045/9209] Built CollatzProof.Arctic.DPGen.STConv (6.2s)
+✔ [9046/9209] Built CollatzProof.Arctic.HModel.Terras2 (6.4s)
+✔ [9047/9209] Built CollatzProof.Arctic.Nat.H2Path (10s)
+✔ [9048/9209] Built CollatzProof.Arctic.Gen.Quad (6.0s)
+✔ [9049/9209] Built CollatzProof.Arctic.HLUWalk2 (13s)
+✔ [9050/9209] Built CollatzProof.Arctic.Nat.NonVacuity3 (7.1s)
+✔ [9051/9209] Built CollatzProof.Arctic.NatExample2 (7.2s)
+✔ [9052/9209] Built CollatzProof.Arctic.Nat.BridgeDP (6.5s)
+✔ [9053/9209] Built CollatzProof.Arctic.Nat.DfaLlnConc (15s)
+✔ [9054/9209] Built CollatzProof.Arctic.KeyMain2 (8.3s)
+✔ [9055/9209] Built CollatzProof.Arctic.HSPSp (14s)
+✔ [9056/9209] Built CollatzProof.Arctic.CoreHelp (6.1s)
+✔ [9057/9209] Built CollatzProof.Arctic.HTPDB.LeftUse (6.3s)
+✔ [9058/9209] Built CollatzProof.Arctic.HTPDB.Uses (6.4s)
+✔ [9059/9209] Built CollatzProof.Arctic.Nat.AutoCore (6.3s)
+✔ [9060/9209] Built CollatzProof.Arctic.CoreU (6.6s)
+✔ [9061/9209] Built CollatzProof.Arctic.Nat.H2Bin (7.4s)
+✔ [9062/9209] Built CollatzProof.Arctic.HTPDB.Canon (6.0s)
+✔ [9063/9209] Built CollatzProof.Arctic.Nat.W3Mon (7.3s)
+✔ [9064/9209] Built CollatzProof.Arctic.Gen.SysSweep (7.4s)
+✔ [9065/9209] Built CollatzProof.Arctic.HModel.Swap (6.4s)
+✔ [9066/9209] Built CollatzProof.Arctic.HTPDB.ARule (6.0s)
+✔ [9067/9209] Built CollatzProof.Arctic.Paper4 (6.0s)
+✔ [9068/9209] Built CollatzProof.Arctic.Nat.BridgeDPForms (6.6s)
+✔ [9069/9209] Built CollatzProof.Arctic.KeyAnal5 (7.5s)
+✔ [9070/9209] Built CollatzProof.Arctic.Gen.KeyMain3 (6.9s)
+✔ [9071/9209] Built CollatzProof.Arctic.HSPLin (6.6s)
+✔ [9072/9209] Built CollatzProof.Arctic.HLUMain (6.4s)
+✔ [9073/9209] Built CollatzProof.Arctic.Nat.AddLoopLift (6.2s)
+ℹ [9074/9209] Built CollatzProof.Arctic.Upper (29s)
+info: CollatzProof/Arctic/Upper.lean:340:0: 'Collatz.Arctic.Upper.lemma_56_11_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [9075/9209] Built CollatzProof.Arctic.HTPDB.LeftUseReal (7.1s)
+✔ [9076/9209] Built CollatzProof.Arctic.CoreLowFam (7.2s)
+✔ [9077/9209] Built CollatzProof.Arctic.Nat.NonVacuityW1 (7.5s)
+✔ [9078/9209] Built CollatzProof.Arctic.Nat.H2Top (11s)
+✔ [9079/9209] Built CollatzProof.Arctic.HTPDB.DPCanon (7.4s)
+✔ [9080/9209] Built CollatzProof.Arctic.CoreGood (9.2s)
+✔ [9081/9209] Built CollatzProof.Arctic.Nat.W3Stay (8.3s)
+✔ [9082/9209] Built CollatzProof.Arctic.Nat.H2Orbit (8.0s)
+✔ [9083/9209] Built CollatzProof.Arctic.HTPDB.ARuleFive (7.2s)
+✔ [9084/9209] Built CollatzProof.Arctic.HSPLinVal (6.3s)
+✔ [9085/9209] Built CollatzProof.Arctic.Gen.KeyMain3Q (6.8s)
+✔ [9086/9209] Built CollatzProof.Arctic.HTPDB.LeftUseMain (5.8s)
+✔ [9087/9209] Built CollatzProof.Arctic.CorePart (6.0s)
+✔ [9088/9209] Built CollatzProof.Arctic.CoreUpperApp (6.7s)
+✔ [9089/9209] Built CollatzProof.Arctic.Nat.NonVacuityW2b (6.3s)
+✔ [9090/9209] Built CollatzProof.Arctic.HTPDB.Main (5.8s)
+✔ [9091/9209] Built CollatzProof.Arctic.Nat.DfaLln (16s)
+✔ [9092/9209] Built CollatzProof.Arctic.Nat.W3Decomp (6.8s)
+✔ [9093/9209] Built CollatzProof.Arctic.Nat.H2Chain (15s)
+✔ [9094/9209] Built CollatzProof.Arctic.HSPSeg (6.1s)
+⚠ [9095/9209] Built CollatzProof.Arctic.CoreX0 (8.3s)
+warning: CollatzProof/Arctic/CoreX0.lean:121:0: automatically included section variable(s) unused in theorem `Collatz.Arctic.x0Cut_mono`:
+  hsm
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hsm in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: CollatzProof/Arctic/CoreX0.lean:155:15: This simp argument is unused:
+  Nat.add_sub_cancel
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.sub_self, zero_mul, Nat.zero_div, add_zero, zero_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: CollatzProof/Arctic/CoreX0.lean:202:0: automatically included section variable(s) unused in theorem `Collatz.Arctic.x0Cut_exc`:
+  hmono
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit hmono in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: CollatzProof/Arctic/CoreX0.lean:208:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: CollatzProof/Arctic/CoreX0.lean:208:74: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: CollatzProof/Arctic/CoreX0.lean:208:39: Unused tactic linter: `omega` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: CollatzProof/Arctic/CoreX0.lean:286:31: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: CollatzProof/Arctic/CoreX0.lean:286:60: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: CollatzProof/Arctic/CoreX0.lean:286:31: Unused tactic linter: `simp [List.append_assoc]` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: CollatzProof/Arctic/CoreX0.lean:286:60: Unused tactic linter: `omega` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [9096/9209] Built CollatzProof.Arctic.Nat.DfaLlnExample (6.3s)
+✔ [9097/9209] Built CollatzProof.Arctic.Nat.NonVacuityW2a (6.1s)
+✔ [9098/9209] Built CollatzProof.Arctic.Nat.W3DecompProof (9.5s)
+✔ [9099/9209] Built CollatzProof.Arctic.HSPStruct (8.1s)
+✔ [9100/9209] Built CollatzProof.Arctic.Nat.BridgeDPFilter (28s)
+⚠ [9101/9209] Built CollatzProof.Arctic.CorePoint (6.1s)
+warning: CollatzProof/Arctic/CorePoint.lean:68:30: Unused tactic linter: `push_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [9102/9209] Built CollatzProof.Arctic.HTWCut (7.6s)
+✔ [9103/9209] Built CollatzProof.Arctic.Gen.KeyMain4 (16s)
+✔ [9104/9209] Built CollatzProof.Arctic.Gen.HTWCut (7.5s)
+✔ [9105/9209] Built CollatzProof.Arctic.Nat.W3DecompProof2 (6.3s)
+✔ [9106/9209] Built CollatzProof.Arctic.CoreMain (5.5s)
+✔ [9107/9209] Built CollatzProof.Arctic.HSPStructSum (6.8s)
+✔ [9108/9209] Built CollatzProof.Arctic.Gen.Point (6.7s)
+✔ [9109/9209] Built CollatzProof.Arctic.Nat.H2Lyap (18s)
+✔ [9110/9209] Built CollatzProof.Arctic.Nat.H2Shrink (18s)
+✔ [9111/9209] Built CollatzProof.Arctic.Gen.HTWProb (6.8s)
+✔ [9112/9209] Built CollatzProof.Arctic.HTWProb (6.8s)
+✔ [9113/9209] Built CollatzProof.Arctic.KeyMain3 (7.0s)
+✔ [9114/9209] Built CollatzProof.Arctic.Nat.W3DecompProof3 (6.9s)
+✔ [9115/9209] Built CollatzProof.Arctic.HSPSpread (6.1s)
+✔ [9116/9209] Built CollatzProof.Arctic.Nat.H2Lyap2 (5.6s)
+✔ [9117/9209] Built CollatzProof.Arctic.Nat.NonVacuityW2d (6.4s)
+✔ [9118/9209] Built CollatzProof.Arctic.Nat.W3bBase (6.1s)
+✔ [9119/9209] Built CollatzProof.Arctic.Nat.H2Main (5.8s)
+✔ [9120/9209] Built CollatzProof.Arctic.Nat.W3DecompProof4 (6.0s)
+✔ [9121/9209] Built CollatzProof.Arctic.Nat.NonVacuityW2c (6.9s)
+✔ [9122/9209] Built CollatzProof.Arctic.Nat.BridgeRevW3 (5.6s)
+✔ [9123/9209] Built CollatzProof.Arctic.HTWFromKey (15s)
+✔ [9124/9209] Built CollatzProof.Arctic.Gen.HTWFromKey (16s)
+✔ [9125/9209] Built CollatzProof.Arctic.KeyMain4 (15s)
+✔ [9126/9209] Built CollatzProof.Arctic.Nat.NonVacuityW2e (6.5s)
+✔ [9127/9209] Built CollatzProof.Arctic.Nat.W3DecompProof5 (6.0s)
+✔ [9128/9209] Built CollatzProof.Arctic.Nat.W3Top (11s)
+✔ [9129/9209] Built CollatzProof.Arctic.KeyFinal (5.2s)
+⚠ [9130/9209] Built CollatzProof.Arctic.CoreGoodPoint (24s)
+warning: CollatzProof/Arctic/CoreGoodPoint.lean:103:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: CollatzProof/Arctic/CoreGoodPoint.lean:146:56: `Nat.add_div_le_add_div` has been deprecated: Use `Nat.div_add_div_le_add_div` instead
+warning: CollatzProof/Arctic/CoreGoodPoint.lean:23:56: Variable name `hz` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hz
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [9131/9209] Built CollatzProof.Arctic.Gen.GoodPoint (25s)
+✔ [9132/9209] Built CollatzProof.Arctic.HSPIneq (21s)
+✔ [9133/9209] Built CollatzProof.Arctic.Nat.W3DecompProof6 (8.5s)
+✔ [9134/9209] Built CollatzProof.Arctic.Nat.W3Gap (6.9s)
+✔ [9135/9209] Built CollatzProof.Arctic.Nat.W3Bridge (8.8s)
+✔ [9136/9209] Built CollatzProof.Arctic.Nat.W3DecompProof7 (6.9s)
+✔ [9137/9209] Built CollatzProof.Arctic.Nat.W3hConf (5.0s)
+✔ [9138/9209] Built CollatzProof.Arctic.Nat.W3GapTail (8.1s)
+✔ [9139/9209] Built CollatzProof.Arctic.Nat.W3Uses (7.0s)
+⚠ [9140/9209] Built CollatzProof.Arctic.CoreFinal (16s)
+warning: CollatzProof/Arctic/CoreFinal.lean:56:5: Variable name `hN0` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN0
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [9141/9209] Built CollatzProof.Arctic.Gen.Final (15s)
+✔ [9142/9209] Built CollatzProof.Arctic.Nat.W3DecompProof8 (7.0s)
+✔ [9143/9209] Built CollatzProof.Arctic.Nat.NonVacuityW3b (5.8s)
+✔ [9144/9209] Built CollatzProof.Arctic.Nat.W3hSetup (6.5s)
+✔ [9145/9209] Built CollatzProof.Arctic.Nat.NonVacuityW3a (6.3s)
+✔ [9146/9209] Built CollatzProof.Arctic.DPGen.Family (5.4s)
+✔ [9147/9209] Built CollatzProof.Arctic.Nat.NonVacuityW3c (6.3s)
+✔ [9148/9209] Built CollatzProof.Arctic.Nat.W3hCoef (7.1s)
+ℹ [9149/9209] Built CollatzProof.Arctic.HSPMain (30s)
+info: CollatzProof/Arctic/HSPMain.lean:272:0: 'Collatz.Arctic.minRate_holds' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: CollatzProof/Arctic/HSPMain.lean:273:0: 'Collatz.Arctic.hsp_holds' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [9150/9209] Built CollatzProof.Arctic.Nat.W3hCaseA (6.3s)
+✔ [9151/9209] Built CollatzProof.Arctic.Nat.W3hSum (8.9s)
+✔ [9152/9209] Built CollatzProof.Arctic.Gen.TCheck (5.5s)
+✔ [9153/9209] Built CollatzProof.Arctic.Summary (5.5s)
+✔ [9154/9209] Built CollatzProof.Arctic.HTPDB.Final (5.6s)
+✔ [9155/9209] Built CollatzProof.Arctic.RH.Spec (5.7s)
+✔ [9156/9209] Built CollatzProof.Arctic.Nat.W3hMain (5.6s)
+✔ [9157/9209] Built CollatzProof.Arctic.DPGen.FamilyInst (5.8s)
+✔ [9158/9209] Built CollatzProof.Arctic.DPGen.Sim (5.0s)
+✔ [9159/9209] Built CollatzProof.Arctic.RH.Count (5.7s)
+✔ [9160/9209] Built CollatzProof.Arctic.NonVacuity (5.9s)
+✔ [9161/9209] Built CollatzProof.Arctic.DPWeak (6.1s)
+✔ [9162/9209] Built CollatzProof.Arctic.Nat.W3hEval (9.2s)
+✔ [9163/9209] Built CollatzProof.Arctic.DPGen.STCheck (5.8s)
+✔ [9164/9209] Built CollatzProof.Arctic.RH.Canon (6.5s)
+✔ [9165/9209] Built CollatzProof.Arctic.NonVacuity2 (5.9s)
+✔ [9166/9209] Built CollatzProof.Arctic.Affine.Coef (5.9s)
+✔ [9167/9209] Built CollatzProof.Arctic.DPWeak2 (5.7s)
+✔ [9168/9209] Built CollatzProof.Arctic.DPGen.HCheck (5.8s)
+✔ [9169/9209] Built CollatzProof.Arctic.Nat.W3hTail (7.7s)
+✔ [9170/9209] Built CollatzProof.Arctic.RH.Bridge (15s)
+✔ [9171/9209] Built CollatzProof.Arctic.DPWeak3 (5.8s)
+✔ [9172/9209] Built CollatzProof.Arctic.NonVacuity3 (6.1s)
+✔ [9173/9209] Built CollatzProof.Arctic.RH.Check (14s)
+✔ [9174/9209] Built CollatzProof.Arctic.RH.Final (5.1s)
+✔ [9175/9209] Built CollatzProof.Arctic.DPWeak4 (5.9s)
+✔ [9176/9209] Built CollatzProof.Arctic.NonVacuity4 (6.0s)
+✔ [9177/9209] Built CollatzProof.Arctic.Nat.W3hGroup (10s)
+✔ [9178/9209] Built CollatzProof.Arctic.Paper3 (5.9s)
+✔ [9179/9209] Built CollatzProof.Arctic.HTPDB.NonVacuity (6.4s)
+✔ [9180/9209] Built CollatzProof.Arctic.Nat.W3hX1 (6.3s)
+✔ [9181/9209] Built CollatzProof.Arctic.Nat.NonVacuityRev (9.6s)
+✔ [9182/9209] Built CollatzProof.Arctic.DPFilterStatement (5.4s)
+✔ [9183/9209] Built CollatzProof.Arctic.Nat.W3hPick (5.6s)
+✔ [9184/9209] Built CollatzProof.Arctic.RH.NonVacuity (5.0s)
+✔ [9185/9209] Built CollatzProof.Arctic.RH.Rev (5.3s)
+✔ [9186/9209] Built CollatzProof.Arctic.Nat.NonVacuityDP (8.3s)
+✔ [9187/9209] Built CollatzProof.Arctic.Paper2 (5.8s)
+✔ [9188/9209] Built CollatzProof.Arctic.Nat.W3hIterHyp (9.5s)
+✔ [9189/9209] Built CollatzProof.Arctic.Affine.Fin (5.2s)
+✔ [9190/9209] Built CollatzProof.Arctic.Affine.Witness (5.6s)
+✔ [9191/9209] Built CollatzProof.Arctic.Nat.W3hTailX0 (7.7s)
+✔ [9192/9209] Built CollatzProof.Arctic.Affine.Top (5.4s)
+✔ [9193/9209] Built CollatzProof.Arctic.Nat.W3hCaseBDet (9.8s)
+✔ [9194/9209] Built CollatzProof.Arctic.DPFilter (30s)
+✔ [9195/9209] Built CollatzProof.Arctic.DPFilterBZ (5.0s)
+✔ [9196/9209] Built CollatzProof.Arctic.DPFilterCtrl (5.9s)
+✔ [9197/9209] Built CollatzProof.Arctic.Nat.W3hCaseBX (22s)
+✔ [9198/9209] Built CollatzProof.Arctic.Nat.W3hCaseBAux (6.0s)
+✔ [9199/9209] Built CollatzProof.Arctic.Nat.W3hCaseB (23s)
+✔ [9200/9209] Built CollatzProof.Arctic.Nat.W3hCore (5.2s)
+✔ [9201/9209] Built CollatzProof.Arctic.Nat.Final (5.1s)
+✔ [9202/9209] Built CollatzProof.Arctic.Nat.H2MainExtra (5.4s)
+✔ [9203/9209] Built CollatzProof.Arctic.Nat.NonVacuityW3h2 (5.4s)
+✔ [9204/9209] Built CollatzProof.Arctic.Nat.NonVacuityW3h (5.5s)
+✔ [9205/9209] Built CollatzProof.Arctic.Nat.HWCorner (5.5s)
+✔ [9206/9209] Built CollatzProof.Arctic.Nat.NonVacuityHW (7.2s)
+✔ [9207/9209] Built CollatzProof.Arctic.Paper5 (6.9s)
+✔ [9208/9209] Built CollatzProof.Arctic.Paper (5.8s)
+Build completed successfully (9209 jobs).
+# exit status 0, 2026-10-07T18:00:43+09:00

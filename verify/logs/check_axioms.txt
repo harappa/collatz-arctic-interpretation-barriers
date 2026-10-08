@@ -1,0 +1,5 @@
+# 2026-10-07T18:01:01+09:00 $ python3 verify/check_axioms.py verify/logs/probe.txt
+Paper*.lean: 5 files (Paper.lean, Paper2.lean, Paper3.lean, Paper4.lean, Paper5.lean), 204 theorems paper_*
+output: 205 reports of `#print axioms`, no error, 0 warning(s)
+   205 x [propext, Classical.choice, Quot.sound]
+ALL OK
