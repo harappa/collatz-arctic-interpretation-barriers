@@ -65,7 +65,7 @@ theorem point_upper (A : Interp D) (u₀ c : Fin D → Arc) {E : BRel (Fin D)} (
   have h := hupz pre₀ y₁ P hdig hP hlen V hV
   rw [hcfg] at h
   have hT : ((pre₀ ++ y₁ ++ us).length : ℝ) ≤ lenT x0 := by
-    unfold lenT; rw [hshape]; push_cast; simp
+    unfold lenT; rw [hshape]; simp
   nlinarith
 
 /-- **Lower bound at the end point.** -/

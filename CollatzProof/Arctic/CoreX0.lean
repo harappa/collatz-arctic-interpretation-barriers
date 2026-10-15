@@ -117,7 +117,7 @@ lemma x0_hle {j : ℕ} (hj : j ≤ M) : bE (b₀ + j * k / M) ≤ m := by
   rw [Nat.mul_div_cancel_left _ (by omega)] at this
   omega
 
-include hM hM' hsm hmono hb₀ hbk in
+include hM hM' hmono hb₀ hbk in
 theorem x0Cut_mono : ∀ i < M' + M + 3,
     x0Cut K F s m b₀ k M M' bE i ≤ x0Cut K F s m b₀ k M M' bE (i + 1) := by
   intro i hi
@@ -152,7 +152,7 @@ theorem x0Cut_width : ∀ i < M' + M + 3,
   have hM'F : M' * F / M' = F := Nat.mul_div_cancel_left _ (by omega)
   rcases Nat.eq_zero_or_pos i with rfl | hi0
   · rw [x0Cut_zero, x0Cut_free (i := 0 + 1) (by omega) (by omega)]
-    simp only [Nat.add_sub_cancel, Nat.sub_self, zero_mul, Nat.zero_div, add_zero, zero_add]
+    simp only [Nat.sub_self, zero_mul, Nat.zero_div, add_zero, zero_add]
     generalize F / M' = qF at *
     generalize k / M = qk at *
     omega
@@ -198,14 +198,14 @@ theorem x0Cut_width : ∀ i < M' + M + 3,
     generalize k / M = qk at *
     omega
 
-include hM hM' hsm hmono hb₀ hbk in
+include hM hM' hsm hb₀ hbk in
 theorem x0Cut_exc :
     (∑ i ∈ Finset.range (M' + M + 3), (if x0Exc M M' i then
       x0Cut K F s m b₀ k M M' bE (i + 1) - x0Cut K F s m b₀ k M M' bE i else 0)) = (K - 1) + s + s := by
   have hMk : M * k / M = k := Nat.mul_div_cancel_left _ (by omega)
   have hM'F : M' * F / M' = F := Nat.mul_div_cancel_left _ (by omega)
   rw [← Finset.sum_subset (s₁ := {0, M' + 1, M' + M + 2}) (s₂ := Finset.range (M' + M + 3))]
-  · rw [Finset.sum_insert (by simp <;> omega), Finset.sum_insert (by simp <;> omega), Finset.sum_singleton]
+  · rw [Finset.sum_insert (by simp), Finset.sum_insert (by simp; omega), Finset.sum_singleton]
     have e0 : x0Exc M M' 0 = true := by simp [x0Exc]
     have e1 : x0Exc M M' (M' + 1) = true := by simp [x0Exc]
     have e2 : x0Exc M M' (M' + M + 2) = true := by simp [x0Exc]
@@ -248,7 +248,7 @@ theorem x0_goodPartition (p₁ U P₂ R : Word) {K F s m b₀ k M M' : ℕ} {bE 
   have hMk : M * k / M = k := Nat.mul_div_cancel_left _ (by omega)
   have hM'F : M' * F / M' = F := Nat.mul_div_cancel_left _ (by omega)
   apply goodPartition_of_cuts
-  · exact x0Cut_mono (K := K) (F := F) hM hM' hsm hmono hb₀ hbk
+  · exact x0Cut_mono (K := K) (F := F) hM hM' hmono hb₀ hbk
   · exact x0Cut_zero
   · rw [x0Cut_last (by omega), hlen]
   · intro i hi
@@ -257,7 +257,7 @@ theorem x0_goodPartition (p₁ U P₂ R : Word) {K F s m b₀ k M M' : ℕ} {bE 
         (((K - 1) + s + (F / M' + 1) + 11 * (k / M + 1) : ℕ) : ℝ) := by exact_mod_cast h
     linarith
   · exact hcount
-  · rw [x0Cut_exc (K := K) (F := F) hM hM' hsm hmono hb₀ hbk]; exact hexc
+  · rw [x0Cut_exc (K := K) (F := F) hM hM' hsm hb₀ hbk]; exact hexc
   · intro i hi he
     have hne : ¬ (i = 0 ∨ i = M' + 1 ∨ i = M' + M + 2) := by simpa [x0Exc] using he
     rcases Nat.lt_or_ge i (M' + 1) with h1 | h1
@@ -283,6 +283,6 @@ theorem x0_goodPartition (p₁ U P₂ R : Word) {K F s m b₀ k M M' : ℕ} {bE 
       have hb : m - bE (b₀ + j * k / M) ≤ R.length := by rw [hR]; omega
       have := (winClose_append_shift (p₁ ++ U ++ P₂) R [] hb δ).mpr hw
       simp only [List.append_nil, List.length_append, hp₁, hU, hP₂] at this
-      convert this using 2 <;> simp [List.append_assoc] <;> omega
+      convert this using 2
 
 end Collatz.Arctic

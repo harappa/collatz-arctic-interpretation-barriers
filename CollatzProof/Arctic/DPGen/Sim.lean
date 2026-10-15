@@ -150,4 +150,97 @@ theorem simulation_family_arcZ (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : �
     ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
   simulation_arcZ E U P π ha (autoUseG_family M cnt hsp_holds hTW hUse) hd J hb hlow hU hP
 
+/-! ## The weak form (condition (b′) of Lemma 5.6, revision r5)
+
+The equality of (b) is assumed only at the points `n` of the domain and at their images `f n`, and finiteness (below
+zero: a lower bound) is assumed for the value of the automaton instead of the value `gV`. For the transformations of
+Section 8 the automaton is replaced by its maximum with the constant 0 (a direct sum with a one-state automaton), so the equality holds only at the points of the family and at the end points of the orbits. The proofs above use the equality only at these points. -/
+
+/-- **Lemma 5.6 with (b′)** (`𝔸_ℕ`): the equality of (b) only at the points of the domain and their images, finiteness for the value of the automaton. -/
+theorem simulation_arc_on {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, dom n → ∃ es, GDChain U P es (E n) (E (f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    (hc : AutoUseG f dom cnt)
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun Arc d)
+    (hb : ∃ (D : ℕ) (u : Fin D → Arc) (A : Interp D) (c : Fin D → Arc),
+      (∀ n, autoVal u A c n ≠ 0) ∧
+      ∀ n, dom n → gV hd J (E n) = autoVal u A c n ∧ gV hd J (E (f n)) = autoVal u A c (f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) := by
+  intro hs
+  obtain ⟨D, u, A, c, hfinA, hval⟩ := hb
+  refine barrier_of_auto_arcG (autoCoreG_of_use hc) u A c σ₀ (List.mem_singleton_self _) hfinA ?_
+  intro n hn
+  obtain ⟨h0, h1⟩ := hval n hn
+  rw [count_cdOf, ← h0, ← h1]
+  obtain ⟨es, hch, hle⟩ := ha n hn
+  have h2 := gV_chain hd J (Arc.fin 1) (fun _ _ h => Arc.gg_mul_fin_one h) hU hP hs hch
+  refine le_trans (ArcticOrder.mul_mono le_rfl ?_) h2
+  rw [Arc.fin_one_pow, Arc.fin_one_pow, Arc.fin_le_fin]
+  exact hle
+
+/-- **Lemma 5.6 with (b′)** (below zero, `𝔸_ℤ`): the equality of (b) only at the points of the domain and their images, a lower bound for the value of the automaton. -/
+theorem simulation_arcZ_on {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, dom n → ∃ es, GDChain U P es (E n) (E (f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    (hc : AutoUseG f dom cnt)
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun ArcZ d)
+    (hb : ∃ (D : ℕ) (u : Fin D → ArcZ) (A : Letter → Matrix (Fin D) (Fin D) ArcZ)
+      (c : Fin D → ArcZ), (∃ B : ℤ, ∀ n, ArcZ.fin B ≤ autoValZ u A c n) ∧
+      ∀ n, dom n → gV hd J (E n) = autoValZ u A c n ∧ gV hd J (E (f n)) = autoValZ u A c (f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) := by
+  intro hs
+  obtain ⟨D, u, A, c, ⟨B, hB⟩, hval⟩ := hb
+  refine barrier_of_auto_arcZG (autoCoreG_of_use hc) (ArcZ.fin (-B) • u) A c σ₀
+    (List.mem_singleton_self _) ?_ ?_
+  · intro n
+    rw [autoValZ_smul]
+    have h := ArcticOrder.mul_mono (le_refl (ArcZ.fin (-B))) (hB n)
+    rw [ArcZ.fin_mul_fin, neg_add_cancel] at h
+    exact ArcZ.exists_nat_of_le h
+  · intro n hn
+    obtain ⟨h0, h1⟩ := hval n hn
+    rw [count_cdOf, autoValZ_smul, autoValZ_smul, ← h0, ← h1, mul_assoc]
+    refine ArcticOrder.mul_mono le_rfl ?_
+    obtain ⟨es, hch, hle⟩ := ha n hn
+    have h2 := gV_chain hd J (ArcZ.fin 1) (fun _ _ h => ArcZ.gg_mul_fin_one h) hU hP hs hch
+    refine le_trans (ArcticOrder.mul_mono le_rfl ?_) h2
+    rw [ArcZ.fin_pow, ArcZ.fin_pow, ArcZ.fin_le_fin]
+    exact_mod_cast Nat.mul_le_mul_right 1 hle
+
+/-- **Lemma 5.6 with (b′), family form** (`𝔸_ℕ`). -/
+theorem simulation_family_arc_on (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : ℕ → ℕ}
+    (hUse : HUseC M.f M.R M.steps cnt)
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, famDom M n →
+      ∃ es, GDChain U P es (E n) (E (M.f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun Arc d)
+    (hb : ∃ (D : ℕ) (u : Fin D → Arc) (A : Interp D) (c : Fin D → Arc),
+      (∀ n, autoVal u A c n ≠ 0) ∧
+      ∀ n, famDom M n → gV hd J (E n) = autoVal u A c n ∧
+        gV hd J (E (M.f n)) = autoVal u A c (M.f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_arc_on E U P π ha (autoUseG_family M cnt hsp_holds hTW hUse) hd J hb hU hP
+
+/-- **Lemma 5.6 with (b′), family form** (below zero). -/
+theorem simulation_family_arcZ_on (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : ℕ → ℕ}
+    (hUse : HUseC M.f M.R M.steps cnt)
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, famDom M n →
+      ∃ es, GDChain U P es (E n) (E (M.f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun ArcZ d)
+    (hb : ∃ (D : ℕ) (u : Fin D → ArcZ) (A : Letter → Matrix (Fin D) (Fin D) ArcZ)
+      (c : Fin D → ArcZ), (∃ B : ℤ, ∀ n, ArcZ.fin B ≤ autoValZ u A c n) ∧
+      ∀ n, famDom M n → gV hd J (E n) = autoValZ u A c n ∧
+        gV hd J (E (M.f n)) = autoValZ u A c (M.f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_arcZ_on E U P π ha (autoUseG_family M cnt hsp_holds hTW hUse) hd J hb hU hP
+
 end Collatz.Arctic.DPGen

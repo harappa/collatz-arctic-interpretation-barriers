@@ -16,6 +16,10 @@ Names have the form `paper_<kind>_<section>_<number>[_<target>]` (Appendix A of 
     applied to a dynamic rule that is used at most once in the canonical derivation of each point (`f. → .` for $T$, `ff. → 0.` for $H$).
   - `paper_thm_3_6_T`, `paper_thm_3_6_H`: Theorem 3.6 for weights in `𝔸_ℕ` (entries in ℕ ∪ {−∞}, values finite for `n ≥ 1`; the formal status line of Theorem 3.6 lists them last), proved without the translation: the counting form of
     Theorem 5.5 with slope `κ = 0` for the same rule gives an orbit segment `n → f^[m] n` with `V(n) < (number of uses) ≤ m`, while `V(n) ≥ m` because the value decreases by at least 1 at each step and stays ≥ 0.
+* Since revision r5 the proof path of the main theorems for $T$ (`Summary.lean`) goes through the general layer `Gen/`. The original proofs for $T$
+  whose statements, cited in the paper, are not instances of the general layer (`CoreGoodPoint.good_point`, which gives the uses of the five rules
+  at one point simultaneously, and the formulas of Theorem B.7 in `KeyMain3`, such as `km_pair_shift`, in which the late part `ζ` is an arbitrary
+  parity word) are no longer on that path, and this module imports them.
 -/
 import CollatzProof.Arctic.Paper2
 import CollatzProof.Arctic.Paper3
@@ -28,6 +32,8 @@ import CollatzProof.Arctic.Affine.Fin
 import CollatzProof.Arctic.Affine.Top
 import CollatzProof.Arctic.Paper4
 import CollatzProof.Arctic.Paper5
+import CollatzProof.Arctic.CoreGoodPoint
+import CollatzProof.Arctic.KeyMain3
 
 namespace Collatz.Arctic.Paper
 

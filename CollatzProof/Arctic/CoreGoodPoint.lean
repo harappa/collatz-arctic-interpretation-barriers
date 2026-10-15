@@ -20,7 +20,7 @@ theorem good_point (hSP : HSP) (hTW : HTerrasWin) (hLU : HLeftUse)
       (v : List Bool), Dfa.img (supDelta A) (v ++ wstar) (Dfa.classSet (supDelta A) q₀ i) =
         Dfa.img (supDelta A) wstar (Dfa.classSet (supDelta A) q₀ (i + v.length)))
     (w₀ : List Bool) (hw₀ : ∀ q, Dfa.Recurrent (supDelta A) (Dfa.run (supDelta A) q w₀)) (hw₀ne : w₀ ≠ [])
-    (β₀ : List Bool) (S₁ z : Word) (hS₁ : IsDigits S₁) (hz : IsDigits z)
+    (β₀ : List Bool) (S₁ z : Word) (hS₁ : IsDigits S₁) (_hz : IsDigits z)
     (hS : bitsMSB (parityOf β₀).length (terrasR (parityOf β₀)) = S₁ ++ wstar.map ofBool ++ us ++ z)
     (wlo : List Bool) (Xlo : Finset (Fin D)) (hrun : Dfa.run (supDelta A) (suppF u₀) wlo = Xlo)
     (hrec : Dfa.Recurrent (supDelta A) Xlo) (αlo : ℝ)
@@ -100,7 +100,7 @@ theorem good_point (hSP : HSP) (hTW : HTerrasWin) (hLU : HLeftUse)
   have hper : ((F + (bitsMSB s (famRho β₀ βf) ++
       bitsMSB (m - s) (famRtop β₀ βf)).length : ℕ) : ZMod P) = 0 := by
     rw [List.length_append, bitsMSB_length, bitsMSB_length, show s + (m - s) = m by omega, hFm]
-    haveI : NeZero P := ⟨by omega⟩
+    have : NeZero P := ⟨by omega⟩
     rw [ZMod.natCast_eq_zero_iff]
     exact Nat.dvd_of_mod_eq_zero hjmod
   -- the number `bb` of low bits of `h`
@@ -143,7 +143,7 @@ theorem good_point (hSP : HSP) (hTW : HTerrasWin) (hLU : HLeftUse)
       calc (t + 1) * F / M ≤ M * F / M := mul_div_mono _ _ F M (by omega)
         _ = F := Nat.mul_div_cancel_left _ (by omega)
     have hwid : M₀ ≤ (t + 1) * F / M - t * F / M := by
-      have h1' : t * F / M + F / M ≤ (t * F + F) / M := Nat.add_div_le_add_div _ _ _
+      have h1' : t * F / M + F / M ≤ (t * F + F) / M := Nat.div_add_div_le_add_div
       have h2' : M₀ + 2 ≤ F / M := by
         rw [Nat.le_div_iff_mul_le (by omega)]; linarith [hFM]
       rw [show t * F + F = (t + 1) * F by ring] at h1'

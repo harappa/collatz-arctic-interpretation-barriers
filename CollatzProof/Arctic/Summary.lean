@@ -11,6 +11,9 @@ Summary of the formalization of the arctic barrier for 𝒯. The main theorems f
 * The common hypothesis `AutoCore` (`AutoStatement.lean`) follows from the three hypotheses (`CoreFinal.autoCore_of_hyps`; Theorem 6.8).
 * Main theorems: rule removal (Theorem 3.1, `ArcticBarrierST`), reduction pairs for dependency pairs (Theorem 3.3, for the system and its reversal),
   below zero (Theorem 3.4, for the system and its reversal).
+* Since revision r5 the proofs of `autoCore_of_hyps`, `hTerrasWin_of_key` and `hKeyTop` apply the general layer `Gen/` to the model `Gen.tModel`
+  of `T` (`Gen.autoRuleG_of_hyps`, `Gen.hTerrasWinR_of_key`, `Gen.hKeyTopR_of_specs`); the statements are unchanged.
+
 -/
 import CollatzProof.Arctic.CoreFinal
 import CollatzProof.Arctic.AutoBridge

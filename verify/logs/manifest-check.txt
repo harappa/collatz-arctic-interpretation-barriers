@@ -1,4 +1,4 @@
-# 2026-10-07T17:52:50+09:00 $ sha256sum -c MANIFEST.sha256
+# 2026-10-14T22:39:55+09:00 $ sha256sum -c MANIFEST.sha256
 ./.gitignore: OK
 ./CollatzProof/Arctic/ARuleCarry.lean: OK
 ./CollatzProof/Arctic/ARuleFamily.lean: OK
@@ -195,6 +195,7 @@
 ./CollatzProof/Arctic/Nat/NonVacuityW3c.lean: OK
 ./CollatzProof/Arctic/Nat/NonVacuityW3h.lean: OK
 ./CollatzProof/Arctic/Nat/NonVacuityW3h2.lean: OK
+./CollatzProof/Arctic/Nat/RankAuto.lean: OK
 ./CollatzProof/Arctic/Nat/RigidBound.lean: OK
 ./CollatzProof/Arctic/Nat/RigidCone.lean: OK
 ./CollatzProof/Arctic/Nat/RigidCover.lean: OK
@@ -206,6 +207,7 @@
 ./CollatzProof/Arctic/Nat/RigidOrder.lean: OK
 ./CollatzProof/Arctic/Nat/RigidSep.lean: OK
 ./CollatzProof/Arctic/Nat/RigidSpec.lean: OK
+./CollatzProof/Arctic/Nat/RuleRemovalDP.lean: OK
 ./CollatzProof/Arctic/Nat/Statement.lean: OK
 ./CollatzProof/Arctic/Nat/StatementDP.lean: OK
 ./CollatzProof/Arctic/Nat/StatementRev.lean: OK
@@ -288,12 +290,26 @@
 ./LICENSE: OK
 ./NOTICE: OK
 ./README.md: OK
+./computations/certificates/T-rootlabel-full.json: OK
+./computations/certificates/T-rootlabel-innermost.json: OK
+./computations/certificates/T-tile2-full.json: OK
+./computations/certificates/T-tile2-innermost.json: OK
+./computations/certificates/T-tile3-full.json: OK
+./computations/certificates/T-tile3-innermost.json: OK
+./computations/certificates/Trev-rootlabel-full.json: OK
+./computations/certificates/Trev-rootlabel-innermost.json: OK
+./computations/certificates/Trev-tile2-full.json: OK
+./computations/certificates/Trev-tile2-innermost.json: OK
+./computations/certificates/Trev-tile3-full.json: OK
+./computations/certificates/Trev-tile3-innermost.json: OK
 ./computations/check_canonical.py: OK
+./computations/check_certificates.py: OK
 ./computations/check_hmodel.py: OK
 ./computations/check_mod3.py: OK
 ./computations/check_rh.py: OK
 ./computations/check_systems.py: OK
 ./computations/check_transforms.py: OK
+./computations/export_certificates.py: OK
 ./computations/rh_cf_search-2026-10-05.log: OK
 ./computations/rh_cf_search.c: OK
 ./lake-manifest.json: OK
@@ -302,4 +318,4 @@
 ./verify/Closure.lean: OK
 ./verify/Probe.lean: OK
 ./verify/check_axioms.py: OK
-# exit status 0, 2026-10-07T17:52:50+09:00
+# exit status 0, 2026-10-14T22:39:55+09:00

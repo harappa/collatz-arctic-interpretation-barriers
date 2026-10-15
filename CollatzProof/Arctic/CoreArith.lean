@@ -32,7 +32,7 @@ theorem part_numeric {ε : ℝ} (hε : 0 < ε) (hε16 : ε ≤ 1 / 16) (K s F m 
   have hF := div_ceil_le hε F
   have hk' := div_ceil_le hε k
   have hmk' : (8 : ℝ) * k ≤ m := by exact_mod_cast hmk
-  have hN : ((((K - 1) + F + s + m : ℕ) : ℝ)) ≥ F + s + m := by push_cast; have := Nat.zero_le (K - 1); push_cast; linarith [(Nat.cast_nonneg (K - 1) : (0 : ℝ) ≤ ((K - 1 : ℕ) : ℝ))]
+  have hN : ((((K - 1) + F + s + m : ℕ) : ℝ)) ≥ F + s + m := by push_cast; have := Nat.zero_le (K - 1); linarith [(Nat.cast_nonneg (K - 1) : (0 : ℝ) ≤ ((K - 1 : ℕ) : ℝ))]
   have hK1 : ((K - 1 : ℕ) : ℝ) ≤ K := by exact_mod_cast Nat.sub_le K 1
   have hs0 : (0 : ℝ) ≤ s := Nat.cast_nonneg _
   have hF0 : (0 : ℝ) ≤ F := Nat.cast_nonneg _

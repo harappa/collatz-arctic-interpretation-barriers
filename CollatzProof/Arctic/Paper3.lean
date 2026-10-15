@@ -11,7 +11,8 @@ Names of the form described in Appendix A of the paper; the formal status lines 
 * Section 7: Lemma 7.4 (`RH.canDerivRH_eq`), Proposition 7.5 (`RH.autoCoreRH_of_autoCoreH`).
 * Section 8: Corollary 8.1 (`DPGen.autoRuleG_family`).
 * Appendix B: Theorem B.1, Proposition B.2, Theorem B.3, Corollary B.4, Theorem B.7, Theorem B.8, Proposition B.9.
-* Further aliases, cited in the formal status lines of the paper next to those above: `paper_lem_5_6_family`, `_familyZ`, `paper_lem_6_2_exists`,
+* Further aliases, cited in the formal status lines of the paper next to those above: `paper_lem_5_6_family`, `_familyZ`, the forms
+  with (b′) of Lemma 5.6 (revision r5) `paper_lem_5_6_on`, `_Z_on`, `_family_on`, `_familyZ_on`, `paper_lem_6_2_exists`,
   `paper_lem_7_4_count`, `paper_thm_B_1_at`, `paper_thm_B_3_spr`, `paper_thm_B_8_of_key`.
 -/
 import CollatzProof.Arctic.Summary
@@ -71,6 +72,62 @@ theorem paper_lem_5_6_Z {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → �
     (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
     ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
   simulation_arcZ E U P π ha hc hd J hb hlow hU hP
+
+/-- **Lemma 5.6 with (b′)** (`𝔸_ℕ`, revision r5): the equality of (b) only at the points of the domain and their images, finiteness for the value of the automaton. -/
+theorem paper_lem_5_6_on {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, dom n → ∃ es, GDChain U P es (E n) (E (f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    (hc : AutoUseG f dom cnt) {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun Arc d)
+    (hb : ∃ (D : ℕ) (u : Fin D → Arc) (A : Interp D) (c : Fin D → Arc),
+      (∀ n, autoVal u A c n ≠ 0) ∧
+      ∀ n, dom n → gV hd J (E n) = autoVal u A c n ∧ gV hd J (E (f n)) = autoVal u A c (f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_arc_on E U P π ha hc hd J hb hU hP
+
+/-- **Lemma 5.6 with (b′)** (below zero, revision r5). -/
+theorem paper_lem_5_6_Z_on {f : ℕ → ℕ} {dom : ℕ → Prop} {cnt : ℕ → ℕ}
+    (E : ℕ → List (GLetter α)) (U P : List (GDRule α)) (π : GDRule α)
+    (ha : ∀ n, dom n → ∃ es, GDChain U P es (E n) (E (f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    (hc : AutoUseG f dom cnt) {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun ArcZ d)
+    (hb : ∃ (D : ℕ) (u : Fin D → ArcZ) (A : Letter → Matrix (Fin D) (Fin D) ArcZ)
+      (c : Fin D → ArcZ), (∃ B : ℤ, ∀ n, ArcZ.fin B ≤ autoValZ u A c n) ∧
+      ∀ n, dom n → gV hd J (E n) = autoValZ u A c n ∧ gV hd J (E (f n)) = autoValZ u A c (f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_arcZ_on E U P π ha hc hd J hb hU hP
+
+/-- The family form of Lemma 5.6 with (b′) (`𝔸_ℕ`, revision r5; cited by the transformations of Section 8). -/
+theorem paper_lem_5_6_family_on (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : ℕ → ℕ}
+    (hUse : HUseC M.f M.R M.steps cnt) (E : ℕ → List (GLetter α)) (U P : List (GDRule α))
+    (π : GDRule α) (ha : ∀ n, famDom M n →
+      ∃ es, GDChain U P es (E n) (E (M.f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun Arc d)
+    (hb : ∃ (D : ℕ) (u : Fin D → Arc) (A : Interp D) (c : Fin D → Arc),
+      (∀ n, autoVal u A c n ≠ 0) ∧
+      ∀ n, famDom M n → gV hd J (E n) = autoVal u A c n ∧
+        gV hd J (E (M.f n)) = autoVal u A c (M.f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_family_arc_on M hTW hUse E U P π ha hd J hb hU hP
+
+/-- The family form of Lemma 5.6 with (b′) (below zero, revision r5). -/
+theorem paper_lem_5_6_familyZ_on (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : ℕ → ℕ}
+    (hUse : HUseC M.f M.R M.steps cnt) (E : ℕ → List (GLetter α)) (U P : List (GDRule α))
+    (π : GDRule α) (ha : ∀ n, famDom M n →
+      ∃ es, GDChain U P es (E n) (E (M.f n)) ∧ cnt n ≤ es.count (GLabel.root π))
+    {d : ℕ} (hd : 0 < d) (J : GLetter α → AffFun ArcZ d)
+    (hb : ∃ (D : ℕ) (u : Fin D → ArcZ) (A : Letter → Matrix (Fin D) (Fin D) ArcZ)
+      (c : Fin D → ArcZ), (∃ B : ℤ, ∀ n, ArcZ.fin B ≤ autoValZ u A c n) ∧
+      ∀ n, famDom M n → gV hd J (E n) = autoValZ u A c n ∧
+        gV hd J (E (M.f n)) = autoValZ u A c (M.f n))
+    (hU : ∀ ρ ∈ U, WeakA (gevA J ρ.lhs) (gevA J ρ.rhs))
+    (hP : ∀ π' ∈ P, WeakTop hd (gevA J π'.lhs) (gevA J π'.rhs)) :
+    ¬ StrictTop hd (gevA J π.lhs) (gevA J π.rhs) :=
+  simulation_family_arcZ_on M hTW hUse E U P π ha hd J hb hU hP
 
 /-- The family form of Lemma 5.6 (`𝔸_ℕ`; cited in the formal status line of Lemma 5.6). -/
 theorem paper_lem_5_6_family (M : BlockModel) (hTW : HTerrasWinR M.R) {cnt : ℕ → ℕ}

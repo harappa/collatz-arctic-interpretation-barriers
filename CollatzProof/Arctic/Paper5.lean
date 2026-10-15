@@ -23,6 +23,12 @@ after Theorem 3.4, and the printed form of [YAH, Theorem 3.10] in Section 13.2. 
   `NatQ5.HW.hwBarrierST` and `NatQ5.HW.hwBarrierSTrev` (`Nat/HWCorner.lean`), which apply
   `NatQ5.HW.hwBarrierST_of_genCore` to the term of `paper_thm_10_11_gen` and transpose for the reversed system
   (`NatQ5.HW.hwBarrierSTrev_of_ST`); the statements are `NatQ5.HW.HWBarrierST` and `NatQ5.HW.HWBarrierSTrev`.
+* `paper_cor_9_3_mrr`, `paper_cor_9_3_mrr_rev` (Corollary 9.3 (iii), the rule removal processor on an essential
+  problem) are aliases of `NatQ5.MRR.mrrBarrierDP` and `NatQ5.MRR.mrrBarrierDPrev` (`Nat/RuleRemovalDP.lean`), proved from
+  Theorem 9.2 (i) and (iii) and the truncation of Lemma 13.2; `paper_prop_9_4_markMono` and `paper_prop_9_4_markMono_rev`
+  (Proposition 9.4 (iv)) show that the monotonicity of the marked symbol cannot be dropped there.
+* `paper_cor_10_13`, `paper_cor_10_13_lsb` (Corollary 10.13, ranking functions computed by automata over `ℕ`) are
+  aliases of `NatQ5.Rank.noRankAuto` and `NatQ5.Rank.noRankAuto_lsb` (`Nat/RankAuto.lean`), proved from Theorem 10.11 (i).
 * Root: this file imports the remaining files of `Nat/` and the files `DPFilter*.lean`, so that the import closure of
   `Paper.lean` contains every file of `Arctic/` (the probe files of the working repository, which only print axioms, are
   not released; the axiom checks are in `verify/Probe.lean`).
@@ -44,6 +50,8 @@ import CollatzProof.Arctic.Nat.NonVacuityW3h
 import CollatzProof.Arctic.Nat.NonVacuityW3h2
 import CollatzProof.Arctic.Nat.HWCorner
 import CollatzProof.Arctic.Nat.NonVacuityHW
+import CollatzProof.Arctic.Nat.RuleRemovalDP
+import CollatzProof.Arctic.Nat.RankAuto
 import CollatzProof.Arctic.Nat.BridgeDPFilter
 import CollatzProof.Arctic.Nat.BridgeDPForms
 import CollatzProof.Arctic.Nat.DfaLlnExample
@@ -89,6 +97,17 @@ theorem paper_thm_9_2 :
     NatQ5.NatBarrierST ∧ NatQ5.NatBarrierSTB ∧ NatQ5.NatBarrierSTrev ∧ NatQ5.NatBarrierSTrevTop ∧
       NatQ5.NatBarrierDP ∧ NatQ5.NatBarrierDPrev :=
   NatQ5.allBarriers_final
+
+/-- **Corollary 9.3 (iii)** ($\mathcal T$, the rule removal processor on an essential problem): let a natural-number
+matrix interpretation of the marked and unmarked letters have `(M_s)_{11} ≥ 1` for the unmarked letters other than `/`
+and for `/#`. If it weakly orients the usable rules $D_T \cup A$ entrywise and the pairs of $P_B$ in the first component,
+then it strictly orients no usable rule and no pair of $P_B$ in the first component. Rules other than the usable ones
+enter neither the hypotheses nor the conclusion. -/
+theorem paper_cor_9_3_mrr : NatQ5.MRR.MRRBarrierDP := NatQ5.MRR.mrrBarrierDP
+
+/-- **Corollary 9.3 (iii)** ($\mathcal T^{\mathrm{rev}}$): the same with `.`, the usable rules
+$A^{\mathrm{rev}} \cup B^{\mathrm{rev}}$ and $P^{\mathrm{rev}}_{\mathcal T}$. -/
+theorem paper_cor_9_3_mrr_rev : NatQ5.MRR.MRRBarrierDPrev := NatQ5.MRR.mrrBarrierDPrev
 
 /-- **Proposition 9.4 (i)** ($\mathcal T$): every rule `ρ` is strictly oriented by a monotone interpretation of
 dimension 2 that weakly orients all rules but one other rule `σ` (and does not weakly orient `σ`). -/
@@ -144,6 +163,34 @@ theorem paper_prop_9_4_dropU : ¬ NatQ5.W5.NatBarrierDPFor (usableST.erase NatQ5
 cut down to the first six (the rules of $B^{\mathrm{rev}}$ are dropped). -/
 theorem paper_prop_9_4_dropU_rev : ¬ NatQ5.W5.NatBarrierDPFor (usableSTrev.take 6) pairsPDrev :=
   NatQ5.W5.not_barrierDPrev_dropB
+
+/-- **Proposition 9.4 (iv)** ($\mathcal T$): in the rule removal clause of Corollary 9.3 (iii) the monotonicity of the
+marked symbol cannot be dropped. With the unmarked letters as in the first interpretation of (ii) and `/#` interpreted by
+the constant `0`, the unmarked letters other than `/` are monotone, the usable rules and the pairs of $P_B$ are weakly
+oriented entrywise, and all eight usable rules are strictly oriented. -/
+theorem paper_prop_9_4_markMono : ¬ NatQ5.MRR.MRRBarrierDPNoMark := NatQ5.MRR.not_mrrNoMark
+
+/-- **Proposition 9.4 (iv)** ($\mathcal T^{\mathrm{rev}}$): the same with the second interpretation of (ii) and `.#`
+interpreted by the constant `0`; all nine usable rules are strictly oriented. -/
+theorem paper_prop_9_4_markMono_rev : ¬ NatQ5.MRR.MRRBarrierDPrevNoMark := NatQ5.MRR.not_mrrNoMark_rev
+
+/-- **Proposition 9.4 (iv)**, the witness for $\mathcal T$. -/
+theorem paper_prop_9_4_markConst :
+    (∀ s, s ≠ Letter.lft → 1 ≤ (NatQ5.MRR.JMarkConst (DLetter.plain s)).M 0 0) ∧
+      (NatQ5.MRR.JMarkConst (DLetter.mark Letter.lft)).M 0 0 = 0 ∧
+      (∀ ρ ∈ usableST, NatQ5.NWeakD NatQ5.MRR.JMarkConst ρ.plain) ∧
+      (∀ π ∈ pairsPB, NatQ5.NWeakD NatQ5.MRR.JMarkConst π) ∧
+      ∀ ρ ∈ usableST, NatQ5.NStrict (fun s => NatQ5.MRR.JMarkConst (DLetter.plain s)) ρ :=
+  NatQ5.MRR.JMarkConst_facts
+
+/-- **Proposition 9.4 (iv)**, the witness for $\mathcal T^{\mathrm{rev}}$. -/
+theorem paper_prop_9_4_markConst_rev :
+    (∀ s, s ≠ Letter.rgt → 1 ≤ (NatQ5.MRR.JMarkConstRev (DLetter.plain s)).M 0 0) ∧
+      (NatQ5.MRR.JMarkConstRev (DLetter.mark Letter.rgt)).M 0 0 = 0 ∧
+      (∀ ρ ∈ usableSTrev, NatQ5.NWeakD NatQ5.MRR.JMarkConstRev ρ.plain) ∧
+      (∀ π ∈ pairsPDrev, NatQ5.NWeakD NatQ5.MRR.JMarkConstRev π) ∧
+      ∀ ρ ∈ usableSTrev, NatQ5.NStrict (fun s => NatQ5.MRR.JMarkConstRev (DLetter.plain s)) ρ :=
+  NatQ5.MRR.JMarkConstRev_facts
 
 /-! ## Section 10: From rewriting to automata -/
 
@@ -280,6 +327,17 @@ theorem paper_cor_10_12 : NatQ5.HW.HWBarrierST := NatQ5.HW.hwBarrierST
 /-- **Corollary 10.12** ($\mathcal T^{\mathrm{rev}}$, the corner form of [HW06]; products of matrices in the order of
 the letters, as for `NatQ5.NatBarrierSTrev`). -/
 theorem paper_cor_10_12_rev : NatQ5.HW.HWBarrierSTrev := NatQ5.HW.hwBarrierSTrev
+
+/-- **Corollary 10.13** (ranking functions computed by automata over `ℕ`): no value automaton with natural-number
+weights, of any dimension, has values `V` with `V(T(n)) + 1 ≤ V(n)` for every `n ≥ 2`. -/
+theorem paper_cor_10_13 : ¬ ∃ (Q : Type) (_ : Fintype Q) (_ : DecidableEq Q) (A : NatQ5.ValAuto Q),
+    ∀ n, 2 ≤ n → NatQ5.aval A (NatQ5.binWord (T n)) + 1 ≤ NatQ5.aval A (NatQ5.binWord n) :=
+  NatQ5.Rank.noRankAuto
+
+/-- **Corollary 10.13**, reading the digits from the least significant end. -/
+theorem paper_cor_10_13_lsb : ¬ ∃ (Q : Type) (_ : Fintype Q) (_ : DecidableEq Q) (A : NatQ5.ValAuto Q),
+    ∀ n, 2 ≤ n → NatQ5.aval A (NatQ5.binWord (T n)).reverse + 1 ≤ NatQ5.aval A (NatQ5.binWord n).reverse :=
+  NatQ5.Rank.noRankAuto_lsb
 
 /-! ## Section 11: Diagonal growth at most one -/
 

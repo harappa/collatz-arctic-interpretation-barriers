@@ -10,7 +10,8 @@ Run from the root of the release after `lake build`:
 This file is not part of any library. It prints the frozen statements of the main theorems and the definitions they
 use (Appendix A of the paper), for arctic interpretations (Theorems 3.1, 3.3 and 3.4) and for natural-number matrix
 interpretations (Theorem 9.2), the other frozen definitions, the statements of argument filters, the definitions used
-by Proposition 9.5, by the value automata of Sections 10-12 and by Corollary 10.12, and the axioms of `NatQ5.allBarriers_final` (the six
+by Proposition 9.5, by the value automata of Sections 10-12, by Corollary 10.12 and by the rule removal processor of
+Corollary 9.3 (iii), and the axioms of `NatQ5.allBarriers_final` (the six
 statements of Theorem 9.2 together). Then, for every theorem `paper_*` of the module `CollatzProof.Arctic.Paper` (the
 results of the paper under their numbers, with names `paper_<kind>_<section>_<number>[_<target>]`; files
 `Paper.lean`, ..., `Paper5.lean`), it prints the statement and the axioms on which it depends. Every `#print axioms`
@@ -194,6 +195,15 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 #print Collatz.Arctic.NatQ5.GenValueCore
 #print Collatz.Arctic.NatQ5.HW.HWBarrierST
 #print Collatz.Arctic.NatQ5.HW.HWBarrierSTrev
+
+/-! ## Definitions used by the rule removal processor of Corollary 9.3 (iii) and by Proposition 9.4 (iv) (`Nat/RuleRemovalDP.lean`); not frozen -/
+
+#print Collatz.Arctic.NatQ5.MRR.MRRBarrierDP
+#print Collatz.Arctic.NatQ5.MRR.MRRBarrierDPrev
+#print Collatz.Arctic.NatQ5.MRR.MRRBarrierDPNoMark
+#print Collatz.Arctic.NatQ5.MRR.MRRBarrierDPrevNoMark
+#print Collatz.Arctic.NatQ5.MRR.JMarkConst
+#print Collatz.Arctic.NatQ5.MRR.JMarkConstRev
 
 /-! ## Argument filters (the remark after Theorem 3.4 and Proposition 13.4; `DPFilterStatement.lean`, `Nat/BridgeDPFilter.lean`) -/
 
@@ -520,6 +530,18 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 #check @Collatz.Arctic.Paper.paper_lem_5_6_familyZ
 #print axioms Collatz.Arctic.Paper.paper_lem_5_6_familyZ
 
+#check @Collatz.Arctic.Paper.paper_lem_5_6_on
+#print axioms Collatz.Arctic.Paper.paper_lem_5_6_on
+
+#check @Collatz.Arctic.Paper.paper_lem_5_6_Z_on
+#print axioms Collatz.Arctic.Paper.paper_lem_5_6_Z_on
+
+#check @Collatz.Arctic.Paper.paper_lem_5_6_family_on
+#print axioms Collatz.Arctic.Paper.paper_lem_5_6_family_on
+
+#check @Collatz.Arctic.Paper.paper_lem_5_6_familyZ_on
+#print axioms Collatz.Arctic.Paper.paper_lem_5_6_familyZ_on
+
 /-! ## Section 6: The value-level core -/
 
 #check @Collatz.Arctic.Paper.paper_lem_6_2
@@ -562,7 +584,7 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 #check @Collatz.Arctic.Paper.paper_cor_8_1
 #print axioms Collatz.Arctic.Paper.paper_cor_8_1
 
-/-! ## Section 9: Natural-number matrix interpretations (Theorem 9.2, Proposition 9.4, Proposition 9.5 and the remark after it) -/
+/-! ## Section 9: Natural-number matrix interpretations (Theorem 9.2, Corollary 9.3 (iii), Proposition 9.4, Proposition 9.5 and the remark after it) -/
 
 #check @Collatz.Arctic.Paper.paper_thm_9_2_T
 #print axioms Collatz.Arctic.Paper.paper_thm_9_2_T
@@ -584,6 +606,12 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 
 #check @Collatz.Arctic.Paper.paper_thm_9_2
 #print axioms Collatz.Arctic.Paper.paper_thm_9_2
+
+#check @Collatz.Arctic.Paper.paper_cor_9_3_mrr
+#print axioms Collatz.Arctic.Paper.paper_cor_9_3_mrr
+
+#check @Collatz.Arctic.Paper.paper_cor_9_3_mrr_rev
+#print axioms Collatz.Arctic.Paper.paper_cor_9_3_mrr_rev
 
 #check @Collatz.Arctic.Paper.paper_prop_9_4_drop
 #print axioms Collatz.Arctic.Paper.paper_prop_9_4_drop
@@ -617,6 +645,18 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 
 #check @Collatz.Arctic.Paper.paper_prop_9_4_dropU_rev
 #print axioms Collatz.Arctic.Paper.paper_prop_9_4_dropU_rev
+
+#check @Collatz.Arctic.Paper.paper_prop_9_4_markMono
+#print axioms Collatz.Arctic.Paper.paper_prop_9_4_markMono
+
+#check @Collatz.Arctic.Paper.paper_prop_9_4_markMono_rev
+#print axioms Collatz.Arctic.Paper.paper_prop_9_4_markMono_rev
+
+#check @Collatz.Arctic.Paper.paper_prop_9_4_markConst
+#print axioms Collatz.Arctic.Paper.paper_prop_9_4_markConst
+
+#check @Collatz.Arctic.Paper.paper_prop_9_4_markConst_rev
+#print axioms Collatz.Arctic.Paper.paper_prop_9_4_markConst_rev
 
 #check @Collatz.Arctic.Paper.paper_prop_9_5_T
 #print axioms Collatz.Arctic.Paper.paper_prop_9_5_T
@@ -706,6 +746,12 @@ below should report `[propext, Classical.choice, Quot.sound]` or a subset of the
 
 #check @Collatz.Arctic.Paper.paper_cor_10_12_rev
 #print axioms Collatz.Arctic.Paper.paper_cor_10_12_rev
+
+#check @Collatz.Arctic.Paper.paper_cor_10_13
+#print axioms Collatz.Arctic.Paper.paper_cor_10_13
+
+#check @Collatz.Arctic.Paper.paper_cor_10_13_lsb
+#print axioms Collatz.Arctic.Paper.paper_cor_10_13_lsb
 
 /-! ## Section 11: Diagonal growth at most one -/
 

@@ -9,7 +9,7 @@ Notation: the block sequence `β = β_e ++ L` (the early part `β_e` has `n_e` b
 * `km_pair_shift`: Lemma B.5 (iii) written with `ω_j` and `w = 9^{-Y_e}` (`a(par β_e) = 5n_e + 2Y_e`).
 * `km_U_eq`, `km_pair_cell`: the `U(β^e)` of the statement is the top `ℓ` digits of `ρ(β^e)`, and `μ_β(C_u)` is the proportion of swap choices with `U(β^e) = u`.
 * `km_prob_decomp`: **step (a) of the proof of Theorem B.7**, `Pr(U = u) = E_{(β_e, L)} μ_β(C_u)`.
-* `km_tv_mix`: the triangle inequality for total variation.
+* The triangle inequality for total variation, `km_tv_mix`, is in `Gen/KeyMain3Q.lean` (the copy for `T` was removed in revision r5, when it was no longer used).
 * `km_Qavg_apply`: **step (b) of the proof of Theorem B.7**. Apply Proposition B.6 (`SpecQavg`, `z₀ = 0`, `w₀ = 1`) to `Φ_L`.
 * `km_EQ`: **steps (c), (d) of the proof of Theorem B.7**, `E Q_λ(μ_β) ≤ λ(79/100)^I + B · 2(1 - N(3/10)^N)^{⌊n_e/N⌋}`.
 -/
@@ -174,35 +174,6 @@ theorem km_prob_decomp (V I ne nL : ℕ) (β₀ γ : List Bool) (hL : 2 * I ≤ 
   have hLl : L.length = nL := (fam_mem_blockChoices L nL).mp hLm
   rw [km_pair_cell V I β₀ βe L γ (by omega) hℓV (hVM βe hβe L hLm) (hVL L hLm) (hexp L hLm) u hu]
   ring
-
-/-- Mixing in total variation: if `P(u) = Σ_p W(p) c(p, u)` (`W ≥ 0`, `Σ W = 1`), then
-`Σ_u |P(u) - a| ≤ Σ_p W(p) Σ_u |c(p, u) - a|`. -/
-lemma km_tv_mix (S T : Finset (List Bool)) (W1 W2 : List Bool → ℝ) (hW1 : ∀ x, 0 ≤ W1 x)
-    (hW2 : ∀ y, 0 ≤ W2 y) (hsum : ∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y = 1) (U : Finset ℕ)
-    (c : List Bool → List Bool → ℕ → ℝ) (a : ℝ) :
-    ∑ u ∈ U, |∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * c x y u - a| ≤
-      ∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * ∑ u ∈ U, |c x y u - a| := by
-  have h1 : ∀ u ∈ U, |∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * c x y u - a| ≤
-      ∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * |c x y u - a| := by
-    intro u _
-    have e : ∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * c x y u - a =
-        ∑ x ∈ S, ∑ y ∈ T, W1 x * W2 y * (c x y u - a) := by
-      conv_lhs => rw [← mul_one a, ← hsum, Finset.mul_sum]
-      rw [← Finset.sum_sub_distrib]
-      refine Finset.sum_congr rfl (fun x _ => ?_)
-      rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
-      refine Finset.sum_congr rfl (fun y _ => ?_)
-      ring
-    rw [e]
-    refine le_trans (Finset.abs_sum_le_sum_abs _ _) (Finset.sum_le_sum (fun x _ => ?_))
-    refine le_trans (Finset.abs_sum_le_sum_abs _ _) (Finset.sum_le_sum (fun y _ => ?_))
-    rw [abs_mul, abs_of_nonneg (mul_nonneg (hW1 x) (hW2 y))]
-  refine le_trans (Finset.sum_le_sum h1) (le_of_eq ?_)
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl (fun x _ => ?_)
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl (fun y _ => ?_)
-  rw [Finset.mul_sum]
 
 /-! ### The expectation of `Q_λ` -/
 

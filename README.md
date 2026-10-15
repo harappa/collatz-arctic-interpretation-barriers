@@ -32,9 +32,10 @@ example of Proposition 9.5. The theorems use only Lean's three standard axioms (
 - **Dependence:** none; the proofs of the paper use neither companion paper, and this formalization does not use
   their Lean code.
 
-Revision r3 (October 7, 2026). This repository accompanies revision r3 of the paper; the revision number is
-incremented with every revision of the paper and of this repository (revisions r1 and r2 were not published).
-The files were prepared from the author's working repository (not public) at commit `e80eea2b10`; the Lean code
+Revision r5 (October 14, 2026). This repository accompanies revision r5 of the paper; the revision number is
+incremented with every revision of the paper and of this repository, and the files of revision rN carry the tag `rN`
+(the concept DOI above points to the latest published version).
+The files were prepared from the author's working repository (not public) at commit `b606b5a2ae`; the Lean code
 there is identical to the code here after removing comments.
 
 ## Abstract
@@ -44,10 +45,11 @@ the Termination Problem Database; they suggested proving that no matrix or arcti
 termination, and proved such a barrier for natural-number matrix interpretations of Zantema's unary encoding. We show
 that natural-number matrix interpretations in the form of Endrullis, Waldmann and Zantema, and arctic interpretations,
 applied on their own, make no progress on collatz-T in any dimension. A natural-number matrix interpretation of
-collatz-T with all top-left entries at least $1$ that weakly orients all rules strictly orients none of them, and so
-does an arctic interpretation over $\mathbb N \cup \{-\infty\}$ with finite top-left entries, for collatz-T and also
-for the system of their modulo-$8$ conjecture; hence rule removal with these interpretations alone removes no rule at
-any stage. The same holds for the reversed systems and, for collatz-T, for the corner form of Hofbauer and Waldmann.
+collatz-T with all top-left entries at least $1$ that weakly orients all rules strictly orients none of them; the
+same holds for the reversed system and for the corner form of Hofbauer and Waldmann. The same holds for arctic
+interpretations over $\mathbb N \cup \{-\infty\}$ with finite top-left entries, for collatz-T, the system of their
+modulo-$8$ conjecture, and their reversals. Hence rule removal with these interpretations alone removes no rule at any
+stage.
 Without the condition on the top-left entries, natural-number interpretations in the form of Endrullis, Waldmann and
 Zantema remove no rule in the top forms of Yolcu, Aaronson and Heule, and neither natural-number reduction pairs nor
 arctic reduction pairs over the natural numbers or below zero remove a pair of the essential strongly connected
@@ -59,9 +61,11 @@ computer-assisted. The general core form of matrix interpretations, lexicographi
 pipelines in which other techniques act first are not covered. No result here settles the Collatz conjecture.
 
 *What is verified in Lean.* Kernel-checked are Lemma 2.3, the results of Sections 3-7 (including the boundary results
-of Section 4), Theorem 9.2, Propositions 9.4 and 9.5, the numbered results of Sections 10-13 (including Corollary
-10.12), the remark on [YAH, Theorem 3.10] in Section 13.2, Appendix B (probabilistic tools) and Appendix D
-(rigidity), with these exceptions: Corollaries 3.2, 3.5 and 9.3, the remark after Theorem 3.6, the parts of the
+of Section 4), Theorem 9.2, the rule removal processor in Corollary 9.3 (iii), Propositions 9.4 and 9.5, the
+numbered results of Sections 10-13 (including Corollaries 10.12 and 10.13), the remark on [YAH, Theorem 3.10] in
+Section 13.2, Appendix B (probabilistic tools) and Appendix D (rigidity), with these exceptions: Corollaries 3.2 and
+3.5, Corollary 9.3 except the rule removal processor in (iii), the remarks on mixing natural-number and arctic stages
+(Section 9) and after Corollary 10.13, the remark after Theorem 3.6, the parts of the
 remarks after Theorem 3.4 that have no Lean name, real entries (Section 4), Lemma 5.3, the remark on many-sorted
 interpretations (Section 9), Lemma 12.15 (iii) in its general form, and the observations after Propositions 13.3 and
 13.4 are derived in a few lines from kernel-checked results, and Example 4.7 and Question 4.4 are computations.
@@ -69,6 +73,48 @@ Corollary 8.1 is also derived in a few lines from kernel-checked results. The re
 systems) are computer-assisted: the general lemmas (Lemma 5.6 and Corollary 8.1) are in Lean, and their conditions
 for the transformed systems rest on written proofs and on the computations in `computations/`; they are not
 kernel-checked as a whole. See "Scope of the verification" below.
+
+## Changes from revision r4 (not published)
+
+Revision r4 was not published; the changes from the published revision r3 are those of this section and the next.
+These changes answer an external review of revision r3; the points concerned were also present in revision r4.
+
+- Section 8: the dependency pair problems that remain are no longer called "never finite". The paper shows that the
+  listed processors never complete a proof (a problem with pairs always remains); it does not claim that such a
+  problem has an infinite chain. Section 2.2 now defines chains, finite problems and sound processors.
+- Lemma 5.6 has a new condition (b′): the equality of the values with the automaton is needed only at the points of
+  the family and their images, and finiteness (a lower bound) only for the automaton. This is the form used in
+  Section 8, where the automaton is maximized with the constant 0. It is kernel-checked (`paper_lem_5_6_on`,
+  `paper_lem_5_6_Z_on`, `paper_lem_5_6_family_on`, `paper_lem_5_6_familyZ_on`; file
+  `CollatzProof/Arctic/DPGen/Sim.lean`).
+- The proof of Theorem 8.3 states the locality of the root steps explicitly (which positions they read, and why
+  these are determined by M, respectively by n mod 8) and writes out the value automaton for root labelling.
+- New certificates of the witness chains of Theorem 8.3 (`computations/certificates/`), written by
+  `computations/export_certificates.py` and checked by `computations/check_certificates.py`, a separate checker
+  written from the specification without access to the generating scripts.
+- The abstract separates the natural-number and the arctic statements; Appendix A names the tag of each revision;
+  the remark on the printed form of Theorem 3.10 of Yolcu, Aaronson and Heule lists the interpretations explicitly.
+- The Lean proof path of collatz-T now goes through the general layer `CollatzProof/Arctic/Gen/` (duplicates removed);
+  no frozen statement changed.
+
+## Changes from revision r3
+
+These changes answer an external review of revision r3.
+
+- Corollary 9.3 (iii): the rule removal processor is covered on every essential problem, not only on problems that
+  contain all rules of the system, provided that the marked symbol is monotone as well; its orientation statement is now kernel-checked
+  (`paper_cor_9_3_mrr`, `paper_cor_9_3_mrr_rev`; file `CollatzProof/Arctic/Nat/RuleRemovalDP.lean`). New
+  Proposition 9.4 (iv): the monotonicity of the marked symbol cannot be dropped there (`paper_prop_9_4_markMono`,
+  `paper_prop_9_4_markMono_rev`, with the witnesses `paper_prop_9_4_markConst`, `paper_prop_9_4_markConst_rev`).
+  Corollary 3.5 is extended in the same way for arctic interpretations (a written argument).
+- New Corollary 10.13: no automaton over the natural numbers computes a function that decreases by at least 1 along
+  every step of T from 2 on, reading the digits from either end (`paper_cor_10_13`, `paper_cor_10_13_lsb`; file
+  `CollatzProof/Arctic/Nat/RankAuto.lean`).
+- New remark after Corollary 9.3: natural-number and arctic stages may be mixed.
+- The condition (H2^prod) of Sections 10-12 is renamed (Z01^lift) in the paper (the comments of the Lean files and the
+  Lean name `H2Prod` keep the old name); the set of indices of Corollary 10.12 is written with a calligraphic J, since
+  J also denotes interpretations.
+- The 16 linter warnings of the build (in five files of the arctic part) were removed; no statement changed.
 
 ## Changes from revision r2 (not published)
 
@@ -236,7 +282,7 @@ the paper.
 | Proposition 4.8 | Somewhere finite arctic linear functions with absolute parts can strictly orient a rule of T or H, the others weakly oriented, if and only if it is not a left-end rule | `paper_prop_4_8_T`, `paper_prop_4_8_H` | kernel-checked |
 | Lemma 5.1 | Weak orientation does not increase Phi in context; strict orientation decreases it by at least 1 | `paper_lem_5_1_weak`, `paper_lem_5_1_strict` | kernel-checked |
 | Theorem 5.5 | The value-level statement AutoCore holds for T and for H | `paper_thm_5_5_T`, `paper_thm_5_5_H` | kernel-checked |
-| Lemma 5.6 | The simulation lemma (arctic naturals and below zero; family forms) | `paper_lem_5_6`, `paper_lem_5_6_Z`, `paper_lem_5_6_family`, `paper_lem_5_6_familyZ` | kernel-checked |
+| Lemma 5.6 | The simulation lemma (arctic naturals and below zero; family forms; with condition (b′)) | `paper_lem_5_6`, `paper_lem_5_6_Z`, `paper_lem_5_6_family`, `paper_lem_5_6_familyZ`, `paper_lem_5_6_on`, `paper_lem_5_6_Z_on`, `paper_lem_5_6_family_on`, `paper_lem_5_6_familyZ_on` | kernel-checked |
 | Lemma 6.2 | Idempotents of the minimal ideal of a Boolean matrix semigroup | `paper_lem_6_2`, `paper_lem_6_2_exists` | kernel-checked |
 | Lemma 6.3 | Carry-over and stay | `paper_lem_6_3`, `paper_lem_6_3_stay` | kernel-checked |
 | Lemma 6.5 | Upper bound from window frequencies | `paper_lem_6_5` | kernel-checked |
@@ -247,7 +293,8 @@ the paper.
 | Proposition 7.5 | AutoCore for R_H from AutoCore for H | `paper_prop_7_5` | kernel-checked |
 | Corollary 8.1 | Non-increase along the family suffices | `paper_cor_8_1` | derived in a few lines from kernel-checked results: `paper_cor_8_1` (one rule) is kernel-checked, and the form of the paper combines it with the minimal rates and window frequencies |
 | Theorem 9.2 | Natural-number matrix interpretations: (i) rule removal, monotone (T, reversed T); (ii) top forms, without monotonicity (the left-end rules of T; `.f -> .` and `.t -> .2` of reversed T); (iii) dependency pairs, the essential SCC in the first component (T, reversed T); all six together | `paper_thm_9_2_T`, `paper_thm_9_2_Trev`, `paper_thm_9_2_B`, `paper_thm_9_2_revTop`, `paper_thm_9_2_DP`, `paper_thm_9_2_DPrev`; together `paper_thm_9_2` | kernel-checked |
-| Proposition 9.4 | The boundary of Theorem 9.2: (i) every rule is strictly oriented, in dimension 2, if one other rule need not be weakly oriented, and the statement for reversed T fails without one rule; (ii) without monotonicity the form (i) fails, and in dimension 1 every rule except the top rules is strictly oriented; (iii) every pair alone is strictly oriented, and the conclusion fails without the weak orientation of the other pairs (the printed form of [YAH, Theorem 3.10]) or of one usable rule | `paper_prop_9_4_drop`, `paper_prop_9_4_drop_rev`, `paper_prop_9_4_noMono`, `paper_prop_9_4_noMono_nonB`, `paper_prop_9_4_noMono_rev`, `paper_prop_9_4_noMono_nonTop`, `paper_prop_9_4_pair`, `paper_prop_9_4_literal`, `paper_prop_9_4_literal_rev`, `paper_prop_9_4_dropU`, `paper_prop_9_4_dropU_rev` | kernel-checked |
+| Corollary 9.3 (iii), rule removal | The rule removal processor on an essential dependency pair problem, with the unmarked letters and the marked symbol monotone, removes no usable rule and no pair of the essential SCC (T, reversed T) | `paper_cor_9_3_mrr`, `paper_cor_9_3_mrr_rev` | kernel-checked (the other parts of Corollary 9.3 are derived in a few lines) |
+| Proposition 9.4 | The boundary of Theorem 9.2: (i) every rule is strictly oriented, in dimension 2, if one other rule need not be weakly oriented, and the statement for reversed T fails without one rule; (ii) without monotonicity the form (i) fails, and in dimension 1 every rule except the top rules is strictly oriented; (iii) every pair alone is strictly oriented, and the conclusion fails without the weak orientation of the other pairs (the printed form of [YAH, Theorem 3.10]) or of one usable rule ; (iv) in the rule removal processor of Corollary 9.3 (iii) the monotonicity of the marked symbol cannot be dropped | `paper_prop_9_4_drop`, `paper_prop_9_4_drop_rev`, `paper_prop_9_4_noMono`, `paper_prop_9_4_noMono_nonB`, `paper_prop_9_4_noMono_rev`, `paper_prop_9_4_noMono_nonTop`, `paper_prop_9_4_pair`, `paper_prop_9_4_literal`, `paper_prop_9_4_literal_rev`, `paper_prop_9_4_dropU`, `paper_prop_9_4_dropU_rev`, `paper_prop_9_4_markMono`, `paper_prop_9_4_markMono_rev`, `paper_prop_9_4_markConst`, `paper_prop_9_4_markConst_rev` | kernel-checked |
 | Proposition 9.5 | A natural-number affine interpretation of dimension 4 weakly orients all rules of T, H and R_H, strictly orients none, has values that do not increase along T and H, and has a residue component of growth rate log 2 violating the primitivity hypothesis (P) of Paper II; the remark after it (the form of Paper I) | `paper_prop_9_5_T`, `paper_prop_9_5_H`, `paper_prop_9_5_RH`; remark: `paper_prop_9_5_remark` | kernel-checked |
 | Lemma 10.2 | The identity for one step; with the 11 rules weakly oriented the value does not increase along a step of T; with monotonicity, each use of a strictly oriented rule decreases it by at least 1 | `paper_lem_10_2_step`, `paper_lem_10_2_T`, `paper_lem_10_2_orbit` | kernel-checked |
 | Lemma 10.3 | The value of a canonical string is the value of the value automaton | `paper_lem_10_3` | kernel-checked |
@@ -259,7 +306,8 @@ the paper.
 | Corollary 10.9 | Only 0/1 components: lifts of value automata with (M), families of matrices with (G1), natural-number interpretations that weakly orient the 11 rules | `paper_cor_10_9`, `paper_cor_10_9_gen`, `paper_cor_10_9_nat` | kernel-checked |
 | Theorem 10.10 | Values and uses on 0/1 automata | `paper_thm_10_10` | kernel-checked |
 | Theorem 10.11 | The value-level core for value automata with (M); for families with (G1) and for natural-number interpretations without monotonicity | `paper_thm_10_11`, `paper_thm_10_11_nat`, `paper_thm_10_11_gen` | kernel-checked |
-| Corollary 10.12 | The corner form of [HW06]: a family of natural-number matrices whose diagonal entries at a set J of indices are at least 1 and that weakly orients all 11 rules entrywise decreases no rule at an entry of J × J (T, reversed T) | `paper_cor_10_12`, `paper_cor_10_12_rev` | kernel-checked |
+| Corollary 10.12 | The corner form of [HW06]: a family of natural-number matrices whose diagonal entries at a set 𝒥 of indices are at least 1 and that weakly orients all 11 rules entrywise decreases no rule at an entry of 𝒥 × 𝒥 (T, reversed T) | `paper_cor_10_12`, `paper_cor_10_12_rev` | kernel-checked |
+| Corollary 10.13 | No value automaton over the natural numbers, of any dimension, has values V with V(T(n)) ≤ V(n) - 1 for every n ≥ 2, reading the digits from either end | `paper_cor_10_13`, `paper_cor_10_13_lsb` | kernel-checked |
 | Lemma 11.1 | Splitting paths into segments of length q | `paper_lem_11_1` | kernel-checked |
 | Corollary 11.2 | A polynomial bound for the values when the diagonal growth is at most G | `paper_cor_11_2` | kernel-checked |
 | Lemma 11.3 | If G > 1, some set S = scc(i) has a uniform lower bound ‖N^S_x‖ ≥ c_0 G^\|x\| with c_0 > 0; hence it is strongly connected and rigid at G, and it has an internal edge | `paper_lem_11_3` | kernel-checked |
@@ -351,23 +399,23 @@ which the kernel re-evaluates (no `native_decide`).
 
 ### Reproduction from a clean copy
 
-On 2026-10-07 the files of this repository alone (revision r3), copied to an empty directory, were checked as
+On 2026-10-14 the files of this repository alone (revision r5), copied to an empty directory, were checked as
 follows; the logs are in `verify/logs/`.
 
-- `sha256sum -c MANIFEST.sha256`: all 303 files listed in the manifest matched (before the logs were added).
+- `sha256sum -c MANIFEST.sha256`: all 319 files listed in the manifest matched (before the logs were added).
 - `lake exe cache get && lake build` (Lean v4.34.1, Mathlib v4.34.1; Mathlib cloned from GitHub at the commit in
-  `lake-manifest.json`, its compiled files from the Mathlib cache): `Build completed successfully (9209 jobs)` in about
-  8 minutes, with 16 warnings in five files (linter warnings and one deprecated lemma) and no error.
-- `lake env lean verify/Probe.lean` and `python3 verify/check_axioms.py verify/logs/probe.txt`: 205 reports of
-  `#print axioms` (the 204 theorems `paper_*` and `NatQ5.allBarriers_final`), all
+  `lake-manifest.json`, its compiled files from the Mathlib cache): `Build completed successfully (9211 jobs)`
+  in about 8 minutes, with no warning and no error.
+- `lake env lean verify/Probe.lean` and `python3 verify/check_axioms.py verify/logs/probe.txt`: 217 reports of
+  `#print axioms` (the 216 theorems `paper_*` and `NatQ5.allBarriers_final`), all
   `[propext, Classical.choice, Quot.sound]`, no error; `ALL OK`.
-- `lake env lean verify/Closure.lean`: 285 modules, 10037 declared constants, 68753 reachable constants, axioms
-  `Classical.choice`, `Quot.sound` and `propext` only.
-- `lake env leanchecker --fresh CollatzProof.Arctic.Paper`: accepted (exit status 0, no message) in about 35 minutes,
-  single-threaded. The root module imports all files, so every declaration in its import closure, which contains all
+- `lake env lean verify/Closure.lean`: 287 modules, 9974 declared constants, 68689 reachable
+  constants, axioms `Classical.choice`, `Quot.sound` and `propext` only.
+- `lake env leanchecker --fresh CollatzProof.Arctic.Paper`: accepted (exit status 0, no message) in about
+  35 minutes, single-threaded. The root module imports all files, so every declaration in its import closure, which contains all
   files of this repository and the Mathlib modules they import, was replayed in the kernel.
 
-The logs of revision r2 do not apply to revision r3 and are not included.
+The logs of earlier revisions do not apply to revision r5 and are not included.
 
 ### Verification logs
 
@@ -386,14 +434,14 @@ commands in "Building and checking".
 
 `#print axioms` in `verify/Probe.lean` reports `[propext, Classical.choice, Quot.sound]` for every theorem
 `paper_*`. The script `verify/check_axioms.py` (Python 3, standard library only) checks this mechanically on the output
-of `verify/Probe.lean`: it finds the theorems `paper_*` by scanning `CollatzProof/Arctic/Paper*.lean` (204 theorems),
+of `verify/Probe.lean`: it finds the theorems `paper_*` by scanning `CollatzProof/Arctic/Paper*.lean` (216 theorems),
 and it requires, for each of them, exactly one report of `#print axioms` whose axioms are among `propext`,
 `Classical.choice` and `Quot.sound` (so `sorryAx` or any other axiom fails the check), and no error message of Lean.
 `python3 verify/check_axioms.py --self-test` runs the script on synthetic outputs, good and bad. `verify/Probe.lean`
 also prints the axioms of `NatQ5.allBarriers_final`, the six statements of Theorem 9.2 together. Beyond the theorems
 `paper_*`, `verify/Closure.lean` counts the constants declared in the modules `CollatzProof.Arctic.*`, traverses every
 constant reachable from them, including those of Mathlib and of the Lean core, and prints the axioms met on the way;
-it reports 285 modules, 10037 declared constants, 68753 reachable constants and the axioms `Classical.choice`,
+it reports 287 modules, 9974 declared constants, 68689 reachable constants and the axioms `Classical.choice`,
 `Quot.sound` and `propext` only (`verify/logs/closure.txt`). There is no `sorry`, no `admit`, no `axiom` declaration
 and no `native_decide` in the sources of this repository, and no result from the literature is assumed as a
 hypothesis.
@@ -402,14 +450,18 @@ hypothesis.
 
 - **Section 8.2** (the systems after flat context closure with root labelling, full tiling, the switch to innermost
   rewriting, and narrowing) is computer-assisted: it rests on written proofs that apply the simulation lemma (Lemma 5.6,
-  kernel-checked) and Corollary 8.1, and on the finite computations in `computations/check_transforms.py`. The
-  transformed systems are not represented in Lean, and the results are not kernel-checked as a whole.
+  kernel-checked) and Corollary 8.1, and on the finite computations in `computations/check_transforms.py`; the
+  witness chains of Theorem 8.3 are stored as certificates in `computations/certificates/` and replayed by the separate
+  program `computations/check_certificates.py`. The transformed systems are not represented in Lean, and the results
+  are not kernel-checked as a whole.
 - **Corollaries 3.2, 3.5 and 8.1, the parts of the remarks after Theorem 3.4 without a Lean name, the remark after
   Theorem 3.6, and Lemma 5.3** are short written arguments from kernel-checked theorems; Lemma 5.3 is carried out
   inside the proofs of the kernel-checked theorems `barrier_of_auto_arcZ` and `Gen.barrier_of_auto_arcZG`, without a
   separate statement.
-- **Corollary 9.3** (any number of stages, top forms, the dependency pair framework) is a short written argument from
-  Theorem 9.2 and Propositions 13.3 and 13.4; the minimal chains that it uses for SCC decomposition are checked in Lean
+- **Corollary 9.3** (any number of stages, top forms, the dependency pair framework), except the rule removal
+  processor in (iii), which is kernel-checked (`paper_cor_9_3_mrr`, `paper_cor_9_3_mrr_rev`), is a short written
+  argument from Theorem 9.2 and Propositions 13.3 and 13.4, and so are the remarks on mixing natural-number and arctic
+  stages (Section 9) and after Corollary 10.13; the minimal chains that it uses for SCC decomposition are checked in Lean
   (`NatQ5.W5.pB_cycle`, `NatQ5.W5.pDrev_edges`).
 - **Real entries (Section 4), the remark on many-sorted interpretations (Section 9), Lemma 12.15 (iii) in its general
   form, and the observations after Propositions 13.3 and 13.4** are short written arguments from kernel-checked
@@ -463,12 +515,14 @@ informal and formal statements.
 | `CollatzProof/Arctic/Nat/Rigid*.lean` | Rigidity of non-negative matrix families (Appendix D). |
 | `CollatzProof/Arctic/Nat/Final.lean` | The six statements of Theorem 9.2 without hypotheses (`allBarriers_final`). |
 | `CollatzProof/Arctic/Nat/NonVacuity*.lean` | Checks of non-vacuity of the natural-number statements (including Corollary 10.12, `NonVacuityHW.lean`), Proposition 9.4, and Zantema's system (the remark in Section 13.2). |
+| `CollatzProof/Arctic/Nat/RuleRemovalDP.lean` | The rule removal processor of Corollary 9.3 (iii) on essential problems, and Proposition 9.4 (iv). |
+| `CollatzProof/Arctic/Nat/RankAuto.lean` | Corollary 10.13: ranking functions computed by automata over the natural numbers. |
 | `CollatzProof/Arctic/Paper.lean`, `Paper2.lean`, `Paper3.lean`, `Paper4.lean`, `Paper5.lean` | The root module: the results of the paper under their numbers. |
-| `verify/Probe.lean` | Prints the frozen statements and the definitions they use (arctic and natural-number), the statements of argument filters and the definitions they use, the definitions used by Proposition 9.5, by the value automata and by Corollary 10.12, and the statement and axioms of every theorem `paper_*` (not part of any library). |
+| `verify/Probe.lean` | Prints the frozen statements and the definitions they use (arctic and natural-number), the statements of argument filters and the definitions they use, the definitions used by Proposition 9.5, by the value automata, by Corollary 10.12 and by the rule removal processor of Corollary 9.3 (iii), and the statement and axioms of every theorem `paper_*` (not part of any library). |
 | `verify/Closure.lean` | Counts the constants declared in `CollatzProof/Arctic`, traverses all constants reachable from them and prints the axioms met (not part of any library). |
 | `verify/check_axioms.py` | Checks the output of `verify/Probe.lean`: every theorem `paper_*` depends on `propext`, `Classical.choice` and `Quot.sound` at most (Python 3, standard library only). |
 | `verify/logs/` | The logs of the build, of `verify/Probe.lean`, of the axiom check, of `verify/Closure.lean`, of the kernel re-check and of the manifest check in a clean copy (see "Verification logs"). |
-| `computations/` | The programs of Appendix C (Python 3 with the standard library, and one C program) and the log of the C program. |
+| `computations/` | The programs of Appendix C (Python 3 with the standard library, and one C program), the log of the C program, and the certificates of the witness chains of Theorem 8.3 in `certificates/` (JSON). |
 | `lakefile.toml`, `lake-manifest.json`, `lean-toolchain` | Lake project (Lean v4.34.1, Mathlib v4.34.1). |
 | `MANIFEST.sha256` | SHA-256 of every file in this repository except itself. |
 | `README.md`, `LICENSE`, `NOTICE` | This file; the Apache License, Version 2.0; the copyright and third-party notice. |
@@ -514,6 +568,8 @@ python3 computations/check_hmodel.py
 python3 computations/check_rh.py
 python3 computations/check_mod3.py
 python3 computations/check_transforms.py
+python3 computations/export_certificates.py   # regenerates computations/certificates/ and compares byte for byte
+python3 computations/check_certificates.py
 gcc -O2 -o rh_cf_search computations/rh_cf_search.c && ./rh_cf_search 1 cf
 ```
 
@@ -525,6 +581,8 @@ gcc -O2 -o rh_cf_search computations/rh_cf_search.c && ./rh_cf_search 1 cf
 | `check_rh.py` | Propositions 4.3 and 4.5 for $R_H$: the interpretation `RH.NonVacuityRH.ILeft` and condition (CF), the subsystems, Lemma 5.2 for $R_H$ on random interpretations, the left-end rules, mutation tests | 1 s |
 | `check_mod3.py` | Example 4.7, Proposition 9.5 and the remark after it, by exact computation | 7 s |
 | `check_transforms.py` | Section 8.2: the transformed systems, the sets $P_{\mathcal E}$ and $R_{\mathcal E}$, their dependency graphs, usable rules and usable symbols, the symbols of $\mathcal E(n)$ (in $P_{\mathcal E} \cup R_{\mathcal E}$ for the $n$ that define $P_{\mathcal E}$ and along the family), innermost chains, the processors of Proposition 8.4 and Theorem 8.5 | 34 s |
+| `export_certificates.py` | Section 8.2: regenerates the twelve certificate files of Theorem 8.3 in `certificates/` with a fixed seed and compares them byte for byte with the files in the repository (with `--write` it writes them); the generating side, built on `check_transforms.py` | 14 s |
+| `check_certificates.py` | Theorem 8.3 (i) and the locality in its proof, from the certificate files alone: the transformed rules and dependency pairs are recomputed, every witness is replayed step by step (root steps by the stated pairs, steps below the root, innermost steps where required), the edges make $P_{\mathcal E}$ strongly connected, and the locality table is checked by simulating the canonical step. A separate program that imports neither of the two scripts above | 2 s |
 | `rh_cf_search.c` | Question 4.4: exhaustive search in dimension 2 (C, one thread); the runs are recorded in `rh_cf_search-2026-10-05.log` | $K=1$: under 1 s; $K=2$: 1.5 min |
 
 The times were measured on one core of an Intel Xeon Gold 6254 (3.1 GHz) with Python 3.12 and gcc 13.3 (`-O2`).
@@ -578,7 +636,7 @@ this repository.
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.23147025},
   url       = {https://doi.org/10.5281/zenodo.23147025},
-  note      = {Preprint, revision r3}
+  note      = {Preprint, revision r4}
 }
 ```
 
